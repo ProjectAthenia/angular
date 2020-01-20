@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class StorageProvider {
+export class StorageService {
 
   /**
    * Loads the authentication token from storage

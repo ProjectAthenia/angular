@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {StorageProvider} from "../storage/storage.service";
+import {StorageService} from "../storage/storage.service";
 
 /**
  * Used to manage the authentication of the app
@@ -7,7 +7,7 @@ import {StorageProvider} from "../storage/storage.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthManagerProvider {
+export class AuthManagerService {
 
   /**
    * The refresh rate for when to refresh the token
@@ -16,16 +16,16 @@ export class AuthManagerProvider {
 
   /**
    * Default Constructor
-   * @param storageProvider
+   * @param storageService
    */
-  constructor(private storageProvider: StorageProvider) {
+  constructor(private storageService: StorageService) {
   }
 
   /**
    * Checks if the last retrieved token needs to be refreshed
    */
   needsRefresh(): boolean {
-    const receivedAt = this.storageProvider.loadReceivedAt();
-    return receivedAt + AuthManagerProvider.TOKEN_REFRESH_INTERVAL < Date.now();
+    const receivedAt = this.storageService.loadReceivedAt();
+    return receivedAt + AuthManagerService.TOKEN_REFRESH_INTERVAL < Date.now();
   }
 }

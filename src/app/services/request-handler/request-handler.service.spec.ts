@@ -6,6 +6,7 @@ import {RequestHandlerService} from './request-handler.service';
 import {ToastrService} from 'ngx-toastr';
 import {observable, Observable, of} from 'rxjs';
 import {error} from 'util';
+import {LoadingControllerService} from '../loading-controller/loading-controller.service';
 
 describe('Test Request Handler provider', () => {
 
@@ -20,7 +21,7 @@ describe('Test Request Handler provider', () => {
     storageService = new StorageService();
     authService = new AuthManagerService(storageService);
 
-    requestHandlerProvider = new RequestHandlerService(http, storageService, authService,  toast);
+    requestHandlerProvider = new RequestHandlerService(http, storageService, authService, new LoadingControllerService(), toast);
   });
 
 

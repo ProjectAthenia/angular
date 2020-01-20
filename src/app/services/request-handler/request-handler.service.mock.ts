@@ -2,6 +2,7 @@ import {AuthManagerService} from "../auth-manager/auth-manager.service";
 import {StorageService} from "../storage/storage.service";
 import {HttpClient} from '@angular/common/http';
 import {RequestHandlerService} from './request-handler.service';
+import {LoadingControllerService} from '../loading-controller/loading-controller.service';
 
 /**
  * Class for mocking the request handler provider
@@ -13,6 +14,7 @@ export default class RequestHandlerServiceMock extends RequestHandlerService {
       new HttpClient({handle : null}),
       new StorageService(),
       new AuthManagerService(new StorageService()),
+      new LoadingControllerService(),
       null,
     );
   }

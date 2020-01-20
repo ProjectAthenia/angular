@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {StorageService} from '../storage/storage.service';
 import {AuthManagerService} from '../auth-manager/auth-manager.service';
 import {environment} from '../../../environments/environment';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {Observable} from 'rxjs';
+import {LoadingControllerService} from '../loading-controller/loading-controller.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,6 @@ export class RequestHandlerService {
   authToken: string = null;
 
   /**
-   * The current loading indicator
-   */
-  loadingIndicator = null;
-
-  /**
    * Whether or not the token is currently refreshing
    */
   refreshRequest: Promise<any> = null;
@@ -44,7 +40,7 @@ export class RequestHandlerService {
   constructor(private http: HttpClient,
               private storageService: StorageService,
               private authManager: AuthManagerService,
-//               private loadingController: LoadingController
+              private loadingController: LoadingControllerService,
               private toastrService: ToastrService) {
   }
 
@@ -212,16 +208,7 @@ export class RequestHandlerService {
   private async incrementLoading() {
     if (RequestHandlerService.LOAD_INDICATOR_COUNT === 0) {
       RequestHandlerService.LOAD_INDICATOR_COUNT++;
-        if (this.loadingIndicator != null) {
-          this.loadingIndicator.dismiss();
-          this.loadingIndicator = null;
-        }
-        // TODO show loading this.loadingIndicator = await this.loadingController.create({
-        //     message: 'Loading...',
-        //     spinner: 'dots',
-        //     translucent: true,
-        // });
-        // this.loadingIndicator.present();
+        this.loadingController.show();
     } else {
 
       RequestHandlerService.LOAD_INDICATOR_COUNT++;
@@ -237,8 +224,7 @@ export class RequestHandlerService {
     }
 
     if (RequestHandlerService.LOAD_INDICATOR_COUNT <= 0) {
-
-     // TODO hide loading    this.loadingController.dismiss().catch(console.error);
+      this.loadingController.hide();
     }
   }
 

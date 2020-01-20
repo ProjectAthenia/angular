@@ -6,7 +6,9 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {Observable} from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RequestHandlerService {
 
   /**

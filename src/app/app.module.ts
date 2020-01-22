@@ -7,10 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
+import { LoadingComponentComponent } from './loading-component/loading-component.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadingComponentComponent
   ],
   imports: [
     BrowserModule,

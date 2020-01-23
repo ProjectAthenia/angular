@@ -187,19 +187,11 @@ export class UserPage implements OnInit {
 
     const fileName = 'member-' + this.user.id + '.vcf';
 
-    // this.file.checkFile(this.file.cacheDirectory, fileName).then(exists => {
-    //   if (exists) {
-    //     this.file.writeExistingFile(this.file.cacheDirectory, fileName, card.getFormattedString()).catch(console.error);
-    //   } else {
-    //     this.file.writeFile(this.file.cacheDirectory, fileName, card.getFormattedString()).catch(console.error);
-    //   }
-    // }).catch (error => {
-    //   this.file.writeFile(this.file.cacheDirectory, fileName, card.getFormattedString()).then(() => {
-    //     this.fileOpener.open(this.file.cacheDirectory + fileName, 'text/x-vcard').catch(console.error);
-    //   }).catch(console.error);
-    // }).then(() => {
-    //   this.fileOpener.open(this.file.cacheDirectory + fileName, 'text/x-vcard').catch(console.error);
-    // });
+    const link = document.createElement('a');
+    link.download = 'data.json';
+    const blob = new Blob([card.getFormattedString()], {type: 'text/x-vcard'});
+    link.href = window.URL.createObjectURL(blob);
+    link.click();
   }
 
   /**

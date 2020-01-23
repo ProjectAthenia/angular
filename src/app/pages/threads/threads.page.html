@@ -1,0 +1,23 @@
+<div class="standard-padding">
+
+    <ng-container *ngIf="loaded">
+        <input type="search" #filterBar *ngIf="threads.length != 0" (change)="filterThreads()"/>
+        <h2 *ngIf="threads.length == 0">
+            No Messages Yet!
+        </h2>
+        <div>
+            <div *ngFor="let thread of visibleThreads" (click)="goToThread(thread)">
+                <label>
+                    {{getOtherUserName(thread)}}
+                    <br/>
+                    <div [class]="'last-message ' + (isLastMessageMineOrSeen(thread) ? 'seen' : '')">
+                        <span class="content">{{getLastMessageContent(thread)}}</span>
+                        <span class="message-date">{{getLastMessageDate(thread)}}</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+    </ng-container>
+
+</div>

@@ -11,7 +11,7 @@ import Messaging from './messaging/messaging';
 @Injectable({
   providedIn: 'root'
 })
-export class RequestsServices {
+export class RequestsService {
 
     /**
      * The auth requests available

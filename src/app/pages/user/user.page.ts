@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user/user';
 import {UserService} from '../../services/data-services/user.service';
 import {ActivatedRoute} from '@angular/router';
-import {RequestsServices} from '../../services/requests/requests.services';
+import {RequestsService} from '../../services/requests/requests.service';
 import {Contact} from '../../models/user/contact';
 import vCardsJS from 'vcards-js';
 import {ToastrService} from 'ngx-toastr';
@@ -55,7 +55,7 @@ export class UserPage implements OnInit {
    */
   constructor(private route: ActivatedRoute,
               private toastController: ToastrService,
-              private requests: RequestsServices,
+              private requests: RequestsService,
               private location: Location,
               private userService: UserService) {
   }

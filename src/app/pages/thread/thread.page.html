@@ -1,0 +1,12 @@
+<div id="wrapper">
+    <div id="message-input" class="standard-padding">
+        <textarea #messageInput (change)="setEnteredMessage()"></textarea>
+        <button [disabled]="enteredMessage.length == 0" (click)="sendMessage()">Send</button>
+    </div>
+    <div id="messages" class="standard-padding" *ngIf="loaded">
+        <div *ngFor="let message of messages" [class]="'message ' + (me.id == message.from_id ? 'mine' : '')">
+            <div class="body"> {{message.data.body}}</div>
+            <div class="thumbnail" [ngStyle]="thumbnailStyle(message)"></div>
+        </div>
+    </div>
+</div>

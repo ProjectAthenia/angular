@@ -1,0 +1,25 @@
+<div class="standard-padding" *ngIf="user">
+
+    <div id="profile-image" [ngStyle]="profileImageStyle()"></div>
+
+    <h2>
+        {{user.name}}
+    </h2>
+
+    <div class="actions" *ngIf="!isMe()">
+        <i class="icon ion-md-text" *ngIf="isConnected()" (click)="goToUser(user)"></i>
+        <i class="icon ion-md-open" *ngIf="isConnected()" (click)="exportContact()"></i>
+        <i class="icon ion-md-person-add" *ngIf="canConnect()" (click)="connect()"></i>
+        <button *ngIf="contactIsPendingOtherUser()" (click)="deny()">Cancel Pending Request</button>
+        <div class="pending-content" *ngIf="contactIsPendingMyAction()">
+            Pending Contact Request
+            <i class="icon ion-md-checkmark-circle" (click)="confirm()" slot="end"></i>
+            <i class="icon ion-md-remove-circle" (click)="deny()" slot="end"></i>
+        </div>
+    </div>
+
+    <p *ngFor="let line of userAboutLines">
+        {{line}}
+    </p>
+
+</div>

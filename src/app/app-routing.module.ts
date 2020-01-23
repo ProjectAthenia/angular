@@ -20,10 +20,10 @@ const routes: Routes = [
     path: 'user/:user_id',
     loadChildren: './pages/user/user.module#UserPageModule',
   },
-  // {
-  //   path: 'contacts',
-  //   loadChildren: './pages/contacts/contacts.module#ContactsPageModule',
-  // },
+  {
+    path: 'contacts',
+    loadChildren: './pages/contacts/contacts.module#ContactsPageModule',
+  },
   {
     path: 'user/:user_id/message',
     loadChildren: './pages/thread/thread.module#ThreadPageModule',

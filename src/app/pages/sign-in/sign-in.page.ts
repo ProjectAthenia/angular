@@ -10,6 +10,7 @@ import {BasePage} from '../base.page';
 import {environment} from '../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
 import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-sign-in',
@@ -35,14 +36,14 @@ export class SignInPage extends BasePage implements OnInit {
    * @param requestsProvider
    * @param toastController
    * @param userService
-   * @param location
+   * @param router
    */
   constructor(private formBuilder: FormBuilder,
               private storageProvider: StorageService,
               private requestsProvider: RequestsService,
               private toastController: ToastrService,
               private userService: UserService,
-              private location: Location,
+              private router: Router,
   ) {
     super();
   }
@@ -113,7 +114,7 @@ export class SignInPage extends BasePage implements OnInit {
     this.userService.storeMe(user);
     this.storageProvider.saveLoggedInUserId(user.id);
     AppComponent.LOGGED_IN = true;
-    this.location.go('/home');
+    this.router.navigateByUrl('/home').catch(console.error);
   }
 
   /**

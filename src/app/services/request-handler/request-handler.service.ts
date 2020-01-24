@@ -311,8 +311,7 @@ export class RequestHandlerService {
       await this.requiresAuth();
     }
     const path = this.buildUrl(route);
-    const request = this.http.post(path, {
-      params: data,
+    const request = this.http.post(path, data, {
       headers: this.headers(),
     });
 

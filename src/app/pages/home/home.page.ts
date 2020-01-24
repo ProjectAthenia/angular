@@ -1,14 +1,42 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BasePage} from '../base.page';
+import {RequestsService} from '../../services/requests/requests.service';
+import {ToastrService} from 'ngx-toastr';
+import {User} from '../../models/user/user';
 
 /**
  * Main home page of the app
  */
 @Component({
-    selector: 'app-home',
-    templateUrl: 'home.page.html',
-    styleUrls: ['home.page.scss'],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class HomePage extends BasePage {
+export class HomePage extends BasePage implements OnInit{
 
+  /**
+   * The logged in user
+   */
+  private me: User;
+
+  /**
+   * Default constructor
+   * @param requests
+   * @param toastController
+   */
+  constructor(private requests: RequestsService,
+              private toastController: ToastrService) {
+    super();
+  }
+
+  /**
+   * Run the initial load
+   */
+  ngOnInit(): void {
+    this.requests.auth.loadInitialInformation().then(user => {
+      this.me = user;
+    }).catch(() => {
+      this.toastController.error('Unable to load your information');
+    });
+  }
 }

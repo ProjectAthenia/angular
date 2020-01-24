@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SignInPage } from './sign-in.page';
 import {ComponentsModule} from "../../components/components.module";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
   declarations: [SignInPage]
 })

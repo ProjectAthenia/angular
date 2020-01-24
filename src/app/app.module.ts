@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     Ng2LoadingSpinnerModule.forRoot({}),
+    NgbModule,
     AppRoutingModule,
   ],
   providers: [],

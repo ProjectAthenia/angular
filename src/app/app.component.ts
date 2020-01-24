@@ -27,7 +27,9 @@ export class AppComponent {
     this.authManagerService.getLogoutObservable().subscribe(() => this.handleLogout());
     const authToken = this.storageService.loadAuthToken();
     if (!authToken) {
-      this.location.go('/sign-in')
+      this.location.go('/sign-in');
+    } else {
+      this.location.go('/home');
     }
   }
 

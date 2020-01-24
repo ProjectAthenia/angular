@@ -1,37 +1,39 @@
-<div class="standard-padding">
+<div id="sign-in-wrapper" class="standard-padding">
 
-    <div id="sign-in-content">
+  <div id="sign-in-content">
 
-        <img *ngIf="getBrandingImageUrl()" id="logo" [src]="getBrandingImageUrl()">
+    <h1>Sign In</h1>
 
-        <form [formGroup]="form" class="standard-padding">
-            <div>
-                <label>Email Address</label>
-                <input type="email" ngDefaultControl formControlName="email" [formControl]="form.controls.email"/>
-            </div>
+    <img *ngIf="getBrandingImageUrl()" id="logo" [src]="getBrandingImageUrl()">
 
-            <div *ngIf="submitted && !form.controls.email.valid" class="validator-error">
-                Please enter a valid email address.
-            </div>
+    <form [formGroup]="form">
+      <div>
+        <label for="email">Email Address</label>
+        <input id="email" type="email" class="form-control" ngDefaultControl formControlName="email" [formControl]="form.controls.email"/>
+      </div>
 
-            <div>
-                <label >Password <small>(at least 6 characters)</small></label>
-                <input type="password" ngDefaultControl formControlName="password" [formControl]="form.controls.password"/>
-            </div>
+      <div *ngIf="submitted && !form.controls.email.valid" class="validator-error">
+        Please enter a valid email address.
+      </div>
 
-            <div *ngIf="submitted && !form.controls.password.valid" class="validator-error">
-                Please enter a valid 6 digit password.
-            </div>
+      <div>
+        <label for="password">Password <small>(at least 6 characters)</small></label>
+        <input id="password" type="password" class="form-control" ngDefaultControl formControlName="password" [formControl]="form.controls.password"/>
+      </div>
 
-            <div class="submit-wrapper">
-                <a *ngIf="getForgotPasswordUrl()" [href]="getForgotPasswordUrl()">I forgot my password</a>
-                <button (click)="submit()">Sign In</button>
-            </div>
-        </form>
-    </div>
+      <div *ngIf="submitted && !form.controls.password.valid" class="validator-error">
+        Please enter a valid 6 digit password.
+      </div>
 
-</div>
+      <div class="submit-wrapper">
+        <a *ngIf="getForgotPasswordUrl()" [href]="getForgotPasswordUrl()">I forgot my password</a>
+        <button class="btn btn-primary" (click)="submit()">Sign In</button>
+      </div>
+    </form>
+  </div>
 
-<footer>
+
+  <footer>
     Copyright 2019, {{getBrandingName()}}
-</footer>
+  </footer>
+</div>

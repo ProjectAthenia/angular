@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthManagerService} from './services/auth-manager/auth-manager.service';
+import {Location} from '@angular/common';
+import {StorageService} from './services/storage/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +15,20 @@ export class AppComponent {
    */
   static LOGGED_IN = false;
 
-  title = 'athenia';
-
-  constructor(private authManagerService: AuthManagerService) {
+  /**
+   * Default Constructor
+   * @param authManagerService
+   * @param storageService
+   * @param location
+   */
+  constructor(private authManagerService: AuthManagerService,
+              private storageService: StorageService,
+              private location: Location) {
     this.authManagerService.getLogoutObservable().subscribe(() => this.handleLogout());
+    const authToken = this.storageService.loadAuthToken();
+    if (!authToken) {
+      this.location.go('/sign-in')
+    }
   }
 
   /**

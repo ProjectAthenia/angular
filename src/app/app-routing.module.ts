@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: './pages/home/home.module#HomePageModule'
   },
   {
+    path: 'sign-in',
+    loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'
+  },
+  {
     path: 'threads',
     loadChildren: './pages/threads/threads.module#ThreadsPageModule',
   },

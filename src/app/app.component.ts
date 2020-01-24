@@ -7,6 +7,12 @@ import {AuthManagerService} from './services/auth-manager/auth-manager.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  /**
+   * Whether or not the user is currently logged in
+   */
+  static LOGGED_IN = false;
+
   title = 'athenia';
 
   constructor(private authManagerService: AuthManagerService) {

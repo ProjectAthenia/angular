@@ -7,8 +7,8 @@ import {ComponentsModule} from "../../components/components.module";
 import {StorageService} from "../../services/storage/storage.service";
 import {RequestsService} from "../../services/requests/requests.service";
 import RequestsServiceMock from "../../services/requests/requests.service.mock";
-import {Location} from '@angular/common';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 describe('SignInPage', () => {
   let component: SignInPage;
@@ -18,8 +18,8 @@ describe('SignInPage', () => {
   const toast = {
     error: jasmine.createSpy('error')
   };
-  const locationStub = {
-    back: jasmine.createSpy('back')
+  const routerStub = {
+    navigateByUrl: jasmine.createSpy('navigateByUrl')
   };
 
   beforeEach(async(() => {
@@ -36,7 +36,7 @@ describe('SignInPage', () => {
         StorageService,
         FormBuilder,
         { provide: RequestsService, requestsProvider},
-        { provide: Location, useValue: locationStub},
+        { provide: Router, useValue: routerStub},
         { provide: ToastrService, useValue: toast },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

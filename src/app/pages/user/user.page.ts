@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user/user';
 import {UserService} from '../../services/data-services/user.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RequestsService} from '../../services/requests/requests.service';
 import {Contact} from '../../models/user/contact';
 import vCardsJS from 'vcards-js';
@@ -51,12 +51,14 @@ export class UserPage implements OnInit {
    * @param toastController
    * @param requests
    * @param location
+   * @param router
    * @param userService
    */
   constructor(private route: ActivatedRoute,
               private toastController: ToastrService,
               private requests: RequestsService,
               private location: Location,
+              private router: Router,
               private userService: UserService) {
   }
 
@@ -131,7 +133,7 @@ export class UserPage implements OnInit {
    * @param user
    */
   goToUser(user: User) {
-    this.location.go( '/user/' + user.id + '/message');
+    this.router.navigateByUrl( '/user/' + user.id + '/message').catch(console.error);
   }
 
   /**
@@ -188,7 +190,7 @@ export class UserPage implements OnInit {
     const fileName = 'member-' + this.user.id + '.vcf';
 
     const link = document.createElement('a');
-    link.download = 'data.json';
+    link.download = fileName;
     const blob = new Blob([card.getFormattedString()], {type: 'text/x-vcard'});
     link.href = window.URL.createObjectURL(blob);
     link.click();

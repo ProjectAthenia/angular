@@ -43,7 +43,6 @@ describe('ThreadPage', () => {
         { provide: Location, useValue: locationStub},
         { provide: RequestsService, useValue: requestsProvider},
         {provide: ActivatedRoute, useValue: activatedRoute},
-        { provide: Router, useValue: {}},
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })

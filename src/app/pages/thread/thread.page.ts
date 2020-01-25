@@ -5,7 +5,7 @@ import {RequestsService} from '../../services/requests/requests.service';
 import {Thread} from '../../models/user/thread';
 import {MessagingService} from '../../services/data-services/messaging.service';
 import {Message} from '../../models/user/message';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {ToastrService} from 'ngx-toastr';
 
@@ -59,7 +59,6 @@ export class ThreadPage implements OnInit, OnDestroy {
 
   /**
    * Default Constructor
-   * @param router
    * @param location
    * @param toastController
    * @param requests
@@ -67,8 +66,7 @@ export class ThreadPage implements OnInit, OnDestroy {
    * @param route
    * @param userService
    */
-  constructor(private router: Router,
-              private location: Location,
+  constructor(private location: Location,
               private toastController: ToastrService,
               private requests: RequestsService,
               private messagingService: MessagingService,

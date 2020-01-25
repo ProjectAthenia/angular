@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthManagerService} from './services/auth-manager/auth-manager.service';
-import {Location} from '@angular/common';
 import {StorageService} from './services/storage/storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -19,17 +19,17 @@ export class AppComponent {
    * Default Constructor
    * @param authManagerService
    * @param storageService
-   * @param location
+   * @param router
    */
   constructor(private authManagerService: AuthManagerService,
               private storageService: StorageService,
-              private location: Location) {
+              private router: Router) {
     this.authManagerService.getLogoutObservable().subscribe(() => this.handleLogout());
     const authToken = this.storageService.loadAuthToken();
     if (!authToken) {
-      this.location.go('/sign-in');
+      this.router.navigateByUrl('/sign-in').catch(console.error);
     } else {
-      this.location.go('/home');
+      this.router.navigateByUrl('/home').catch(console.error);
     }
   }
 

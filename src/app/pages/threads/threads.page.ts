@@ -7,6 +7,7 @@ import {MessagingService} from '../../services/data-services/messaging.service';
 import {Message} from '../../models/user/message';
 import {Location} from '@angular/common';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-threads',
@@ -49,12 +50,14 @@ export class ThreadsPage implements OnInit, OnDestroy {
   /**
    * Default Constructor
    * @param location
+   * @param router
    * @param toastController
    * @param requests
    * @param messagingService
    * @param userService
    */
   constructor(private location: Location,
+              private router: Router,
               private toastController: ToastrService,
               private requests: RequestsService,
               private messagingService: MessagingService,
@@ -132,7 +135,7 @@ export class ThreadsPage implements OnInit, OnDestroy {
 
     if (otherUser != null) {
       this.userService.cacheUser(otherUser);
-      this.location.go('/user/' + otherUser.id + '/message');
+      this.router.navigateByUrl('/user/' + otherUser.id + '/message').catch(console.error);
     }
   }
 

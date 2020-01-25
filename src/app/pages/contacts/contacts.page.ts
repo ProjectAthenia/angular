@@ -3,8 +3,9 @@ import {UserService} from '../../services/data-services/user.service';
 import {User} from '../../models/user/user';
 import {RequestsService} from '../../services/requests/requests.service';
 import {Contact} from '../../models/user/contact';
-import {Location} from '@angular/common';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-contacts',
@@ -30,12 +31,14 @@ export class ContactsPage implements OnInit {
 
   /**
    * Default Constructor
+   * @param router
    * @param location
    * @param toastController
    * @param userService
    * @param requests
    */
-  constructor(private location: Location,
+  constructor(private router: Router,
+              private location: Location,
               private toastController: ToastrService,
               private userService: UserService,
               private requests: RequestsService) {
@@ -84,7 +87,7 @@ export class ContactsPage implements OnInit {
   goToUser(contact: Contact) {
     const user = this.getOtherContactUser(contact);
     this.userService.cacheUser(user);
-    this.location.go('/user/' + user.id);
+    this.router.navigateByUrl('/user/' + user.id).catch(console.error);
   }
 
   /**
@@ -103,7 +106,7 @@ export class ContactsPage implements OnInit {
   messageUser(contact: Contact) {
     const user = this.getOtherContactUser(contact);
     this.userService.cacheUser(user);
-    this.location.go('/user/' + user.id + '/message');
+    this.router.navigateByUrl('/user/' + user.id + '/message').catch(console.error);
   }
 
   /**

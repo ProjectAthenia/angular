@@ -6,7 +6,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ComponentsModule} from '../../components/components.module';
 import {RequestsService} from '../../services/requests/requests.service';
 import RequestsServicesMock from '../../services/requests/requests.service.mock';
-import {ActivatedRoute, convertToParamMap} from '@angular/router';
+import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';
 import {StorageService} from '../../services/storage/storage.service';
 import {ToastrService} from 'ngx-toastr';
 import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
@@ -23,6 +23,9 @@ describe('UserPage', () => {
   const requestsService: RequestsService = new RequestsServicesMock();
   const locationStub = {
     back: jasmine.createSpy('back')
+  };
+  const routerStub = {
+    navigateByUrl: jasmine.createSpy('navigateByUrl')
   };
 
   beforeEach(async(() => {
@@ -47,6 +50,7 @@ describe('UserPage', () => {
         {provide: ActivatedRoute, useValue: activatedRoute},
         {provide: StorageService, useValue: new StorageService()},
         {provide: Location, useValue: locationStub},
+        {provide: Router, useValue: routerStub},
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })

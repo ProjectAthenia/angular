@@ -7,3 +7,14 @@
 .submit-wrapper {
   margin: 10px 0;
 }
+
+.profile-image {
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: var(--ion-color-medium);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('/assets/profile-image-placeholder.png');
+}

@@ -1,27 +1,42 @@
-#profile-image {
-  width: 80vw;
-  height: 80vw;
-  margin: 0 auto;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url('/assets/profile-image-placeholder.png');
-}
+#content {
+  #profile-information {
+    display: flex;
+    flex-direction: column;
 
-.actions {
-  text-align: right;
-  margin: 10px auto;
-  max-width: 85vw;
-  ion-icon {
-    width: 40px;
-    height: 40px;
-    margin: 0 0 0 8px;
+    @media screen and (min-width: 800px) {
+      flex-direction: row;
+    }
+
+    #profile-image {
+      max-width: 200px;
+      max-height: 200px;
+      width: 80vw;
+      height: 80vw;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url('/assets/profile-image-placeholder.png');
+    }
+    #user-information {
+      flex-grow: 1;
+      padding: 0 0 0 20px;
+    }
   }
 
-  .pending-content {
-    font-size: 1.15em;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  .actions {
+    text-align: right;
+    margin: 10px auto;
+
+    i {
+      font-size: 40px;
+      margin: 0 0 0 16px;
+    }
+
+    .pending-content {
+      font-size: 1.15em;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
   }
 }

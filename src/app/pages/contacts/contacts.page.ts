@@ -67,6 +67,7 @@ export class ContactsPage implements OnInit {
       this.contacts = contacts.filter(contact => {
         return contact.confirmed_at && !contact.denied_at;
       });
+      console.log('contacts', this.contacts);
       this.userService.storeContacts(contacts);
     });
   }
@@ -138,5 +139,13 @@ export class ContactsPage implements OnInit {
     this.requests.social.confirmContact(this.user, contact, false).then(updated => {
       this.userService.storeContacts([updated]);
     });
+  }
+
+  /**
+   * Returns the profile image style object for the associated user
+   */
+  profileImageStyle() {
+    // Set a custom profile image here
+    return this.user ? {} : {};
   }
 }

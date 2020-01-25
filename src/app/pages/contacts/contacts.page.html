@@ -2,30 +2,33 @@
 
 <div class="standard-padding">
 
-    <ng-container *ngIf="pendingRequests">
+  <ng-container *ngIf="pendingRequests">
 
-        <h2 *ngIf="pendingRequests.length > 0">
-            Current Requests
-        </h2>
-        <div *ngIf="pendingRequests.length > 0">
-            <div *ngFor="let pendingRequest of pendingRequests">
-                <label (click)="goToUser(pendingRequest)">{{getContactUserName(pendingRequest)}}</label>
-                <i class="icon ion-md-checkmark-circle" (click)="confirm(pendingRequest)"></i>
-                <i  class="icon ion-md-remove-circle" (click)="deny(pendingRequest)"></i>
-            </div>
-        </div>
-
-    </ng-container>
-
-    <h2 *ngIf="contacts.length > 0">
-        Your Contacts
+    <h2 *ngIf="pendingRequests.length > 0">
+      Current Requests
     </h2>
-    <div *ngIf="contacts.length > 0">
-        <div *ngFor="let contact of contacts">
-            <label (click)="goToUser(contact)">{{getContactUserName(contact)}}</label>
-            <i  class="icon ion-md-text" (click)="messageUser(contact)"></i>
-        </div>
+    <div *ngIf="pendingRequests.length > 0">
+      <div *ngFor="let pendingRequest of pendingRequests">
+        <label (click)="goToUser(pendingRequest)">{{getContactUserName(pendingRequest)}}</label>
+        <i class="icon ion-md-checkmark-circle" (click)="confirm(pendingRequest)"></i>
+        <i  class="icon ion-md-remove-circle" (click)="deny(pendingRequest)"></i>
+      </div>
     </div>
+
+  </ng-container>
+
+  <h2 *ngIf="contacts.length > 0">
+    Your Contacts
+  </h2>
+  <div *ngIf="contacts.length > 0" id="contacts">
+    <ng-container *ngFor="let contact of contacts">
+      <div *ngIf="getOtherContactUser(contact)?.id" class="contact">
+        <div class="profile-image" [ngStyle]="profileImageStyle()"></div>
+        <label (click)="goToUser(contact)">{{getContactUserName(contact)}}</label>
+        <i  class="icon ion-md-text" (click)="messageUser(contact)"></i>
+      </div>
+    </ng-container>
+  </div>
 
 
 </div>

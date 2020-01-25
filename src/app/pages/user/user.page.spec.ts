@@ -18,7 +18,7 @@ describe('UserPage', () => {
   let fixture: ComponentFixture<UserPage>;
   let activatedRoute;
   const toast = {
-    show: jasmine.createSpy('show')
+    error: jasmine.createSpy('error')
   };
   const requestsService: RequestsService = new RequestsServicesMock();
   const locationStub = {

@@ -73,7 +73,7 @@ export class UserPage implements OnInit {
     // This should never happen, but just in case
     if (this.me == null) {
       this.location.back();
-      this.toastController.show('Error Loading User');
+      this.toastController.error('Error Loading User');
       return;
     }
 
@@ -83,7 +83,7 @@ export class UserPage implements OnInit {
         this.completeLoad(loadedUser);
       }).catch(error => {
         this.location.back();
-        this.toastController.show('Error Loading User');
+        this.toastController.error('Error Loading User');
       });
     } else {
       this.completeLoad(user);

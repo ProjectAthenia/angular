@@ -336,8 +336,7 @@ export class RequestHandlerService {
       await this.requiresAuth();
     }
     const path = this.buildUrl(route);
-    const request = this.http.patch(path, {
-      params: data,
+    const request = this.http.patch(path,  data, {
       headers: this.headers(),
     });
 
@@ -385,8 +384,7 @@ export class RequestHandlerService {
       await this.requiresAuth();
     }
     const path = this.buildUrl(route);
-    const request = this.http.put(path, {
-      params: data,
+    const request = this.http.put(path, data, {
       headers: this.headers(),
     });
 

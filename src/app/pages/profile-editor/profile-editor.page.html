@@ -19,7 +19,7 @@
 
         <div>
           <label>
-            <input type="check" ngDefaultControl formControlName="allow_users_to_add_me" [formControl]="form.controls.allow_users_to_add_me"/>
+            <input type="checkbox" ngDefaultControl formControlName="allow_users_to_add_me" [formControl]="form.controls.allow_users_to_add_me"/>
             Allow Members to Add Me
           </label>
         </div>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="submit-wrapper">
-            <button (click)="save()" class="btn">Save</button>
+            <button (click)="save()" class="btn btn-primary">Save</button>
         </div>
     </form>
 

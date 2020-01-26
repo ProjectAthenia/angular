@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../models/user/user';
 import {UserService} from '../../services/data-services/user.service';
 import {RequestsService} from '../../services/requests/requests.service';
@@ -8,19 +8,20 @@ import {Message} from '../../models/user/message';
 import {Location} from '@angular/common';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {BasePage} from '../base.page';
 
 @Component({
     selector: 'app-threads',
     templateUrl: './threads.page.html',
     styleUrls: ['./threads.page.scss'],
 })
-export class ThreadsPage implements OnInit, OnDestroy {
+export class ThreadsPage extends BasePage implements OnInit, OnDestroy {
 
   /**
    * The search bar
    */
   @ViewChild('filterBar', { static: false })
-  filterBar: HTMLInputElement;
+  filterBar: ElementRef;
 
   /**
    * The logged in user
@@ -62,6 +63,7 @@ export class ThreadsPage implements OnInit, OnDestroy {
               private requests: RequestsService,
               private messagingService: MessagingService,
               private userService: UserService) {
+    super();
   }
 
   /**
@@ -140,6 +142,23 @@ export class ThreadsPage implements OnInit, OnDestroy {
   }
 
   /**
+   * Gets another user in a thread
+   * @param thread
+   */
+  getOtherUser(thread: Thread) {
+    console.log('getOtherUser', thread);
+    let otherUser = null;
+    thread.users.forEach(user => {
+      if (user.id !== this.me.id) {
+        otherUser = user;
+      }
+    });
+    console.log(otherUser);
+
+    return otherUser;
+  }
+
+  /**
    * Gets the other username in a thread
    * @param thread
    */
@@ -191,9 +210,9 @@ export class ThreadsPage implements OnInit, OnDestroy {
    * Filters the threads by the search term
    */
   filterThreads() {
-    if (this.filterBar.value.length > 0) {
+    if (this.filterBar.nativeElement.value.length > 0) {
       this.visibleThreads = this.threads.filter(thread => {
-        return this.getOtherUserName(thread).indexOf(this.filterBar.value) !== -1;
+        return this.getOtherUserName(thread).indexOf(this.filterBar.nativeElement.value) !== -1;
       });
     } else {
       this.visibleThreads = this.threads;

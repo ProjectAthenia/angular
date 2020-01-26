@@ -6,13 +6,14 @@ import {Contact} from '../../models/user/contact';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {BasePage} from '../base.page';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.page.html',
   styleUrls: ['./contacts.page.scss'],
 })
-export class ContactsPage implements OnInit {
+export class ContactsPage extends BasePage implements OnInit {
 
   /**
    * The logged in user
@@ -42,6 +43,7 @@ export class ContactsPage implements OnInit {
               private toastController: ToastrService,
               private userService: UserService,
               private requests: RequestsService) {
+    super();
   }
 
   /**
@@ -139,13 +141,5 @@ export class ContactsPage implements OnInit {
     this.requests.social.confirmContact(this.user, contact, false).then(updated => {
       this.userService.storeContacts([updated]);
     });
-  }
-
-  /**
-   * Returns the profile image style object for the associated user
-   */
-  profileImageStyle() {
-    // Set a custom profile image here
-    return this.user ? {} : {};
   }
 }

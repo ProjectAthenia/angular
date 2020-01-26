@@ -23,7 +23,7 @@
   <div *ngIf="contacts.length > 0" id="contacts">
     <ng-container *ngFor="let contact of contacts">
       <div *ngIf="getOtherContactUser(contact)?.id" class="contact">
-        <div class="profile-image" [ngStyle]="profileImageStyle()"></div>
+        <div class="profile-image" [ngStyle]="profileImageStyle(getOtherContactUser(contact))"></div>
         <label (click)="goToUser(contact)">{{getContactUserName(contact)}}</label>
         <i  class="icon ion-md-text" (click)="messageUser(contact)"></i>
       </div>

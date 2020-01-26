@@ -1,17 +1,40 @@
-.last-message {
-  white-space: nowrap;
-  .content {
-    overflow: hidden;
-    max-width: 75%;
-    float: left;
-    text-overflow: ellipsis;
-  }
-  .message-date {
-    float: right;
-  }
+@import "../../../assets/styles/colors";
 
-  color: black;
-  &.seen {
-    color: var(--ion-color-medium-shade);
+#threads {
+  max-width: 640px;
+  margin: 20px auto;
+  #visible-messages {
+    .thread {
+      width: 100%;
+      padding: 5px 0;
+      border-bottom: 1px solid $grey;
+      display: flex;
+      align-items: center;
+      .thread-contents {
+        flex-grow: 1;
+        margin: 0 10px;
+
+        .last-message {
+          white-space: nowrap;
+
+          .content {
+            overflow: hidden;
+            max-width: 75%;
+            float: left;
+            text-overflow: ellipsis;
+          }
+
+          .message-date {
+            float: right;
+          }
+
+          color: black;
+
+          &.seen {
+            color: var(--ion-color-medium-shade);
+          }
+        }
+      }
+    }
   }
 }

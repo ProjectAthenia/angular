@@ -37,6 +37,6 @@ export class AppComponent {
    * Handles our logout properly
    */
   handleLogout() {
-    // TODO do something
+    this.router.navigateByUrl('/sign-in').catch(console.error);
   }
 }

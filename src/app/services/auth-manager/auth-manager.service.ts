@@ -55,6 +55,6 @@ export class AuthManagerService {
    */
   logOut() {
     this.storageService.logOut();
-    this.logoutSubscriber.complete();
+    this.logoutSubscriber.next();
   }
 }

@@ -9,6 +9,14 @@ import {LoadingControllerService} from '../../services/loading-controller/loadin
 export class LoadingComponentComponent {
 
   /**
+   * The configuration for the loading spinner
+   */
+  indicatorConfig = {
+    backdropColor: 'transparent',
+    spinnerColor: '#aaa',
+  };
+
+  /**
    * Default Constructor
    * @param loadingControllerService
    */

@@ -1,38 +1,26 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThreadPage } from './thread.page';
+import { ProfileEditorPage } from './profile-editor.page';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ComponentsModule} from '../../components/components.module';
 import {RequestsService} from '../../services/requests/requests.service';
 import RequestsServiceMock from '../../services/requests/requests.service.mock';
-import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
-describe('ThreadPage', () => {
-  let component: ThreadPage;
-  let navController;
-  let fixture: ComponentFixture<ThreadPage>;
-  let activatedRoute;
+describe('ProfileEditorPage', () => {
+  let component: ProfileEditorPage;
+  let fixture: ComponentFixture<ProfileEditorPage>;
   const requestsProvider: RequestsService = new RequestsServiceMock();
   const toast = {
-    error: jasmine.createSpy('error')
-  };
-  const locationStub = {
-    back: jasmine.createSpy('back')
+    success: jasmine.createSpy('success')
   };
 
   beforeEach(async(() => {
-    navController = jasmine.createSpyObj('NavController', ['back']);
-    activatedRoute = {};
-    activatedRoute.snapshot = {};
-    activatedRoute.snapshot.paramMap = convertToParamMap({
-      user_id: 1234
-    });
     TestBed.configureTestingModule({
       declarations: [
-        ThreadPage,
+        ProfileEditorPage,
       ],
       imports: [
         ReactiveFormsModule,
@@ -40,9 +28,7 @@ describe('ThreadPage', () => {
       ],
       providers: [
         { provide: ToastrService, useValue: toast},
-        { provide: Location, useValue: locationStub},
         { provide: RequestsService, useValue: requestsProvider},
-        {provide: ActivatedRoute, useValue: activatedRoute},
         {provide: Router, useValue: {}},
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -51,7 +37,7 @@ describe('ThreadPage', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThreadPage);
+    fixture = TestBed.createComponent(ProfileEditorPage);
     component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
   });

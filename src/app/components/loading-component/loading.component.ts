@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {LoadingControllerService} from '../../services/loading-controller/loading-controller.service';
 
 @Component({
-  selector: 'app-component',
+  selector: 'app-loading-component',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })

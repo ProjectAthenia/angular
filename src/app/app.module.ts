@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ComponentsModule} from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     Ng2LoadingSpinnerModule.forRoot({}),
     NgbModule,
     AppRoutingModule,
+    ComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

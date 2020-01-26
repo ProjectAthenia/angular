@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../models/user/user';
 import {UserService} from '../../services/data-services/user.service';
 import {RequestsService} from '../../services/requests/requests.service';
@@ -20,7 +20,7 @@ export class ThreadPage implements OnInit, OnDestroy {
    * The message input
    */
   @ViewChild('messageInput', { static: true })
-  messageInput: HTMLTextAreaElement;
+  messageInput: ElementRef;
 
   /**
    * The logged in user
@@ -199,7 +199,7 @@ export class ThreadPage implements OnInit, OnDestroy {
    * Sets the content of the currently entered message
    */
   setEnteredMessage() {
-    this.enteredMessage = this.messageInput.value;
+    this.enteredMessage = this.messageInput.nativeElement.value;
   }
 
   /**
@@ -209,7 +209,7 @@ export class ThreadPage implements OnInit, OnDestroy {
     this.requests.messaging.createMessage(this.me, this.thread, this.enteredMessage).then(message => {
       this.thread.last_message = message;
       this.enteredMessage = '';
-      this.messageInput.value = '';
+      this.messageInput.nativeElement.value = '';
       this.messages.push(message);
       this.messagingService.cacheThread(this.thread);
       this.resetScroll();

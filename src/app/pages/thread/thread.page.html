@@ -2,7 +2,7 @@
 
 <div id="wrapper">
     <div id="message-input" class="standard-padding">
-        <textarea #messageInput (change)="setEnteredMessage()"></textarea>
+        <textarea #messageInput (keyup)="setEnteredMessage()"></textarea>
         <button [disabled]="enteredMessage.length == 0" (click)="sendMessage()">Send</button>
     </div>
     <div id="messages" class="standard-padding" *ngIf="loaded">

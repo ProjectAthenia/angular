@@ -126,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "athenia"
+    }
+  },
+  "defaultProject": "athenia",
+  "cli": {
+    "analytics": "901c95a2-5ebf-45b5-8dcf-e40716149c6c"
+  }
 }

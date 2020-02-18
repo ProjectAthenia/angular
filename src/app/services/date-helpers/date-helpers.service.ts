@@ -6,8 +6,8 @@ export default class DateHelpersService {
     /**
      * All full month names
      */
-    static monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+    static monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
     /**
@@ -26,14 +26,14 @@ export default class DateHelpersService {
         const j = day % 10,
             k = day % 100;
         if (j == 1 && k != 11) {
-            return day + "st";
+            return day + 'st';
         }
         if (j == 2 && k != 12) {
-            return day + "nd";
+            return day + 'nd';
         }
         if (j == 3 && k != 13) {
-            return day + "rd";
+            return day + 'rd';
         }
-        return day + "th";
+        return day + 'th';
     }
 }

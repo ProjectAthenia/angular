@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user/user';
 import {RequestsService} from '../../services/requests/requests.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -52,7 +52,7 @@ export class ProfileEditorPage extends BasePage implements OnInit {
             about_me: [''],
             allow_users_to_add_me: [''],
             receive_push_notifications: [''],
-            password: ['',  Validators.compose([
+            password: ['', Validators.compose([
                 Validators.minLength(6),
                 Validators.maxLength(256),
             ])],
@@ -94,7 +94,7 @@ export class ProfileEditorPage extends BasePage implements OnInit {
 
                 this.user = user;
                 this.form.controls['password'].setValue('');
-                this.toastController.success('Saved Successfully')
+                this.toastController.success('Saved Successfully');
 
             }).catch(console.error);
         }

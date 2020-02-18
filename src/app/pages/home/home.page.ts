@@ -9,38 +9,38 @@ import {UserService} from '../../services/data-services/user.service';
  * Main home page of the app
  */
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
 })
-export class HomePage extends BasePage implements OnInit{
+export class HomePage extends BasePage implements OnInit {
 
-  /**
-   * The logged in user
-   */
-  private me: User;
+    /**
+     * The logged in user
+     */
+    private me: User;
 
-  /**
-   * Default constructor
-   * @param requests
-   * @param userService
-   * @param toastController
-   */
-  constructor(private requests: RequestsService,
-              private userService: UserService,
-              private toastController: ToastrService) {
-    super();
-  }
+    /**
+     * Default constructor
+     * @param requests
+     * @param userService
+     * @param toastController
+     */
+    constructor(private requests: RequestsService,
+                private userService: UserService,
+                private toastController: ToastrService) {
+        super();
+    }
 
-  /**
-   * Run the initial load
-   */
-  ngOnInit(): void {
-    this.requests.auth.loadInitialInformation().then(user => {
-      this.me = user;
-      this.userService.storeMe(this.me);
-    }).catch(() => {
-      this.toastController.error('Unable to load your information');
-    });
-  }
+    /**
+     * Run the initial load
+     */
+    ngOnInit(): void {
+        this.requests.auth.loadInitialInformation().then(user => {
+            this.me = user;
+            this.userService.storeMe(this.me);
+        }).catch(() => {
+            this.toastController.error('Unable to load your information');
+        });
+    }
 }

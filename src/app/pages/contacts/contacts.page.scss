@@ -1,21 +1,24 @@
 @import "../../../assets/styles/colors";
 
 #contacts {
-  max-width: 640px;
-  margin: 0 auto;
-  .contact {
-    display: flex;
-    margin: 10px 0;
-    padding: 10px 0;
-    border-bottom: 1px solid $grey;
-    align-items: center;
-    label {
-      margin: 10px;
-      font-size: 28px;
-      flex-grow: 1;
+    max-width: 640px;
+    margin: 0 auto;
+
+    .contact {
+        display: flex;
+        margin: 10px 0;
+        padding: 10px 0;
+        border-bottom: 1px solid $grey;
+        align-items: center;
+
+        label {
+            margin: 10px;
+            font-size: 28px;
+            flex-grow: 1;
+        }
+
+        i {
+            font-size: 40px;
+        }
     }
-    i {
-      font-size: 40px;
-    }
-  }
 }

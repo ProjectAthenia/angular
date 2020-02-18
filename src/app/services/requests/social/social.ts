@@ -28,10 +28,10 @@ export default class Social {
      * @param showLoading
      */
     async loadContacts(me: User, showLoading = false): Promise<Contact[]> {
-        return this.requestHandler.get('users/' + me.id + '/contacts', true,  showLoading, [
-                'initiatedBy',
-                'requested',
-            ], {}, {}, {}, 100).then(response => {
+        return this.requestHandler.get('users/' + me.id + '/contacts', true, showLoading, [
+            'initiatedBy',
+            'requested',
+        ], {}, {}, {}, 100).then(response => {
             return Promise.resolve(response.data.map(data => new Contact(data)));
         });
     }
@@ -58,7 +58,7 @@ export default class Social {
     async denyContact(me: User, contact: Contact, showLoading = true): Promise<Contact> {
         return this.requestHandler.put('users/' + me.id + '/contacts/' + contact.id, true, showLoading, {
             deny: true,
-        }).then (result => {
+        }).then(result => {
             return Promise.resolve(new Contact(result));
         });
     }
@@ -72,7 +72,7 @@ export default class Social {
     async confirmContact(me: User, contact: Contact, showLoading = true): Promise<Contact> {
         return this.requestHandler.put('users/' + me.id + '/contacts/' + contact.id, true, showLoading, {
             confirm: true,
-        }).then (result => {
+        }).then(result => {
             return Promise.resolve(new Contact(result));
         });
     }

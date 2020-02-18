@@ -1,28 +1,29 @@
 import Auth from './auth';
-import {RequestHandlerService} from "../../request-handler/request-handler.service";
-import RequestHandlerServiceMock from "../../request-handler/request-handler.service.mock";
-import {User} from "../../../models/user/user";
+import {RequestHandlerService} from '../../request-handler/request-handler.service';
+import RequestHandlerServiceMock from '../../request-handler/request-handler.service.mock';
+import {User} from '../../../models/user/user';
 import {PaymentMethod} from '../../../models/payment/payment-method';
 
 describe('Test the auth requests', () => {
-    let requestHandler : RequestHandlerService;
-    let auth : Auth;
+    let requestHandler: RequestHandlerService;
+    let auth: Auth;
 
     beforeEach(() => {
         requestHandler = new RequestHandlerServiceMock();
         auth = new Auth(requestHandler);
     });
 
-    it("Creates a sign in request properly", async () => {
-        const email = "test@test.com";
-        const password = "password";
+    it('Creates a sign in request properly', async () => {
+        const email = 'test@test.com';
+        const password = 'password';
 
-        const handler = () => {};
+        const handler = () => {
+        };
 
-        spyOn(requestHandler, "post");
+        spyOn(requestHandler, 'post');
         let result = await auth.signIn(email, password, handler);
         expect(requestHandler.post).toHaveBeenCalledWith(
-            "auth/login",
+            'auth/login',
             false,
             true,
             {email: email, password: password},
@@ -30,19 +31,20 @@ describe('Test the auth requests', () => {
         );
     });
 
-    it("Creates a sign up request properly", async () => {
+    it('Creates a sign up request properly', async () => {
         const data = {
-            name : 'A Person',
-            email : "test@test.com",
-            password : "password",
+            name: 'A Person',
+            email: 'test@test.com',
+            password: 'password',
         };
 
-        const handler = () => {};
+        const handler = () => {
+        };
 
-        spyOn(requestHandler, "post");
+        spyOn(requestHandler, 'post');
         await auth.signUp(data, handler);
         expect(requestHandler.post).toHaveBeenCalledWith(
-            "auth/sign-up",
+            'auth/sign-up',
             false,
             true,
             data,

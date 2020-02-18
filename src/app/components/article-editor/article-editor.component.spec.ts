@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ArticleEditorComponent } from './article-editor.component';
-import {CommonModule} from "@angular/common";
+import {ArticleEditorComponent} from './article-editor.component';
+import {CommonModule} from '@angular/common';
 
 describe('ArticleEditorComponent', () => {
     let component: ArticleEditorComponent;
@@ -12,8 +12,7 @@ describe('ArticleEditorComponent', () => {
             imports: [
                 CommonModule,
             ],
-            providers: [
-            ],
+            providers: [],
             declarations: [
                 ArticleEditorComponent,
             ]

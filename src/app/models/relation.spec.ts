@@ -1,5 +1,5 @@
-import {Relation} from "./relation";
-import {BaseModel} from "./base-model";
+import {Relation} from './relation';
+import {BaseModel} from './base-model';
 
 describe('Test that relations can build data properly.', () => {
 

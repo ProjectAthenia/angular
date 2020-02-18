@@ -23,14 +23,14 @@ export default class Subscriptions {
         return this.requestHandler
             .get('membership-plans', true, true, [])
             .then(response => {
-                const data = response.data;
-                const membershipPlans = [];
-                data.forEach(entry => {
-                    membershipPlans.push(new MembershipPlan(entry));
-                });
-                return Promise.resolve(membershipPlans);
-            }
-        );
+                    const data = response.data;
+                    const membershipPlans = [];
+                    data.forEach(entry => {
+                        membershipPlans.push(new MembershipPlan(entry));
+                    });
+                    return Promise.resolve(membershipPlans);
+                }
+            );
     }
 
     /**
@@ -48,9 +48,9 @@ export default class Subscriptions {
         return this.requestHandler
             .post('users/' + user.id + '/subscriptions', true, true, data)
             .then(response => {
-                return Promise.resolve(new Subscription(response));
-            }
-        );
+                    return Promise.resolve(new Subscription(response));
+                }
+            );
     }
 
     /**

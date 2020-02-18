@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {LoadingComponentComponent} from './loading-component/loading.component';
 import {RatingBarComponent} from './rating-bar/rating-bar.component';
@@ -10,25 +10,26 @@ import {LoggedInHeaderComponent} from './logged-in-header/logged-in-header.compo
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    Ng2LoadingSpinnerModule,
-    NgbDropdownModule,
-  ],
-  declarations: [
-    ArticleEditorComponent,
-    ArticleViewerComponent,
-    LoadingComponentComponent,
-    LoggedInHeaderComponent,
-    RatingBarComponent,
-  ],
-  exports: [
-    ArticleEditorComponent,
-    ArticleViewerComponent,
-    LoadingComponentComponent,
-    LoggedInHeaderComponent,
-    RatingBarComponent,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        Ng2LoadingSpinnerModule,
+        NgbDropdownModule,
+    ],
+    declarations: [
+        ArticleEditorComponent,
+        ArticleViewerComponent,
+        LoadingComponentComponent,
+        LoggedInHeaderComponent,
+        RatingBarComponent,
+    ],
+    exports: [
+        ArticleEditorComponent,
+        ArticleViewerComponent,
+        LoadingComponentComponent,
+        LoggedInHeaderComponent,
+        RatingBarComponent,
+    ],
 })
-export class ComponentsModule {}
+export class ComponentsModule {
+}

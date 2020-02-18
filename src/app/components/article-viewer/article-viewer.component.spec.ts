@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CommonModule} from '@angular/common';
 import {ArticleViewerComponent} from './article-viewer.component';
@@ -13,8 +13,7 @@ describe('ArticleViewerComponent', () => {
             imports: [
                 CommonModule,
             ],
-            providers: [
-            ],
+            providers: [],
             declarations: [
                 ArticleViewerComponent,
             ]

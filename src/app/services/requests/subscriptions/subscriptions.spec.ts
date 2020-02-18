@@ -7,8 +7,8 @@ import {PaymentMethod} from '../../../models/payment/payment-method';
 import {Subscription} from '../../../models/subscription/subscription';
 
 describe('Test the subscription requests', () => {
-    let requestHandler : RequestHandlerService;
-    let subscriptions : Subscriptions;
+    let requestHandler: RequestHandlerService;
+    let subscriptions: Subscriptions;
 
     beforeEach(() => {
         requestHandler = new RequestHandlerServiceMock();
@@ -34,7 +34,7 @@ describe('Test the subscription requests', () => {
         expect(result[1].constructor).toBe(MembershipPlan);
     });
 
-    it("Creates a create subscription request properly", async () => {
+    it('Creates a create subscription request properly', async () => {
         const user = new User({
             id: 324,
         });
@@ -45,7 +45,7 @@ describe('Test the subscription requests', () => {
             id: 76,
         });
 
-        spyOn(requestHandler, "post").and.returnValue(Promise.resolve({
+        spyOn(requestHandler, 'post').and.returnValue(Promise.resolve({
             id: 23543,
             user_id: 324,
             membership_plan_rate_id: 534,
@@ -53,7 +53,7 @@ describe('Test the subscription requests', () => {
         }));
         const result = await subscriptions.createSubscription(user, paymentMethod, membershipPlan);
         expect(requestHandler.post).toHaveBeenCalledWith(
-            "users/324/subscriptions",
+            'users/324/subscriptions',
             true,
             true,
             {
@@ -66,7 +66,7 @@ describe('Test the subscription requests', () => {
         expect(result.constructor).toBe(Subscription);
     });
 
-    it("Creates an update subscription request properly", async () => {
+    it('Creates an update subscription request properly', async () => {
         const user = new User({
             id: 324,
         });
@@ -75,7 +75,7 @@ describe('Test the subscription requests', () => {
             recurring: false,
         });
 
-        spyOn(requestHandler, "put").and.returnValue(Promise.resolve({
+        spyOn(requestHandler, 'put').and.returnValue(Promise.resolve({
             id: 76,
             user_id: 324,
             membership_plan_rate_id: 534,
@@ -83,7 +83,7 @@ describe('Test the subscription requests', () => {
         }));
         const result = await subscriptions.updateSubscription(user, subscription, {recurring: true});
         expect(requestHandler.put).toHaveBeenCalledWith(
-            "users/324/subscriptions/76",
+            'users/324/subscriptions/76',
             true,
             true,
             {

@@ -51,7 +51,7 @@ export class Message extends BaseModel {
             now.getMonth() === this.created_at.getMonth()) {
             const baseHours = this.created_at.getHours();
             const pm = baseHours > 12;
-            return (pm ? baseHours -  12 : baseHours) + ':' + this.created_at.getMinutes() +
+            return (pm ? baseHours - 12 : baseHours) + ':' + this.created_at.getMinutes() +
                 ' ' + (pm ? 'pm' : 'am');
         } else {
             return (this.created_at.getMonth() + 1) + '/' + this.created_at.getDate();

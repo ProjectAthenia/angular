@@ -28,7 +28,7 @@ export default class Auth {
         };
 
         return this.requestHandler.post('auth/login', false, true, data, {
-            401 : invalidCredentialsHandler
+            401: invalidCredentialsHandler
         });
     }
 
@@ -40,7 +40,7 @@ export default class Auth {
      */
     async signUp(userData: any, emailInUseHandler: (error) => void): Promise<any> {
         return this.requestHandler.post('auth/sign-up', false, true, userData, {
-            400 : emailInUseHandler
+            400: emailInUseHandler
         });
     }
 
@@ -56,12 +56,12 @@ export default class Auth {
                 'subscriptions.membershipPlanRate.membershipPlan',
                 // Add any expands needed here
             ]).then((response) => {
-                const user = new User(response);
-                return new Promise<User> (resolve => {
-                    resolve(user);
-                });
-            }
-        );
+                    const user = new User(response);
+                    return new Promise<User>(resolve => {
+                        resolve(user);
+                    });
+                }
+            );
     }
 
     /**
@@ -74,11 +74,11 @@ export default class Auth {
         return this.requestHandler.put('users/' + user.id, true, true, userData)
             .then((response) => {
                 const userResponse = new User(response);
-                return new Promise<User> (resolve => {
-                    resolve(userResponse);
-                }
-            );
-        });
+                return new Promise<User>(resolve => {
+                        resolve(userResponse);
+                    }
+                );
+            });
     }
 
     /**
@@ -89,7 +89,7 @@ export default class Auth {
     async createPaymentMethod(user: User, stripeToken: string): Promise<PaymentMethod> {
         return this.requestHandler.post('users/' + user.id + '/payment-methods', true, true, {
             token: stripeToken,
-        }).then (result => {
+        }).then(result => {
             return Promise.resolve(new PaymentMethod(result));
         });
     }

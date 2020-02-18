@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RatingBarComponent} from './rating-bar.component';
 import {CommonModule} from '@angular/common';
@@ -13,8 +13,7 @@ describe('RatingBarComponent', () => {
             imports: [
                 CommonModule,
             ],
-            providers: [
-            ],
+            providers: [],
             declarations: [
                 RatingBarComponent,
             ]

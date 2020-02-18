@@ -1,28 +1,29 @@
 <app-logged-in-header></app-logged-in-header>
 
 <div id="threads" class="standard-padding">
-  <input id="filter" class="form-control" type="search" #filterBar *ngIf="threads.length != 0" (keypress)="filterThreads()"/>
+    <input id="filter" class="form-control" type="search" #filterBar *ngIf="threads.length != 0"
+           (keypress)="filterThreads()"/>
 
-  <ng-container *ngIf="loaded">
-    <h2 *ngIf="threads.length == 0">
-      No Messages Yet!
-    </h2>
-    <div id="visible-messages">
-      <ng-container *ngFor="let thread of visibleThreads">
-        <div *ngIf="getOtherUser(thread)?.id" (click)="goToThread(thread)" class="thread">
-          <div class="profile-image" [ngStyle]="profileImageStyle(getOtherUser(thread))"></div>
-          <div class="thread-contents">
-            {{getOtherUserName(thread)}}
-            <br/>
-            <div [class]="'last-message ' + (isLastMessageMineOrSeen(thread) ? 'seen' : '')">
-              <span class="content">{{getLastMessageContent(thread)}}</span>
-              <span class="message-date">{{getLastMessageDate(thread)}}</span>
-            </div>
-          </div>
+    <ng-container *ngIf="loaded">
+        <h2 *ngIf="threads.length == 0">
+            No Messages Yet!
+        </h2>
+        <div id="visible-messages">
+            <ng-container *ngFor="let thread of visibleThreads">
+                <div *ngIf="getOtherUser(thread)?.id" (click)="goToThread(thread)" class="thread">
+                    <div class="profile-image" [ngStyle]="profileImageStyle(getOtherUser(thread))"></div>
+                    <div class="thread-contents">
+                        {{getOtherUserName(thread)}}
+                        <br/>
+                        <div [class]="'last-message ' + (isLastMessageMineOrSeen(thread) ? 'seen' : '')">
+                            <span class="content">{{getLastMessageContent(thread)}}</span>
+                            <span class="message-date">{{getLastMessageDate(thread)}}</span>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
         </div>
-      </ng-container>
-    </div>
 
-  </ng-container>
+    </ng-container>
 
 </div>

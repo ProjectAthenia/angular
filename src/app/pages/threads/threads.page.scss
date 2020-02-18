@@ -1,40 +1,42 @@
 @import "../../../assets/styles/colors";
 
 #threads {
-  max-width: 640px;
-  margin: 20px auto;
-  #visible-messages {
-    .thread {
-      width: 100%;
-      padding: 5px 0;
-      border-bottom: 1px solid $grey;
-      display: flex;
-      align-items: center;
-      .thread-contents {
-        flex-grow: 1;
-        margin: 0 10px;
+    max-width: 640px;
+    margin: 20px auto;
 
-        .last-message {
-          white-space: nowrap;
+    #visible-messages {
+        .thread {
+            width: 100%;
+            padding: 5px 0;
+            border-bottom: 1px solid $grey;
+            display: flex;
+            align-items: center;
 
-          .content {
-            overflow: hidden;
-            max-width: 75%;
-            float: left;
-            text-overflow: ellipsis;
-          }
+            .thread-contents {
+                flex-grow: 1;
+                margin: 0 10px;
 
-          .message-date {
-            float: right;
-          }
+                .last-message {
+                    white-space: nowrap;
 
-          color: black;
+                    .content {
+                        overflow: hidden;
+                        max-width: 75%;
+                        float: left;
+                        text-overflow: ellipsis;
+                    }
 
-          &.seen {
-            color: var(--ion-color-medium-shade);
-          }
+                    .message-date {
+                        float: right;
+                    }
+
+                    color: black;
+
+                    &.seen {
+                        color: var(--ion-color-medium-shade);
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

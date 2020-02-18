@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Thread} from '../../models/user/thread';
 import {User} from '../../models/user/user';
 
@@ -35,24 +35,24 @@ export class MessagingService {
      */
     getThreadBetweenPeople(me: User, otherUser: User): Thread | null {
         for (const key in this.loadedThreads) {
-           if (this.loadedThreads.hasOwnProperty(key)) {
-               let hasMe = false;
-               let hasOtherUser = false;
-               const thread = this.loadedThreads[key];
+            if (this.loadedThreads.hasOwnProperty(key)) {
+                let hasMe = false;
+                let hasOtherUser = false;
+                const thread = this.loadedThreads[key];
 
-               thread.users.forEach(user => {
-                   if (user.id === me.id) {
-                       hasMe = true;
-                   }
-                   if (user.id === otherUser.id) {
-                       hasOtherUser = true;
-                   }
-               });
+                thread.users.forEach(user => {
+                    if (user.id === me.id) {
+                        hasMe = true;
+                    }
+                    if (user.id === otherUser.id) {
+                        hasOtherUser = true;
+                    }
+                });
 
-               if (hasMe && hasOtherUser) {
-                   return thread;
-               }
-           }
+                if (hasMe && hasOtherUser) {
+                    return thread;
+                }
+            }
         }
     }
 }

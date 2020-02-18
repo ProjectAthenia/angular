@@ -1,14 +1,14 @@
 <header class="row">
-  <div class="col text-right">
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="menu" ngbDropdownToggle>Menu</button>
-      <div ngbDropdownMenu aria-labelledby="menu">
-        <button ngbDropdownItem (click)="goTo('/home')">Home</button>
-        <button ngbDropdownItem (click)="goTo('/contacts')">Contacts</button>
-        <button ngbDropdownItem (click)="goTo('/threads')">Messages</button>
-        <button ngbDropdownItem (click)="goTo('/profile-editor')">My Profile</button>
-        <button ngbDropdownItem (click)="logout()">Logout</button>
-      </div>
+    <div class="col text-right">
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="menu" ngbDropdownToggle>Menu</button>
+            <div ngbDropdownMenu aria-labelledby="menu">
+                <button ngbDropdownItem (click)="goTo('/home')">Home</button>
+                <button ngbDropdownItem (click)="goTo('/contacts')">Contacts</button>
+                <button ngbDropdownItem (click)="goTo('/threads')">Messages</button>
+                <button ngbDropdownItem (click)="goTo('/profile-editor')">My Profile</button>
+                <button ngbDropdownItem (click)="logout()">Logout</button>
+            </div>
+        </div>
     </div>
-  </div>
 </header>

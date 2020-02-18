@@ -29,6 +29,6 @@ export class MembershipPlanRate extends BaseModel {
     constructor(data) {
         super(data, {
             membership_plan: new Relation('model', MembershipPlan),
-        })
+        });
     }
 }

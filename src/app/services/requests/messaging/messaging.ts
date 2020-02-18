@@ -71,8 +71,8 @@ export default class Messaging {
      */
     async markMessageAsSeen(me: User, thread: Thread, message: Message): Promise<Message> {
         return this.requestHandler.put('users/' + me.id + '/threads/' + thread.id + '/messages/' + message.id, true, false, {
-                seen: true,
-            }).then(response => {
+            seen: true,
+        }).then(response => {
 
             if (response) {
                 return Promise.resolve(new Message(response));

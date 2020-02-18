@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { UserService } from './user.service';
+import {UserService} from './user.service';
 import {User} from '../../models/user/user';
 
 describe('UserService', () => {
@@ -11,7 +11,7 @@ describe('UserService', () => {
         expect(service).toBeTruthy();
     });
 
-    it ('should cache the logged in user properly', () => {
+    it('should cache the logged in user properly', () => {
         const service: UserService = TestBed.get(UserService);
 
         service.storeMe(new User({}));

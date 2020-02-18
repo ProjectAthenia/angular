@@ -11,7 +11,7 @@ describe('Test the date helpers', () => {
         expect(DateHelpersService.getMonthName(month)).toBe('November');
     });
 
-    it('Makes sure that the suffixing works properly',  () => {
+    it('Makes sure that the suffixing works properly', () => {
         expect(DateHelpersService.suffixDay(1)).toBe('1st');
         expect(DateHelpersService.suffixDay(2)).toBe('2nd');
         expect(DateHelpersService.suffixDay(3)).toBe('3rd');

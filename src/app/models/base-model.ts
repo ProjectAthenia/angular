@@ -34,7 +34,7 @@ export class BaseModel {
                     if (rawData[property].indexOf(' ') !== -1) {
                         const rawDate = rawData[property].split(' ');
                         let baseDate = new Date(rawDate[0]);
-                        baseDate = new Date(baseDate.getTime() + baseDate.getTimezoneOffset()*60*1000);
+                        baseDate = new Date(baseDate.getTime() + baseDate.getTimezoneOffset() * 60 * 1000);
                         if (rawDate[1]) {
                             const time = rawDate[1].split(':');
                             baseDate.setHours(time[0]);

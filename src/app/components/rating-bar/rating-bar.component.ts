@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output} from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
 
 @Component({
     selector: 'rating-bar',
@@ -9,7 +9,7 @@ export class RatingBarComponent {
     /**
      * The current rating
      */
-    @Input() rating: number ;
+    @Input() rating: number;
 
     /**
      * The rating change callback

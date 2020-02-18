@@ -4,7 +4,7 @@ import {Subscription} from './subscription';
 describe('Test Membership Plan Rate Model', () => {
 
     it('Make sure that the subscription model is being built properly', () => {
-        const model = new Subscription( {
+        const model = new Subscription({
             payment_method_id: 3252,
             recurring: false,
         });
@@ -13,7 +13,7 @@ describe('Test Membership Plan Rate Model', () => {
     });
 
     it('Make sure that the subscription model is being built properly with a membership plan connected', () => {
-        const model = new Subscription( {
+        const model = new Subscription({
             payment_method_id: 3252,
             recurring: false,
             membership_plan_rate: {

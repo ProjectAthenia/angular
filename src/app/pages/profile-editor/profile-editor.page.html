@@ -5,7 +5,8 @@
     <form [formGroup]="form" class="standard-content">
         <div>
             <label>Name</label>
-            <input class="form-control" type="text" ngDefaultControl formControlName="name" [formControl]="form.controls.name"/>
+            <input class="form-control" type="text" ngDefaultControl formControlName="name"
+                   [formControl]="form.controls.name"/>
         </div>
 
         <div *ngIf="submitted && !form.controls.name.valid" class="validator-error">
@@ -13,15 +14,17 @@
         </div>
 
         <div>
-            <label >About Me</label>
-            <textarea type="text" class="form-control" ngDefaultControl formControlName="about_me" [formControl]="form.controls.about_me"></textarea>
+            <label>About Me</label>
+            <textarea type="text" class="form-control" ngDefaultControl formControlName="about_me"
+                      [formControl]="form.controls.about_me"></textarea>
         </div>
 
         <div>
-          <label>
-            <input type="checkbox" ngDefaultControl formControlName="allow_users_to_add_me" [formControl]="form.controls.allow_users_to_add_me"/>
-            Allow Members to Add Me
-          </label>
+            <label>
+                <input type="checkbox" ngDefaultControl formControlName="allow_users_to_add_me"
+                       [formControl]="form.controls.allow_users_to_add_me"/>
+                Allow Members to Add Me
+            </label>
         </div>
 
         <div>
@@ -30,7 +33,8 @@
                 <br>
                 <i><small>Leave blank in order to keep current password.</small></i>
             </label>
-            <input class="form-control" type="password" ngDefaultControl formControlName="password" [formControl]="form.controls.password"/>
+            <input class="form-control" type="password" ngDefaultControl formControlName="password"
+                   [formControl]="form.controls.password"/>
         </div>
 
         <div *ngIf="submitted && !form.controls.password.valid" class="validator-error">

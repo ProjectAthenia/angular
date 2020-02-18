@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
 import {MessagingService} from './messaging.service';
 import {Thread} from '../../models/user/thread';

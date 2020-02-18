@@ -9,7 +9,7 @@ import Messaging from './messaging/messaging';
  * Provider for interacting with all app wide requests
  */
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class RequestsService {
 

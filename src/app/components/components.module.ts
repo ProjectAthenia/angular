@@ -8,6 +8,8 @@ import {ArticleEditorComponent} from './article-editor/article-editor.component'
 import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
 import {LoggedInHeaderComponent} from './logged-in-header/logged-in-header.component';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import {LoggedInTemplateComponent} from './logged-in-template/logged-in-template.component';
+import {SideBarComponent} from './side-bar/side-bar.component';
 
 @NgModule({
     imports: [
@@ -21,14 +23,18 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
         ArticleViewerComponent,
         LoadingComponentComponent,
         LoggedInHeaderComponent,
+        LoggedInTemplateComponent,
         RatingBarComponent,
+        SideBarComponent,
     ],
     exports: [
         ArticleEditorComponent,
         ArticleViewerComponent,
         LoadingComponentComponent,
         LoggedInHeaderComponent,
+        LoggedInTemplateComponent,
         RatingBarComponent,
+        SideBarComponent,
     ],
 })
 export class ComponentsModule {

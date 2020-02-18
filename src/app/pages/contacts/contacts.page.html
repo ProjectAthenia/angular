@@ -1,7 +1,4 @@
-<app-logged-in-header></app-logged-in-header>
-
-<div class="standard-padding">
-
+<app-logged-in-template>
     <ng-container *ngIf="pendingRequests">
 
         <h2 *ngIf="pendingRequests.length > 0">
@@ -11,7 +8,7 @@
             <div *ngFor="let pendingRequest of pendingRequests">
                 <label (click)="goToUser(pendingRequest)">{{getContactUserName(pendingRequest)}}</label>
                 <i class="icon ion-md-checkmark-circle" (click)="confirm(pendingRequest)"></i>
-                <i class="icon ion-md-remove-circle" (click)="deny(pendingRequest)"></i>
+                <i  class="icon ion-md-remove-circle" (click)="deny(pendingRequest)"></i>
             </div>
         </div>
 
@@ -25,10 +22,8 @@
             <div *ngIf="getOtherContactUser(contact)?.id" class="contact">
                 <div class="profile-image" [ngStyle]="profileImageStyle(getOtherContactUser(contact))"></div>
                 <label (click)="goToUser(contact)">{{getContactUserName(contact)}}</label>
-                <i class="icon ion-md-text" (click)="messageUser(contact)"></i>
+                <i  class="icon ion-md-text" (click)="messageUser(contact)"></i>
             </div>
         </ng-container>
     </div>
-
-
-</div>
+</app-logged-in-template>

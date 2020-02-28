@@ -1,6 +1,7 @@
 <app-logged-in-template>
     <div id="threads">
-        <input id="filter" class="form-control" type="search" #filterBar *ngIf="threads.length != 0" (keypress)="filterThreads()"/>
+        <input id="filter" class="form-control" type="search" #filterBar *ngIf="threads.length != 0"
+               (keypress)="filterThreads()"/>
 
         <ng-container *ngIf="loaded">
             <h2 *ngIf="threads.length == 0">

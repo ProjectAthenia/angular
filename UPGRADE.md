@@ -2,6 +2,10 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.2.2
+
+This simply fixes an issue in the `array-helpers.service.spec.ts` file.
+
 ## 0.2.1
 
 Simple style guide clean up. This update brings all of the code into the style code outlined in .editorconfig. To run this update copy over the following files.

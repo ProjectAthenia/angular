@@ -2,6 +2,10 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.2.3
+
+Another quick little bug fix! Simply copy over `angular.json` and `src/app/pages/user/user.page.html` to fix a couple of issues.
+
 ## 0.2.2
 
 This simply fixes an issue in the `array-helpers.service.spec.ts` file.

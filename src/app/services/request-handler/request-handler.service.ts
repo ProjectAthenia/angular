@@ -240,9 +240,10 @@ export class RequestHandlerService {
      * @param search
      * @param limit
      * @param page
+     * @param orders
      */
-    async get(route: string, requiresAuth: boolean, showLoading: boolean, expands: any, customErrorHandlers: any = null,
-              filter: any = null, search: any = null, limit: number = null, page: number = null): Promise<any> {
+    async get(route: string, requiresAuth: boolean, showLoading: boolean, expands: string[] = [], customErrorHandlers: any = null,
+              filter: any = null, search: any = null, limit: number = null, page: number = null, orders: any = {}): Promise<any> {
 
         if (showLoading) {
             await this.incrementLoading();
@@ -252,19 +253,23 @@ export class RequestHandlerService {
         }
         const data = {};
 
-        for (const expand of expands) {
-            data['expand[' + expand + ']'] = '*';
+        for (let i = 0; i < expands.length; i++) {
+            data['expand[' + expands[i] + ']'] = '*';
+        }
+
+        for (const order of Object.keys(orders)) {
+            data['order['  + order + ']'] = orders[order];
         }
 
         if (filter) {
-            for (const key of Object.keys(filter)) {
+            Object.keys(filter).forEach(key => {
                 data['filter[' + key + ']'] = filter[key];
-            }
+            });
         }
 
         if (search) {
 
-            for (const key of Object.keys(search)) {
+            Object.keys(search).forEach(key => {
                 const term = search[key];
                 if (term instanceof Array) {
                     for (const lookup of term) {
@@ -274,7 +279,7 @@ export class RequestHandlerService {
                 } else {
                     data['search[' + key + ']'] = 'like,*' + search[key] + '*';
                 }
-            }
+            });
         }
 
         if (limit) {

@@ -2,6 +2,13 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.3.0
+
+Quick little improvement of how requests are handled and how the auth is updated. To complete this update copy over the following files.
+
+* src/app/services/auth-manager/auth-manager.service.ts - Added new observer for when the auth token is updated.
+* src/app/services/request-handler/request-handler.service.ts - added new order variable to get request, and triggered the auth refresh subscriber properly
+
 ## 0.2.3
 
 Another quick little bug fix! Simply copy over `angular.json` and `src/app/pages/user/user.page.html` to fix a couple of issues.

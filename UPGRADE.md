@@ -27,6 +27,6 @@ Then updated environment config to make sure they have the proper code style.
 
 ## 0.2.0
 
-First things first! Change the editor config to 2 spaces, and then run the code cleanup on the src, and assets directory to make sure the spacing is consistent.
+First things first! Change the editor config to 4 spaces, and then run the code cleanup on the src, and assets directory to make sure the spacing is consistent.
 
 After that copy over and register the components `logged-in-template`, and `side-bar`. Then once that is complete you will new to update all logged in pages to use the new logged in template.

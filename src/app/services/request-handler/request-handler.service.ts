@@ -65,6 +65,7 @@ export class RequestHandlerService {
             const response = await this.refreshRequest;
             this.authToken = response.token;
             this.storageService.saveAuthToken(this.authToken);
+            this.authManager.authRefreshed(this.authToken);
             this.refreshRequest = null;
             return Promise.resolve();
         } catch (error) {

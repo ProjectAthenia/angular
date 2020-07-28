@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Athenia Angular Web App">
+    <tstamp>
+        <format property="buildtimestamp" pattern="yyyyMMddHHmmss"/>
+    </tstamp>
+    <target name="jenkins"
+            depends="npm-install,ng-test"
+            description="Performs the jenkins build/install"/>
+
+    <target name="ng-test">
+        <delete dir="${basedir}/coverage"/>
+        <delete dir="${basedir}/test-results" />
+        <exec executable="/usr/bin/npm" dir="${basedir}" failonerror="true">
+            <arg value="run" />
+            <arg value="test-headless" />
+        </exec>
+    </target>
+
+    <target name="deploy"
+            depends="npm-install,ng-build,link-new-build"
+            description="Performs the deploy for the terminal application."/>
+
+    <target name="npm-install">
+        <exec executable="/usr/bin/npm" failonerror="true" dir="${basedir}">
+            <arg value='install' />
+        </exec>
+    </target>
+
+    <target name="ng-build">
+        <exec executable="/usr/local/bin/ng" failonerror="true" dir="${basedir}">
+            <arg value='build' />
+            <arg value='--prod' />
+        </exec>
+    </target>
+
+    <target name="link-new-build">
+        <move file="${basedir}/dist/current" toFile="${basedir}/dist/${buildtimestamp}" />
+        <symlink link="${basedir}/public" resource="${basedir}/dist/${buildtimestamp}" overwrite="true"/>
+
+        <!-- just a note - this will fail if there is not at least 2 directories but that's ok for now -->
+        <delete verbose="true">
+            <allbutlast count="2">
+                <sort>
+                    <date/>
+                    <resources>
+                        <dirset dir="${basedir}/dist" includes="*" />
+                    </resources>
+                </sort>
+            </allbutlast>
+        </delete>
+    </target>
+</project>

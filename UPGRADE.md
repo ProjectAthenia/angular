@@ -2,6 +2,10 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.4.0
+
+Simple little one! This update simply adds a apache ant build file. To complete this update simply copy over `build.xml`.
+
 ## 0.3.0
 
 Quick little improvement of how requests are handled and how the auth is updated. To complete this update copy over the following files.

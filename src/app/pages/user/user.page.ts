@@ -67,27 +67,25 @@ export class UserPage implements OnInit {
      */
     ngOnInit() {
         const userId = parseInt(this.route.snapshot.paramMap.get('user_id'), 0);
-        this.me = this.userService.getMe();
-        const user = this.userService.getUser(userId);
+        this.userService.getMe().then(me => {
+            this.me = me;
+            const user = this.userService.getUser(userId);
 
-        // This should never happen, but just in case
-        if (this.me == null) {
+            if (user == null) {
+                this.requests.social.loadUser(userId).then(loadedUser => {
+                    this.userService.cacheUser(loadedUser);
+                    this.completeLoad(loadedUser);
+                }).catch(error => {
+                    this.location.back();
+                    this.toastController.error('Error Loading User');
+                });
+            } else {
+                this.completeLoad(user);
+            }
+        }).catch(error => {
             this.location.back();
             this.toastController.error('Error Loading User');
-            return;
-        }
-
-        if (user == null) {
-            this.requests.social.loadUser(userId).then(loadedUser => {
-                this.userService.cacheUser(loadedUser);
-                this.completeLoad(loadedUser);
-            }).catch(error => {
-                this.location.back();
-                this.toastController.error('Error Loading User');
-            });
-        } else {
-            this.completeLoad(user);
-        }
+        });
     }
 
     /**

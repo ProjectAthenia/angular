@@ -51,26 +51,21 @@ export class ContactsPage extends BasePage implements OnInit {
      */
     ngOnInit() {
 
-        this.user = this.userService.getMe();
-
-        // This should never happen, but just in case
-        if (this.user == null) {
+        this.userService.getMe().then(user => {
+            this.user = user;
+            this.requests.social.loadContacts(this.user, true).then(contacts => {
+                this.pendingRequests = contacts.filter(request => {
+                    return request.confirmed_at == null && request.denied_at == null &&
+                        request.requested_id === this.user.id;
+                });
+                this.contacts = contacts.filter(contact => {
+                    return contact.confirmed_at && !contact.denied_at;
+                });
+                this.userService.storeContacts(contacts);
+            });
+        }).catch(error => {
             this.location.back();
             this.toastController.error('Error Loading User');
-
-            return;
-        }
-
-        this.requests.social.loadContacts(this.user, true).then(contacts => {
-            this.pendingRequests = contacts.filter(request => {
-                return request.confirmed_at == null && request.denied_at == null &&
-                    request.requested_id === this.user.id;
-            });
-            this.contacts = contacts.filter(contact => {
-                return contact.confirmed_at && !contact.denied_at;
-            });
-            console.log('contacts', this.contacts);
-            this.userService.storeContacts(contacts);
         });
     }
 

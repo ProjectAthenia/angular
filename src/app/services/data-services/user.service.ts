@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../models/user/user';
 import {Contact} from '../../models/user/contact';
+import {RequestsService} from '../requests/requests.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
-
+export class UserService
+{
     /**
      * The current logged in user
      */
@@ -23,25 +24,39 @@ export class UserService {
     contacts: Contact[] = [];
 
     /**
+     * Default constructor
+     * @param requests
+     */
+    constructor(private requests: RequestsService)
+    {}
+
+    /**
      * Stores the logged in user for us
      * @param user
      */
-    storeMe(user: User) {
+    storeMe(user: User)
+    {
         this.me = user;
     }
 
     /**
      * Gets the current logged in user
      */
-    getMe(): User | null {
-        return this.me;
+    getMe(): Promise<User>
+    {
+        return this.me ? Promise.resolve(this.me) :
+            this.requests.auth.loadInitialInformation().then(me => {
+                this.storeMe(me);
+                return Promise.resolve(me);
+            });
     }
 
     /**
      * Sets a user object into cache
      * @param user
      */
-    cacheUser(user: User) {
+    cacheUser(user: User)
+    {
         this.loadedUsers[user.id] = user;
     }
 
@@ -49,7 +64,8 @@ export class UserService {
      * Gets a user by an id
      * @param id
      */
-    getUser(id: number): User | null {
+    getUser(id: number): User | null
+    {
         return this.loadedUsers[id] ? this.loadedUsers[id] : null;
     }
 
@@ -57,7 +73,8 @@ export class UserService {
      * Stores a list of contacts into cache
      * @param contacts
      */
-    storeContacts(contacts: Contact[]) {
+    storeContacts(contacts: Contact[])
+    {
         contacts.forEach(newContact => {
             if (this.contacts.find(oldContact => newContact.id === oldContact.id)) {
                 this.contacts = this.contacts.map(oldContact => {
@@ -73,7 +90,8 @@ export class UserService {
      * finds all contacts related to a user
      * @param user
      */
-    findContacts(user: User) {
+    findContacts(user: User)
+    {
         return this.contacts.filter(contact => {
             return contact.initiated_by_id === user.id || contact.requested_id === user.id;
         });

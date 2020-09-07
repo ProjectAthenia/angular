@@ -70,17 +70,13 @@ export class ThreadsPage extends BasePage implements OnInit, OnDestroy {
      * Takes care of setting up our form properly
      */
     ngOnInit() {
-        this.me = this.userService.getMe();
-
-        // This should never happen, but just in case
-        if (this.me == null) {
+        this.userService.getMe().then(me => {
+            this.me = me;
+            this.loadThreads();
+        }).catch(error => {
             this.location.back();
             this.toastController.error('Error Loading User');
-
-            return;
-        }
-
-        this.loadThreads();
+        });
     }
 
     /**

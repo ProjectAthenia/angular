@@ -17,7 +17,7 @@ export default class Social {
      * @param showLoading
      */
     async loadUser(userId: number, showLoading = true): Promise<User> {
-        return this.requestHandler.get('users/' + userId, true, showLoading, {}).then(response => {
+        return this.requestHandler.get('users/' + userId, true, showLoading, []).then(response => {
             return Promise.resolve(new User(response));
         });
     }
@@ -32,7 +32,7 @@ export default class Social {
             'initiatedBy',
             'requested',
         ], {}, {}, {}, 100).then(response => {
-            return Promise.resolve(response.data.map(data => new Contact(data)));
+            return Promise.resolve(response && response.data ? response.data.map(data => new Contact(data)): []);
         });
     }
 

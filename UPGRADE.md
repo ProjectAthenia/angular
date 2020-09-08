@@ -2,6 +2,18 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.5.0
+
+A fairly substantial one. This update is an internal change that makes it so that all internal calls to the user service getMe are not returning a promise with the logged in user. This makes it completely unnecessary to load the user from any other context. To complete this update copy over the following paths.
+
+* src/app/services/data-services/user.service.ts - The getMe function has been completely reworked.
+* src/app/services/data-services/user.service.spec.ts - The test has been updated to account for the requests being injected, and the change in structure.
+* src/app/pages/contacts/contacts.page.ts - This page's init has been updated to handle the promise properly.
+* src/app/pages/thread/thread.page.ts - This page's init has been updated to handle the promise properly.
+* src/app/pages/threads/threads.page.ts - This page's init has been updated to handle the promise properly.
+* src/app/pages/user/user.page.ts - This page's init has been updated to handle the promise properly.
+* src/app/services/requests/social/social.ts - Fixed a couple potential bugs
+
 ## 0.4.0
 
 Simple little one! This update simply adds a apache ant build file. To complete this update simply copy over `build.xml`.

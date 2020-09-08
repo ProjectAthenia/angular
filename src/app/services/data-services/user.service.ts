@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {User} from '../../models/user/user';
 import {Contact} from '../../models/user/contact';
 import {RequestsService} from '../requests/requests.service';
+import {NotificationsService} from './notifications.service';
+import {Observable, Subscriber} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,11 +26,32 @@ export class UserService
     contacts: Contact[] = [];
 
     /**
+     * Whether or not the user's contacts have loaded
+     */
+    contactsLoaded = false;
+
+    /**
+     * The observer for listening to contact change events
+     */
+    readonly contactChangeObserver: Observable<Contact>;
+
+    /**
+     * The subscriber to listen for contact chang events
+     */
+    private contactChangeSubscribers: Subscriber<Contact>[] = [];
+
+    /**
      * Default constructor
      * @param requests
+     * @param notificationsService
      */
-    constructor(private requests: RequestsService)
-    {}
+    constructor(private requests: RequestsService,
+                private notificationsService: NotificationsService)
+    {
+        this.contactChangeObserver = new Observable((subscriber) => {
+            this.contactChangeSubscribers.push(subscriber);
+        });
+    }
 
     /**
      * Stores the logged in user for us
@@ -37,6 +60,13 @@ export class UserService
     storeMe(user: User)
     {
         this.me = user;
+        this.notificationsService.refreshNotifications(this.me, false).catch(console.error);
+        if (!this.me.logged_into_make_ready) {
+            this.requests.auth.updateUser(user, {
+                logged_into_make_ready: true,
+                show_in_search: true,
+            }, false).catch(console.error);
+        }
     }
 
     /**
@@ -70,19 +100,35 @@ export class UserService
     }
 
     /**
+     * Gets the observer for the auth refreshed events
+     */
+    getContactChangeObserver(): Observable<Contact> {
+        return this.contactChangeObserver;
+    }
+
+    /**
      * Stores a list of contacts into cache
      * @param contacts
      */
     storeContacts(contacts: Contact[])
     {
-        contacts.forEach(newContact => {
-            if (this.contacts.find(oldContact => newContact.id === oldContact.id)) {
-                this.contacts = this.contacts.map(oldContact => {
-                    return oldContact.id === newContact.id ? newContact : oldContact;
-                });
-            } else {
-                this.contacts.push(newContact);
-            }
+        contacts.forEach(contact => this.storeContact(contact));
+    }
+
+    /**
+     * Stores a list of contacts into cache
+     * @param contact
+     */
+    storeContact(contact: Contact) {
+        if (this.contacts.find(oldContact => contact.id === oldContact.id)) {
+            this.contacts = this.contacts.map(oldContact => {
+                return oldContact.id === contact.id ? contact : oldContact;
+            });
+        } else {
+            this.contacts.push(contact);
+        }
+        this.contactChangeSubscribers.forEach(subscriber => {
+            subscriber.next(contact);
         });
     }
 
@@ -90,8 +136,22 @@ export class UserService
      * finds all contacts related to a user
      * @param user
      */
-    findContacts(user: User)
-    {
+    findContacts(user: User): Promise<Contact[]> {
+        if (this.contactsLoaded) {
+            return Promise.resolve(this.filterForContacts(user));
+        } else {
+            return this.requests.social.loadContacts(this.me).then(contacts => {
+                this.contacts = contacts;
+                return Promise.resolve(this.filterForContacts(user));
+            });
+        }
+    }
+
+    /**
+     * Filters our logged in user's contacts for any contacts with the passed in user
+     * @param user
+     */
+    private filterForContacts(user: User): Contact[] {
         return this.contacts.filter(contact => {
             return contact.initiated_by_id === user.id || contact.requested_id === user.id;
         });

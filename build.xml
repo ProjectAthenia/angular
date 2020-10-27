@@ -27,7 +27,7 @@
     </target>
 
     <target name="ng-build">
-        <exec executable="/usr/local/bin/ng" failonerror="true" dir="${basedir}">
+        <exec executable="/usr/bin/ng" failonerror="true" dir="${basedir}">
             <arg value='build' />
             <arg value='--prod' />
         </exec>

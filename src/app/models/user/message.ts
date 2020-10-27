@@ -3,8 +3,8 @@ import {BaseModel} from '../base-model';
 /**
  * Used as a data wrapper for our message model
  */
-export class Message extends BaseModel {
-
+export class Message extends BaseModel
+{
     /**
      * The users in a thread
      */

@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import Subscriptions from './subscriptions/subscriptions';
 import Social from './social/social';
 import Messaging from './messaging/messaging';
+import OrganizationRequests from './organization/organization';
 
 /**
  * Provider for interacting with all app wide requests
@@ -11,12 +12,17 @@ import Messaging from './messaging/messaging';
 @Injectable({
     providedIn: 'root'
 })
-export class RequestsService {
-
+export class RequestsService
+{
     /**
      * The auth requests available
      */
     auth: Auth;
+
+    /**
+     * All requests needed for managing organizations
+     */
+    organization: OrganizationRequests;
 
     /**
      * The requests related to our subscriptions
@@ -37,8 +43,10 @@ export class RequestsService {
      * Default constructor
      * @param requestHandler
      */
-    constructor(private requestHandler: RequestHandlerService) {
+    constructor(private requestHandler: RequestHandlerService)
+    {
         this.auth = new Auth(requestHandler);
+        this.organization = new OrganizationRequests(this.requestHandler);
         this.subscriptions = new Subscriptions(this.requestHandler);
         this.social = new Social(this.requestHandler);
         this.messaging = new Messaging(requestHandler);

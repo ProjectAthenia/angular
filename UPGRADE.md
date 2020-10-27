@@ -2,6 +2,16 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.6.0
+
+Production ready! This update fixes some bugs in the production scripts, and also adds a new page model. The following files will need to be copied over.
+
+* angular.json - Fixed production output directory
+* build.xml - Fixed build path
+* src/app/models/page.ts - New Model
+* src/app/models/page.spec.ts - New Test
+* src/app/services/data-services/user.service.ts - Added contacts functions
+
 ## 0.5.0
 
 A fairly substantial one. This update is an internal change that makes it so that all internal calls to the user service getMe are not returning a promise with the logged in user. This makes it completely unnecessary to load the user from any other context. To complete this update copy over the following paths.

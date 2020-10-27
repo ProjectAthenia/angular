@@ -1,0 +1,27 @@
+<app-logged-in-template>
+
+    <div id="sign-in-content">
+
+        <h1>Create An Organization</h1>
+
+        <p>Creating an organization allows you to add users to your organization, and manage your subscription.</p>
+
+        <form [formGroup]="form">
+            <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" class="form-control" ngDefaultControl formControlName="name"
+                       [formControl]="form.controls.name"/>
+            </div>
+
+            <div *ngIf="submitted && !form.controls.name.valid" class="validator-error">
+                Please enter your organization's name.
+            </div>
+
+            <div class="submit-wrapper">
+                <button class="btn btn-primary" (click)="submit()">Create</button>
+            </div>
+        </form>
+
+    </div>
+
+</app-logged-in-template>

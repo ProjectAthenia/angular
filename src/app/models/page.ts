@@ -28,7 +28,8 @@ export class Page<Model> extends BaseModel
      * @param rawData
      * @param modelConstructor
      */
-    constructor(rawData, modelConstructor) {
+    constructor(rawData, modelConstructor)
+    {
         super(rawData, {
             data: new Relation('array', modelConstructor),
         });

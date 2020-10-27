@@ -92,7 +92,8 @@ export class UserService
     /**
      * Gets the observer for the auth refreshed events
      */
-    getContactChangeObserver(): Observable<Contact> {
+    getContactChangeObserver(): Observable<Contact>
+    {
         return this.contactChangeObserver;
     }
 
@@ -109,7 +110,8 @@ export class UserService
      * Stores a list of contacts into cache
      * @param contact
      */
-    storeContact(contact: Contact) {
+    storeContact(contact: Contact)
+    {
         if (this.contacts.find(oldContact => contact.id === oldContact.id)) {
             this.contacts = this.contacts.map(oldContact => {
                 return oldContact.id === contact.id ? contact : oldContact;
@@ -126,7 +128,8 @@ export class UserService
      * finds all contacts related to a user
      * @param user
      */
-    findContacts(user: User): Promise<Contact[]> {
+    findContacts(user: User): Promise<Contact[]>
+    {
         if (this.contactsLoaded) {
             return Promise.resolve(this.filterForContacts(user));
         } else {
@@ -141,7 +144,8 @@ export class UserService
      * Filters our logged in user's contacts for any contacts with the passed in user
      * @param user
      */
-    private filterForContacts(user: User): Contact[] {
+    private filterForContacts(user: User): Contact[]
+    {
         return this.contacts.filter(contact => {
             return contact.initiated_by_id === user.id || contact.requested_id === user.id;
         });

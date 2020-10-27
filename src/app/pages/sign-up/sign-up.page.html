@@ -1,0 +1,68 @@
+<div id="sign-up-wrapper" class="standard-padding">
+
+    <div id="sign-up-content">
+
+        <h1>Welcome to {{getBrandingName()}}!</h1>
+
+        <img *ngIf="getBrandingImageUrl()" id="logo" [src]="getBrandingImageUrl()">
+
+        <form [formGroup]="form">
+            <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" ngDefaultControl formControlName="name"
+                       [formControl]="form.controls.name"/>
+            </div>
+
+            <div *ngIf="submitted && !form.controls.name.valid" class="validator-error">
+                Please enter your name.
+            </div>
+
+            <div>
+                <label for="email">Email Address</label>
+                <input id="email" type="email" ngDefaultControl formControlName="email"
+                       [formControl]="form.controls.email"/>
+            </div>
+
+            <div *ngIf="submitted && !form.controls.email.valid" class="validator-error">
+                Please enter a valid email address.
+            </div>
+
+            <div>
+                <label for="password">Password <small>(at least 6 characters)</small></label>
+                <input id="password" type="password" ngDefaultControl formControlName="password"
+                       [formControl]="form.controls.password"/>
+            </div>
+
+            <div *ngIf="submitted && !form.controls.password.valid" class="validator-error">
+                Please enter a valid 6 digit password.
+            </div>
+
+            <div class="submit-wrapper">
+                <button class="btn btn-primary" (click)="submit()">Sign Up</button>
+            </div>
+        </form>
+
+        <p>Already have an account?<br/><span class="link" (click)="goToSignIn()">Click here to sign in.</span></p>
+    </div>
+
+    <footer>
+        Copyright 2019, {{getBrandingName()}}
+    </footer>
+
+</div>
+
+<ng-template #existingUserModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Hmm...</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>There already seems to be an account with this email address. Do you have an existing account?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Nope</button>
+        <button type="button" class="btn btn-outline-dark" (click)="goToSignIn()">Login</button>
+    </div>
+</ng-template>

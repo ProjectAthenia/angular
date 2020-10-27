@@ -102,21 +102,22 @@ export class UserPage implements OnInit {
      */
     loadContact() {
 
-        let contacts = this.userService.findContacts(this.user);
-        if (contacts.length === 0 && !this.contactLoaded) {
-            this.requests.social.loadContacts(this.me).then(newContacts => {
-                this.userService.storeContacts(newContacts);
-                this.contactLoaded = true;
-                this.loadContact();
-            });
-        } else {
-            contacts = contacts.sort((contactA, contactB) => {
-                return contactA.id > contactB.id ? -1 : 1;
-            });
+        this.userService.findContacts(this.user).then(contacts => {
+            if (contacts.length === 0 && !this.contactLoaded) {
+                this.requests.social.loadContacts(this.me).then(newContacts => {
+                    newContacts.forEach(contact => this.userService.storeContact(contact));
+                    this.contactLoaded = true;
+                    this.loadContact();
+                });
+            } else {
+                contacts = contacts.sort((contactA, contactB) => {
+                    return contactA.id > contactB.id ? -1 : 1;
+                });
 
-            this.contactLoaded = true;
-            this.contact = contacts[0];
-        }
+                this.contactLoaded = true;
+                this.contact = contacts[0];
+            }
+        });
     }
 
     /**
@@ -139,7 +140,7 @@ export class UserPage implements OnInit {
      */
     connect() {
         this.requests.social.createContact(this.me, this.user).then(contact => {
-            this.userService.storeContacts([contact]);
+            this.userService.storeContact(contact);
             this.contact = contact;
         });
     }
@@ -149,7 +150,7 @@ export class UserPage implements OnInit {
      */
     deny() {
         this.requests.social.denyContact(this.me, this.contact).then(contact => {
-            this.userService.storeContacts([contact]);
+            this.userService.storeContact(contact);
             this.contact = contact;
         });
     }
@@ -159,7 +160,7 @@ export class UserPage implements OnInit {
      */
     confirm() {
         this.requests.social.confirmContact(this.me, this.contact).then(contact => {
-            this.userService.storeContacts([contact]);
+            this.userService.storeContact(contact);
             this.contact = contact;
         });
     }

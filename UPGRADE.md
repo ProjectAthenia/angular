@@ -8,9 +8,11 @@ Production ready! This update fixes some bugs in the production scripts, and als
 
 * angular.json - Fixed production output directory
 * build.xml - Fixed build path
+* package.json - Added command for running tests without visual chrome
 * src/app/models/page.ts - New Model
 * src/app/models/page.spec.ts - New Test
 * src/app/services/data-services/user.service.ts - Added contacts functions
+* src/app/pages/user/user.page.ts - Fixed a couple things for user service change
 
 ## 0.5.0
 

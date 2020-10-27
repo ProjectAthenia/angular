@@ -9,7 +9,6 @@ import {AppComponent} from '../../app.component';
 import {BasePage} from '../base.page';
 import {environment} from '../../../environments/environment';
 import {ToastrService} from 'ngx-toastr';
-import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 
 @Component({

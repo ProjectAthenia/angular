@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {User} from '../../models/user/user';
 import {Contact} from '../../models/user/contact';
 import {RequestsService} from '../requests/requests.service';
-import {NotificationsService} from './notifications.service';
 import {Observable, Subscriber} from 'rxjs';
 
 @Injectable({
@@ -43,10 +42,8 @@ export class UserService
     /**
      * Default constructor
      * @param requests
-     * @param notificationsService
      */
-    constructor(private requests: RequestsService,
-                private notificationsService: NotificationsService)
+    constructor(private requests: RequestsService)
     {
         this.contactChangeObserver = new Observable((subscriber) => {
             this.contactChangeSubscribers.push(subscriber);
@@ -60,13 +57,6 @@ export class UserService
     storeMe(user: User)
     {
         this.me = user;
-        this.notificationsService.refreshNotifications(this.me, false).catch(console.error);
-        if (!this.me.logged_into_make_ready) {
-            this.requests.auth.updateUser(user, {
-                logged_into_make_ready: true,
-                show_in_search: true,
-            }, false).catch(console.error);
-        }
     }
 
     /**

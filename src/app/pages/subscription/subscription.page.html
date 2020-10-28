@@ -1,0 +1,59 @@
+<app-logged-in-template>
+
+    <form *ngIf="user && membershipPlans">
+        <div class="validator-error" *ngIf="error">{{error}}</div>
+
+        <ng-container *ngIf="!currentSubscription">
+            <div id="membership-options" *ngIf="membershipPlans && membershipPlans.length > 1">
+                <h3>Select Your Membership Plan</h3>
+
+                <label *ngFor="let membershipPlan of activeMembershipPlans()" (click)="setSelectedMembershipPlan(membershipPlan)">
+                    <input name="membership-plan" value="{{membershipPlan.id}}"/>
+                    {{membershipPlan.name}} ${{membershipPlan.current_cost}}
+                </label>
+            </div>
+
+            <h3 *ngIf="membershipPlans.length == 1">
+                Subscribe to the {{membershipPlans[0].name}} for ${{membershipPlans[0].current_cost}}
+            </h3>
+        </ng-container>
+
+        <ng-container *ngIf="currentSubscription">
+            Your {{currentSubscription.membership_plan_rate.membership_plan.name}} subscription is {{getCurrentSubscriptionStatus()}}
+
+            <div class="submit-wrapper" *ngIf="currentSubscription.expires_at">
+                <button class="btn btn-primary" *ngIf="currentSubscription.recurring" (click)="setRecurring(false)">Cancel Auto Renewal</button>
+                <button class="btn btn-primary" *ngIf="!currentSubscription.recurring" (click)="setRecurring(true)">Turn On Auto Renewal</button>
+            </div>
+        </ng-container>
+
+        <div [ngStyle]="getCardSelectorDisplay()">
+
+            <div id="payment-options" *ngIf="user && user.payment_methods.length > 0" value="{{selectedPaymentMethod?.id}}">
+                <h3>Select Your Payment Method</h3>
+
+                <label *ngFor="let paymentMethod of user.payment_methods"
+                       (click)="setSelectedPaymentMethod(paymentMethod)">
+                    <input name="payment-options" value="{{paymentMethod.id}}"/>
+                    Card Ending In {{paymentMethod.identifier}}
+                </label>
+
+                <label (click)="setSelectedPaymentMethod(null)">
+                    <input name="payment-options"/>
+                    New Credit Card
+                </label>
+
+            </div>
+
+            <div id="new_card_inputs" [ngStyle]="getCardDisplay()">
+                <stripe-card #stripeCard></stripe-card>
+            </div>
+
+            <div class="submit-wrapper">
+                <button class="btn btn-primary" (click)="submit(stripeCard)">{{currentSubscription ? 'Change Payment Method' : 'Submit'}}</button>
+            </div>
+        </div>
+
+    </form>
+
+</app-logged-in-template>

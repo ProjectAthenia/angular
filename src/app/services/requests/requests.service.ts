@@ -5,6 +5,7 @@ import Subscriptions from './subscriptions/subscriptions';
 import Social from './social/social';
 import Messaging from './messaging/messaging';
 import OrganizationRequests from './organization/organization';
+import EntityRequests from './entity/entity';
 
 /**
  * Provider for interacting with all app wide requests
@@ -18,6 +19,11 @@ export class RequestsService
      * The auth requests available
      */
     auth: Auth;
+
+    /**
+     * All requests related to entities
+     */
+    entityRequests: EntityRequests;
 
     /**
      * All requests needed for managing organizations
@@ -46,6 +52,7 @@ export class RequestsService
     constructor(private requestHandler: RequestHandlerService)
     {
         this.auth = new Auth(requestHandler);
+        this.entityRequests = new EntityRequests(requestHandler);
         this.organization = new OrganizationRequests(this.requestHandler);
         this.subscriptions = new Subscriptions(this.requestHandler);
         this.social = new Social(this.requestHandler);

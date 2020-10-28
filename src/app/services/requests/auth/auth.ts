@@ -80,17 +80,4 @@ export default class Auth {
                 );
             });
     }
-
-    /**
-     * Creates a payment method for a user
-     * @param user
-     * @param stripeToken
-     */
-    async createPaymentMethod(user: User, stripeToken: string): Promise<PaymentMethod> {
-        return this.requestHandler.post('users/' + user.id + '/payment-methods', true, true, {
-            token: stripeToken,
-        }).then(result => {
-            return Promise.resolve(new PaymentMethod(result));
-        });
-    }
 }

@@ -76,18 +76,4 @@ describe('Test the auth requests', () => {
         const result = await auth.updateUser(user, {});
         expect(result.id).toBe(324);
     });
-
-    it('Creates a request for creating a payment method properly', async () => {
-
-        spyOn(requestHandler, 'post').and.returnValue(Promise.resolve({
-            id: 324,
-            identifier: '4242',
-        }));
-        const user = new User({
-            id: 4531,
-        });
-        const result = await auth.createPaymentMethod(user, 'token');
-        expect(result.id).toBe(324);
-        expect(result.constructor).toBe(PaymentMethod);
-    });
 });

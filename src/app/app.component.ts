@@ -28,8 +28,6 @@ export class AppComponent {
         const authToken = this.storageService.loadAuthToken();
         if (!authToken) {
             this.router.navigateByUrl('/sign-in').catch(console.error);
-        } else {
-            this.router.navigateByUrl('/home').catch(console.error);
         }
     }
 

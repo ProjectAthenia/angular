@@ -8,7 +8,7 @@
                 <h3>Select Your Membership Plan</h3>
 
                 <label *ngFor="let membershipPlan of activeMembershipPlans()" (click)="setSelectedMembershipPlan(membershipPlan)">
-                    <input name="membership-plan" value="{{membershipPlan.id}}"/>
+                    <input type="radio" name="membership-plan" value="{{membershipPlan.id}}"/>
                     {{membershipPlan.name}} ${{membershipPlan.current_cost}}
                 </label>
             </div>
@@ -34,12 +34,12 @@
 
                 <label *ngFor="let paymentMethod of user.payment_methods"
                        (click)="setSelectedPaymentMethod(paymentMethod)">
-                    <input name="payment-options" value="{{paymentMethod.id}}"/>
+                    <input type="radio" name="payment-options" value="{{paymentMethod.id}}"/>
                     Card Ending In {{paymentMethod.identifier}}
                 </label>
 
                 <label (click)="setSelectedPaymentMethod(null)">
-                    <input name="payment-options"/>
+                    <input type="radio" name="payment-options"/>
                     New Credit Card
                 </label>
 

@@ -11,9 +11,6 @@ import {ToastrService} from 'ngx-toastr';
 import {StripeCard} from 'stripe-angular';
 import DateHelpersService from '../../services/date-helpers/date-helpers.service';
 
-declare function require(name:string);
-require('card');
-
 @Component({
     selector: 'app-subscription',
     templateUrl: './subscription.page.html',

@@ -1,16 +1,16 @@
-import {RequestHandlerProvider} from "../../request-handler/request-handler";
-import RequestHandlerProviderMock from "../../request-handler/request-handler.mock";
 import {User} from "../../../models/user/user";
 import {PaymentMethod} from '../../../models/payment/payment-method';
-import {Asset} from '../../../models/asset';
 import EntityRequests from './entity';
+import {RequestHandlerService} from '../../request-handler/request-handler.service';
+import RequestHandlerServiceMock from '../../request-handler/request-handler.service.mock';
+import {Asset} from '../../../models/asset';
 
 describe('Test the auth requests', () => {
-    let requestHandler : RequestHandlerProvider;
+    let requestHandler : RequestHandlerService;
     let entityRequests : EntityRequests;
 
     beforeEach(() => {
-        requestHandler = new RequestHandlerProviderMock();
+        requestHandler = new RequestHandlerServiceMock();
         entityRequests = new EntityRequests(requestHandler);
     });
 

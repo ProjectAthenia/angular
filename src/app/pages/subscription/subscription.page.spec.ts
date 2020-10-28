@@ -4,21 +4,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubscriptionPage } from './subscription.page';
 import {FormsModule} from '@angular/forms';
 import {ComponentsModule} from '../../components/components.module';
-import {AlertController, NavController, ToastController} from '@ionic/angular';
-import {RequestsProvider} from '../../providers/requests/requests';
-import RequestsProviderMock from '../../providers/requests/requests.mock';
-import {ActivatedRoute, convertToParamMap} from '@angular/router';
-import {CardModule} from 'ngx-card';
-import {Stripe} from '@ionic-native/stripe/ngx';
-import {StorageProvider} from '../../providers/storage/storage';
-import {NativeStorageMock} from '../../../../test-config/mocks/plugins';
+import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';
+import {RequestsService} from '../../services/requests/requests.service';
+import RequestsServiceMock from '../../services/requests/requests.service.mock';
+import {StorageService} from '../../services/storage/storage.service';
+import {ToastrService} from 'ngx-toastr';
 
 describe('SubscriptionPage', () => {
     let component: SubscriptionPage;
     let navController;
     let fixture: ComponentFixture<SubscriptionPage>;
     let activatedRoute;
-    const requestsProvider: RequestsProvider = new RequestsProviderMock();
+    const requestsProvider: RequestsService = new RequestsServiceMock();
+    const toast = {
+        error: jasmine.createSpy('error')
+    };
 
     beforeEach(async(() => {
         navController = jasmine.createSpyObj('NavController', ['navigateBack']);
@@ -34,16 +34,13 @@ describe('SubscriptionPage', () => {
             imports: [
                 FormsModule,
                 ComponentsModule,
-                CardModule,
             ],
             providers: [
-                { provide: AlertController, useValue: new AlertController()},
-                { provide: ToastController, useValue: new ToastController()},
-                { provide: NavController, useValue: navController},
-                { provide: RequestsProvider, useValue: requestsProvider},
+                { provide: RequestsService, useValue: requestsProvider},
                 { provide: ActivatedRoute, useValue: activatedRoute},
-                { provide: Stripe, useValue: new Stripe() },
-                {provide: StorageProvider, useValue: new StorageProvider(new NativeStorageMock())},
+                {provide: StorageService, useValue: new StorageService()},
+                {provide: ToastrService, useValue: toast},
+                {provide: Router, useValue: {}},
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         })

@@ -29,7 +29,7 @@
 
         <div [ngStyle]="getCardSelectorDisplay()">
 
-            <div id="payment-options" *ngIf="user && user.payment_methods.length > 0" value="{{selectedPaymentMethod?.id}}">
+            <div id="payment-options" *ngIf="user && user.payment_methods.length > 0">
                 <h3>Select Your Payment Method</h3>
 
                 <label *ngFor="let paymentMethod of user.payment_methods"

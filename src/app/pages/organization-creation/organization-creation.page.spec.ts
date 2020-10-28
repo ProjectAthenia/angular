@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RequestsService} from '../../services/requests/requests.service';
 import RequestsServiceMock from '../../services/requests/requests.service.mock';
 import {StorageService} from '../../services/storage/storage.service';
+import {Router} from '@angular/router';
 
 describe('OrganizationCreationPage', () => {
     let component: OrganizationCreationPage;
@@ -24,6 +25,7 @@ describe('OrganizationCreationPage', () => {
             providers: [
                 { provide: RequestsService, useValue: requestsProvider},
                 {provide: StorageService, useValue: new StorageService()},
+                {provide: Router, useValue: {}},
             ],
             declarations: [
                 OrganizationCreationPage,

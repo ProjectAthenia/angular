@@ -9,8 +9,16 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'contacts',
+        loadChildren: './pages/contacts/contacts.module#ContactsPageModule',
+    },
+    {
         path: 'home',
         loadChildren: './pages/home/home.module#HomePageModule'
+    },
+    {
+        path: 'organization-creation',
+        loadChildren: './pages/organization-creation/organization-creation.module#OrganizationCreationPageModule'
     },
     {
         path: 'profile-editor',
@@ -21,16 +29,24 @@ const routes: Routes = [
         loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'
     },
     {
+        path: 'sign-up',
+        loadChildren: './pages/sign-up/sign-up.module#SignUpPageModule'
+    },
+    {
+        path: 'subscription',
+        loadChildren: './pages/subscription/subscription.module#SubscriptionPageModule'
+    },
+    {
+        path: 'subscription/:organization_id',
+        loadChildren: './pages/subscription/subscription.module#SubscriptionPageModule'
+    },
+    {
         path: 'threads',
         loadChildren: './pages/threads/threads.module#ThreadsPageModule',
     },
     {
         path: 'user/:user_id',
         loadChildren: './pages/user/user.module#UserPageModule',
-    },
-    {
-        path: 'contacts',
-        loadChildren: './pages/contacts/contacts.module#ContactsPageModule',
     },
     {
         path: 'user/:user_id/message',

@@ -1,15 +1,16 @@
-<div id="sign-up-wrapper" class="standard-padding">
+<div id="sign-up" class="standard-padding horizontal-page">
 
-    <div id="sign-up-content">
+    <div class="page-content">
 
-        <h1>Welcome to {{getBrandingName()}}!</h1>
+        <h1>Sign Up</h1>
 
         <img *ngIf="getBrandingImageUrl()" id="logo" [src]="getBrandingImageUrl()">
 
+        <p>Already have an account?<br/><span class="link" (click)="goToSignIn()">Click here to sign in.</span></p>
         <form [formGroup]="form">
             <div>
                 <label for="name">Name</label>
-                <input id="name" type="text" ngDefaultControl formControlName="name"
+                <input id="name" type="text" class="form-control" ngDefaultControl formControlName="name"
                        [formControl]="form.controls.name"/>
             </div>
 
@@ -19,7 +20,7 @@
 
             <div>
                 <label for="email">Email Address</label>
-                <input id="email" type="email" ngDefaultControl formControlName="email"
+                <input id="email" type="email" class="form-control" ngDefaultControl formControlName="email"
                        [formControl]="form.controls.email"/>
             </div>
 
@@ -29,7 +30,7 @@
 
             <div>
                 <label for="password">Password <small>(at least 6 characters)</small></label>
-                <input id="password" type="password" ngDefaultControl formControlName="password"
+                <input id="password" type="password" class="form-control" ngDefaultControl formControlName="password"
                        [formControl]="form.controls.password"/>
             </div>
 
@@ -41,8 +42,6 @@
                 <button class="btn btn-primary" (click)="submit()">Sign Up</button>
             </div>
         </form>
-
-        <p>Already have an account?<br/><span class="link" (click)="goToSignIn()">Click here to sign in.</span></p>
     </div>
 
     <footer>

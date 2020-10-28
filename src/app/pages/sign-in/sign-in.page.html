@@ -1,10 +1,12 @@
-<div id="sign-in-wrapper" class="standard-padding">
+<div id="sign-in" class="standard-padding horizontal-page">
 
-    <div id="sign-in-content">
+    <div class="page-content">
 
         <h1>Sign In</h1>
 
         <img *ngIf="getBrandingImageUrl()" id="logo" [src]="getBrandingImageUrl()">
+
+        <p *ngIf="signUpEnabled()">Don't have an account?<br/><span class="link" (click)="goToSignUp()">Click here to sign up.</span></p>
 
         <form [formGroup]="form">
             <div>

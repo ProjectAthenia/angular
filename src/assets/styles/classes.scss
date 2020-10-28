@@ -18,3 +18,27 @@
     background-repeat: no-repeat;
     background-image: url('/assets/profile-image-placeholder.png');
 }
+.link {
+    cursor: pointer;
+}
+
+.horizontal-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0 auto;
+    .page-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    footer {
+        margin: 10px 0;
+    }
+}

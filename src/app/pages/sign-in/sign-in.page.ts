@@ -42,16 +42,16 @@ export class SignInPage extends BasePage implements OnInit {
                 private requestsProvider: RequestsService,
                 private toastController: ToastrService,
                 private userService: UserService,
-                private router: Router,
-    ) {
+                private router: Router)
+    {
         super();
     }
 
     /**
      * Takes care of setting up our form properly
      */
-    ngOnInit() {
-
+    ngOnInit()
+    {
         this.form = this.formBuilder.group({
 
             email: ['', Validators.compose([
@@ -66,9 +66,26 @@ export class SignInPage extends BasePage implements OnInit {
     }
 
     /**
+     * Whether or not the sign up enabled feature flag is turned on
+     */
+    signUpEnabled()
+    {
+        return environment.sign_up_enabled;
+    }
+
+    /**
+     * Takes the user to the login page
+     */
+    goToSignUp()
+    {
+        this.router.navigateByUrl('/sign-up');
+    }
+
+    /**
      * Runs the submission to the server
      */
-    submit() {
+    submit()
+    {
         this.submitted = true;
 
         if (this.form.valid) {
@@ -85,8 +102,8 @@ export class SignInPage extends BasePage implements OnInit {
      * Handles the login completion properly
      * @param response
      */
-    handleLoginCompletion(response) {
-
+    handleLoginCompletion(response)
+    {
         const authToken = response.token;
 
         this.storageProvider.saveAuthToken(authToken);
@@ -99,8 +116,8 @@ export class SignInPage extends BasePage implements OnInit {
      * Handles displaying the incorrect credentials toast to the user
      * @param error
      */
-    handleIncorrectPassword(error) {
-
+    handleIncorrectPassword(error)
+    {
         this.toastController.error('Email Address or password incorrect.');
     }
 
@@ -109,7 +126,8 @@ export class SignInPage extends BasePage implements OnInit {
      *
      * @param user
      */
-    saveUserData(user: User) {
+    saveUserData(user: User)
+    {
         this.userService.storeMe(user);
         this.storageProvider.saveLoggedInUserId(user.id);
         AppComponent.LOGGED_IN = true;
@@ -119,7 +137,8 @@ export class SignInPage extends BasePage implements OnInit {
     /**
      * Returns the app forgot password url properly
      */
-    getForgotPasswordUrl(): string {
+    getForgotPasswordUrl(): string
+    {
         return environment.forgot_password_url;
     }
 }

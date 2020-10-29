@@ -13,8 +13,8 @@ export interface RelationMap {
 /**
  * Base model for all data models within the app
  */
-export class BaseModel {
-
+export abstract class BaseModel
+{
     /**
      * auto increment id, which just about every model has
      */
@@ -27,7 +27,8 @@ export class BaseModel {
      * @param relations
      * @param dates
      */
-    constructor(private rawData: Object, private relations: RelationMap = {}, private dates: Array<string> = []) {
+    constructor(protected rawData: Object, protected relations: RelationMap = {}, protected dates: Array<string> = [])
+    {
         for (const property in rawData) {
             if (this.dates.includes(property)) {
                 if (rawData[property]) {

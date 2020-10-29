@@ -1,5 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {User} from '../../models/user/user';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BasePage} from '../base.page';
 import {MembershipPlan} from '../../models/subscription/membership-plan';
@@ -10,6 +9,7 @@ import {UserService} from '../../services/data-services/user.service';
 import {ToastrService} from 'ngx-toastr';
 import {StripeCard} from 'stripe-angular';
 import DateHelpersService from '../../services/date-helpers/date-helpers.service';
+import Entity from '../../models/entity';
 
 @Component({
     selector: 'app-subscription',
@@ -26,7 +26,7 @@ export class SubscriptionPage extends BasePage implements OnInit {
     /**
      * The form object that helps us validate the sign in form
      */
-    user: User;
+    entity: Entity;
 
     /**
      * The current subscription if there is one
@@ -63,30 +63,31 @@ export class SubscriptionPage extends BasePage implements OnInit {
     constructor(private requests: RequestsService,
                 private userService: UserService,
                 private route: ActivatedRoute,
-                private toastrService: ToastrService,
-    ) {
+                private toastrService: ToastrService)
+    {
         super();
     }
 
     /**
      * Takes care of setting up our form properly
      */
-    ngOnInit() {
+    ngOnInit()
+    {
         this.requests.subscriptions.fetchMembershipPlans().then(membershipPlans => {
             this.membershipPlans = membershipPlans;
             if (this.membershipPlans.length == 1) {
                 this.setSelectedMembershipPlan(this.membershipPlans[0]);
             }
             this.requests.auth.loadInitialInformation().then(user => {
-                this.user = user;
+                this.entity = user;
                 this.userService.storeMe(user);
-                this.currentSubscription = this.user.getCurrentSubscription();
+                this.currentSubscription = this.entity.getCurrentSubscription();
                 if (this.currentSubscription) {
-                    this.selectedPaymentMethod = this.user.payment_methods.find(paymentMethod => {
+                    this.selectedPaymentMethod = this.entity.payment_methods.find(paymentMethod => {
                         return paymentMethod.id == this.currentSubscription.payment_method_id;
                     });
                 }
-                if (this.user.payment_methods.length == 0) {
+                if (this.entity.payment_methods.length == 0) {
                     this.selectedPaymentMethod = null;
                 }
             }).catch(console.error);
@@ -146,9 +147,10 @@ export class SubscriptionPage extends BasePage implements OnInit {
      * Sets the subscription to be recurring
      * @param recurring
      */
-    setRecurring(recurring: boolean) {
+    setRecurring(recurring: boolean)
+    {
         this.requests.subscriptions.updateSubscription(
-            this.user,
+            this.entity,
             this.currentSubscription,
             {recurring: recurring}
         ).then(subscription => {
@@ -160,7 +162,8 @@ export class SubscriptionPage extends BasePage implements OnInit {
      * Sets the current payment method the user has selected
      * @param paymentMethod
      */
-    setSelectedPaymentMethod(paymentMethod: PaymentMethod) {
+    setSelectedPaymentMethod(paymentMethod: PaymentMethod)
+    {
         this.selectedPaymentMethod = paymentMethod;
     }
 
@@ -168,23 +171,24 @@ export class SubscriptionPage extends BasePage implements OnInit {
      * Sets the selected membership plan properly
      * @param membershipPlan
      */
-    setSelectedMembershipPlan(membershipPlan: MembershipPlan) {
+    setSelectedMembershipPlan(membershipPlan: MembershipPlan)
+    {
         this.selectedMembershipPlan = membershipPlan;
     }
 
     /**
      * Validates the save properly
      */
-    submit(stripeCard: StripeCard) {
-
+    submit(stripeCard: StripeCard)
+    {
         this.submitted = true;
         this.error = null;
 
         if (this.currentSubscription) {
             if (this.selectedPaymentMethod === null) {
                 stripeCard.createToken().then(token => {
-                    this.requests.entityRequests.createPaymentMethod(this.user, token.id).then(paymentMethod => {
-                        this.user.payment_methods.push(paymentMethod);
+                    this.requests.entityRequests.createPaymentMethod(this.entity, token.id).then(paymentMethod => {
+                        this.entity.payment_methods.push(paymentMethod);
                         this.setSelectedPaymentMethod(paymentMethod);
                         this.changePaymentMethod(paymentMethod);
                     });
@@ -201,9 +205,9 @@ export class SubscriptionPage extends BasePage implements OnInit {
                 this.error = 'Please select a payment method.';
             } else if (this.selectedPaymentMethod === null) {
                 stripeCard.createToken().then(token => {
-                    this.requests.entityRequests.createPaymentMethod(this.user, token.id).then(paymentMethod => {
+                    this.requests.entityRequests.createPaymentMethod(this.entity, token.id).then(paymentMethod => {
                         this.selectedPaymentMethod = paymentMethod;
-                        this.user.payment_methods.push(paymentMethod);
+                        this.entity.payment_methods.push(paymentMethod);
                         this.createSubscription();
                     }).catch(error => {
                         this.error = error.message;
@@ -218,17 +222,18 @@ export class SubscriptionPage extends BasePage implements OnInit {
     /**
      * creates a subscription properly
      */
-    createSubscription() {
+    createSubscription()
+    {
         const paymentMethod = this.selectedPaymentMethod;
         if (paymentMethod) {
 
             this.requests.subscriptions.createSubscription(
-                this.user, paymentMethod as PaymentMethod,
+                this.entity, paymentMethod as PaymentMethod,
                 this.selectedMembershipPlan
             ).then(subscription => {
                 this.currentSubscription = subscription;
-                this.user.subscriptions.push(subscription);
-                this.userService.storeMe(this.user);
+                this.entity.subscriptions.push(subscription);
+                this.userService.storeMe(this.entity);
                 this.toastrService.show( 'Subscription successfully created!');
             }).catch(() => {
                 this.error = 'Error processing payment. Please try another payment source.';
@@ -240,9 +245,10 @@ export class SubscriptionPage extends BasePage implements OnInit {
      * Changes the payment method properly
      * @param paymentMethod
      */
-    changePaymentMethod(paymentMethod: PaymentMethod) {
+    changePaymentMethod(paymentMethod: PaymentMethod)
+    {
         this.requests.subscriptions.updateSubscription(
-            this.user,
+            this.entity,
             this.currentSubscription,
             {payment_method_id: paymentMethod.id}
         ).then(() => {

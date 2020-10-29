@@ -1,6 +1,6 @@
 <app-logged-in-template>
 
-    <form *ngIf="user && membershipPlans">
+    <form *ngIf="entity && membershipPlans">
         <div class="validator-error" *ngIf="error">{{error}}</div>
 
         <ng-container *ngIf="!currentSubscription">
@@ -29,10 +29,10 @@
 
         <div [ngStyle]="getCardSelectorDisplay()">
 
-            <div id="payment-options" *ngIf="user && user.payment_methods.length > 0">
+            <div id="payment-options" *ngIf="entity && entity.payment_methods.length > 0">
                 <h3>Select Your Payment Method</h3>
 
-                <label *ngFor="let paymentMethod of user.payment_methods"
+                <label *ngFor="let paymentMethod of entity.payment_methods"
                        (click)="setSelectedPaymentMethod(paymentMethod)">
                     <input type="radio" name="payment-options" value="{{paymentMethod.id}}"/>
                     Card Ending In {{paymentMethod.identifier}}

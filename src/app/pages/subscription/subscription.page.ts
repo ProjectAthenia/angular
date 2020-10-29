@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BasePage} from '../base.page';
 import {MembershipPlan} from '../../models/subscription/membership-plan';
 import {PaymentMethod} from '../../models/payment/payment-method';
@@ -10,6 +10,7 @@ import {ToastrService} from 'ngx-toastr';
 import {StripeCard} from 'stripe-angular';
 import DateHelpersService from '../../services/date-helpers/date-helpers.service';
 import Entity from '../../models/entity';
+import {User} from '../../models/user/user';
 
 @Component({
     selector: 'app-subscription',
@@ -57,11 +58,13 @@ export class SubscriptionPage extends BasePage implements OnInit {
      * Default Constructor
      * @param requests
      * @param userService
+     * @param router
      * @param route
      * @param toastrService
      */
     constructor(private requests: RequestsService,
                 private userService: UserService,
+                private router: Router,
                 private route: ActivatedRoute,
                 private toastrService: ToastrService)
     {
@@ -79,19 +82,52 @@ export class SubscriptionPage extends BasePage implements OnInit {
                 this.setSelectedMembershipPlan(this.membershipPlans[0]);
             }
             this.requests.auth.loadInitialInformation().then(user => {
-                this.entity = user;
                 this.userService.storeMe(user);
-                this.currentSubscription = this.entity.getCurrentSubscription();
-                if (this.currentSubscription) {
-                    this.selectedPaymentMethod = this.entity.payment_methods.find(paymentMethod => {
-                        return paymentMethod.id == this.currentSubscription.payment_method_id;
-                    });
-                }
-                if (this.entity.payment_methods.length == 0) {
-                    this.selectedPaymentMethod = null;
+
+                const maybeOrganizationId = this.route.snapshot.paramMap.get('organization_id');
+                if (maybeOrganizationId) {
+                    const organizationId = Number.parseInt(maybeOrganizationId);
+                    if (!user.organization_managers.find(i => i.organization_id == organizationId)) {
+                        this.handleUnauthorizedAccess();
+                        return;
+                    }
+
+                    this.requests.organization.loadOrganization(organizationId).then(organization => {
+                        this.readyEntity(organization);
+                    })
+
+                } else {
+                    this.readyEntity(user);
                 }
             }).catch(console.error);
         }).catch(console.error);
+    }
+
+    /**
+     * Gets everything ready for the entity passed in
+     * @param entity
+     */
+    readyEntity(entity: Entity)
+    {
+        this.entity = entity;
+        this.currentSubscription = this.entity.getCurrentSubscription();
+        if (this.currentSubscription) {
+            this.selectedPaymentMethod = this.entity.payment_methods.find(paymentMethod => {
+                return paymentMethod.id == this.currentSubscription.payment_method_id;
+            });
+        }
+        if (this.entity.payment_methods.length == 0) {
+            this.selectedPaymentMethod = null;
+        }
+    }
+
+    /**
+     * Takes us to the home page at the moment, and shows an error message
+     */
+    handleUnauthorizedAccess()
+    {
+        this.toastrService.error('You do not have permission to access this organization.');
+        this.router.navigateByUrl('/home').catch(console.error);
     }
 
     /**
@@ -233,7 +269,9 @@ export class SubscriptionPage extends BasePage implements OnInit {
             ).then(subscription => {
                 this.currentSubscription = subscription;
                 this.entity.subscriptions.push(subscription);
-                this.userService.storeMe(this.entity);
+                if (this.entity.baseRoute() == 'users') {
+                    this.userService.storeMe(this.entity as User);
+                }
                 this.toastrService.show( 'Subscription successfully created!');
             }).catch(() => {
                 this.error = 'Error processing payment. Please try another payment source.';

@@ -50,6 +50,7 @@ export default class Auth {
     async loadInitialInformation(): Promise<User> {
         return this.requestHandler
             .get('users/me', true, true, [
+                'organizationManagers',
                 'paymentMethods',
                 'subscriptions',
                 'subscriptions.membershipPlanRate',

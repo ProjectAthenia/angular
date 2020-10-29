@@ -1,12 +1,12 @@
 import {BaseModel} from '../base-model';
 import {OrganizationManager} from './organization-manager';
 import {Relation} from '../relation';
-import IsEntity from '../contracts/is-entity';
+import Entity from '../entity';
 
 /**
  * Used as a data wrapper for our organization model
  */
-export class Organization extends BaseModel implements IsEntity {
+export class Organization extends Entity {
 
     /**
      * The name of the organization

@@ -1,7 +1,7 @@
 import {PaymentMethod} from '../../../models/payment/payment-method';
-import IsEntity from '../../../models/contracts/is-entity';
 import {RequestHandlerService} from '../../request-handler/request-handler.service';
 import {Asset} from '../../../models/asset';
+import Entity from '../../../models/entity';
 
 /**
  * All requests needed for handling authentication within the app
@@ -20,7 +20,7 @@ export default class EntityRequests {
      * @param entity
      * @param stripeToken
      */
-    async createPaymentMethod(entity: IsEntity, stripeToken: string): Promise<PaymentMethod> {
+    async createPaymentMethod(entity: Entity, stripeToken: string): Promise<PaymentMethod> {
         return this.requestHandler.post(entity.baseRoute() + '/' + entity.id + '/payment-methods', true, true, {
             token: stripeToken,
         }).then (result => {
@@ -34,7 +34,7 @@ export default class EntityRequests {
      * @param entity
      * @param fileContents
      */
-    async uploadProfileImage(entity: IsEntity, fileContents: string): Promise<Asset> {
+    async uploadProfileImage(entity: Entity, fileContents: string): Promise<Asset> {
         return this.requestHandler.post(entity.baseRoute() + '/' + entity.id + '/profile-images', true, false, {
             file_contents: fileContents,
         }).then(response => {
@@ -50,7 +50,7 @@ export default class EntityRequests {
      * @param entity
      * @param fileContents
      */
-    async uploadAsset(entity: IsEntity, fileContents: string): Promise<Asset> {
+    async uploadAsset(entity: Entity, fileContents: string): Promise<Asset> {
         return this.requestHandler.post(entity.baseRoute() + '/' + entity.id + '/assets', true, false, {
             file_contents: fileContents,
         }).then(response => {

@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {RequestsService} from '../../services/requests/requests.service';
 import RequestHandlerServiceMock from '../../services/request-handler/request-handler.service.mock';
+import {MenuComponent} from '../menu/menu.component';
 
 describe('SideBarComponent', () => {
     let component: SideBarComponent;
@@ -22,6 +23,7 @@ describe('SideBarComponent', () => {
                 {provide: RequestsService, useValue: new RequestHandlerServiceMock()},
             ],
             declarations: [
+                MenuComponent,
                 SideBarComponent,
             ]
         })

@@ -7,6 +7,7 @@ import {RequestsService} from '../../services/requests/requests.service';
 import RequestHandlerServiceMock from '../../services/request-handler/request-handler.service.mock';
 import {SideBarComponent} from '../side-bar/side-bar.component';
 import {LoggedInHeaderComponent} from '../logged-in-header/logged-in-header.component';
+import {MenuComponent} from '../menu/menu.component';
 
 describe('LoggedInTemplateComponent', () => {
     let component: LoggedInTemplateComponent;
@@ -24,6 +25,7 @@ describe('LoggedInTemplateComponent', () => {
                 {provide: RequestsService, useValue: new RequestHandlerServiceMock()},
             ],
             declarations: [
+                MenuComponent,
                 SideBarComponent,
                 LoggedInHeaderComponent,
                 LoggedInTemplateComponent,

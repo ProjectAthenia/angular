@@ -1,7 +1,9 @@
+@import "../../../assets/styles/colors";
+
 .links {
     margin: 10px 0;
 
-    div {
-        cursor: pointer;
+    button {
+        border-bottom: 1px solid $darkGrey;
     }
 }

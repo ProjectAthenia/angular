@@ -7,14 +7,14 @@ import IsEntity from '../../../../../../mobile/src/app/models/contracts/is-entit
 /**
  * All requests needed for handling subscriptions within the app
  */
-export default class Subscriptions {
-
+export default class Subscriptions
+{
     /**
      * Default constructor
      * @param requestHandler
      */
-    constructor(private requestHandler: RequestHandlerService) {
-    }
+    constructor(private requestHandler: RequestHandlerService)
+    {}
 
     /**
      * Fetches all membership plans

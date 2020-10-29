@@ -1,13 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LoggedInHeaderComponent} from './logged-in-header.component';
+import {MenuComponent} from './menu.component';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
-import {MenuComponent} from '../menu/menu.component';
 
 describe('LoggedInHeaderComponent', () => {
-    let component: LoggedInHeaderComponent;
-    let fixture: ComponentFixture<LoggedInHeaderComponent>;
+    let component: MenuComponent;
+    let fixture: ComponentFixture<MenuComponent>;
     let navController;
 
     beforeEach(async(() => {
@@ -21,14 +20,13 @@ describe('LoggedInHeaderComponent', () => {
             ],
             declarations: [
                 MenuComponent,
-                LoggedInHeaderComponent,
             ]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LoggedInHeaderComponent);
+        fixture = TestBed.createComponent(MenuComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

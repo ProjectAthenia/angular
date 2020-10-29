@@ -51,6 +51,7 @@ export default class Auth {
         return this.requestHandler
             .get('users/me', true, true, [
                 'organizationManagers',
+                'organizationManagers.organization',
                 'paymentMethods',
                 'subscriptions',
                 'subscriptions.membershipPlanRate',

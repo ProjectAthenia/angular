@@ -2,6 +2,66 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.7.0 
+
+Massive update! Not only does this add a ton of new features, but it also fixes a number of issues with ionicon and misceallanous pieces. To finish this update, make the following changes.
+
+* angular.json
+* package.json
+* src/app/app-routing.module.ts
+* src/app/app.component.ts
+* src/app/app.module.ts
+* src/app/components/components.module.ts
+* src/app/components/logged-in-header/logged-in-header.component.html
+* src/app/components/logged-in-header/logged-in-header.component.spec.ts
+* src/app/components/logged-in-template/logged-in-template.component.spec.ts
+* src/app/components/menu/
+* src/app/components/organization-users-management/
+* src/app/components/rating-bar/rating-bar.component.html
+* src/app/components/rating-bar/rating-bar.component.spec.ts
+* src/app/components/side-bar/side-bar.component.html
+* src/app/components/side-bar/side-bar.component.scss
+* src/app/components/side-bar/side-bar.component.spec.ts
+* src/app/models/asset.spec.ts
+* src/app/models/asset.ts
+* src/app/models/base-model.ts
+* src/app/models/entity.ts
+* src/app/models/organization/organization-manager.spec.ts
+* src/app/models/organization/organization-manager.ts
+* src/app/models/organization/organization.spec.ts
+* src/app/models/organization/organization.ts
+* src/app/models/user/message.ts
+* src/app/models/user/role.spec.ts
+* src/app/models/user/role.ts
+* src/app/models/user/thread.spec.ts
+* src/app/models/user/thread.ts
+* src/app/models/user/user.ts
+* src/app/pages/contacts/contacts.module.ts
+* src/app/pages/contacts/contacts.page.html
+* src/app/pages/organization-creation/
+* src/app/pages/organization-users-management/
+* src/app/pages/sign-in/sign-in.page.html
+* src/app/pages/sign-in/sign-in.page.scss
+* src/app/pages/sign-in/sign-in.page.ts
+* src/app/pages/sign-up/
+* src/app/pages/subscription/
+* src/app/pages/user/user.module.ts
+* src/app/pages/user/user.page.html
+* src/app/services/data-services/organization.service.spec.ts
+* src/app/services/data-services/organization.service.ts
+* src/app/services/requests/auth/auth.spec.ts
+* src/app/services/requests/auth/auth.ts
+* src/app/services/requests/entity/
+* src/app/services/requests/organization/
+* src/app/services/requests/requests.service.ts
+* src/app/services/requests/subscriptions/subscriptions.ts
+* src/assets/styles/classes.scss
+* src/assets/styles/elements.scss
+* src/environments/environment.prod.ts
+* src/environments/environment.ts
+* src/index.html
+* src/styles.scss
+
 ## 0.6.0
 
 Production ready! This update fixes some bugs in the production scripts, and also adds a new page model. The following files will need to be copied over.

@@ -4,9 +4,15 @@ app-logged-in-header {
 @import "colors";
 
 ion-icon {
-    display: inline-block;
     width: 20px;
     height: 20px;
     visibility: visible;
     color: $primary;
+}
+.btn {
+    display: flex;
+    ion-icon {
+        color: white;
+        margin: 2px 3px;
+    }
 }

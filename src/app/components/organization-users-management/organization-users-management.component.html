@@ -1,5 +1,5 @@
 <button class="btn btn-info" (click)="showManagerDialogue()" id="add-btn">
-    Add Member <ion-icon name="add-outline" ></ion-icon>
+    Add Member <ion-icon name="add-circle-outline" ></ion-icon>
 </button>
 
 <div *ngIf="organization" class="list">
@@ -12,9 +12,14 @@
     </div>
 </div>
 
-<div id="manager-form-wrapper" *ngIf="formVisible" (click)="closeOrganizationManagerForm()">
-    <div id="manager-form" (click)="preventPropagation($event)">
-        <h3>Add Member</h3>
+<ng-template #editingModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title modal-basic-title">Add Member</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
         <p>Enter the email address of the user that you want to add to your organization, and what sort of role this user will have in your organization.</p>
         <div>
             <label for="email">Email Address</label>
@@ -23,17 +28,20 @@
                    [value]="editingOrganizationManager ? editingOrganizationManager.user.email : null"/>
         </div>
 
-        <h4>Role</h4>
+        <p>Role</p>
         <label *ngFor="let role of organizationRoles">
             <input type="radio" name="role" #roleRadio slot="start" [value]="role.value" [checked]="editingOrganizationManager ? editingOrganizationManager.role_id : null"/>
             {{role.label}}
         </label>
+    </div>
 
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
         <button class="btn btn-primary" (click)="saveOrganizationManager(emailInput.value)">Submit</button>
     </div>
-</div>
+</ng-template>
 
-<ng-template #existingUserModal let-modal>
+<ng-template #deleteConfirmation let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Are you sure?</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

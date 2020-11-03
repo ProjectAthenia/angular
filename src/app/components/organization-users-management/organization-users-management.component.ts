@@ -32,11 +32,6 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
     organizationManagers: OrganizationManager[] = [];
 
     /**
-     * Whether or not the editing form is currently visible
-     */
-    formVisible = false;
-
-    /**
      * All available roles
      */
     organizationRoles = [
@@ -76,6 +71,12 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
      */
     @ViewChild('deleteConfirmation', {static: false})
     deleteConfirmation;
+
+    /**
+     * The editing form modal
+     */
+    @ViewChild('editingModal', {static: false})
+    editingModal;
 
     /**
      * Default Constructor
@@ -156,21 +157,12 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
     }
 
     /**
-     * Stops the closure of our background for us
-     * @param event
-     */
-    preventPropagation(event)
-    {
-        event.stopPropagation();
-    }
-
-    /**
      * Opens the add member prompt
      */
     showManagerDialogue(organizationManager: OrganizationManager = null)
     {
-        this.formVisible = true;
         this.editingOrganizationManager = organizationManager;
+        this.modalService.open(this.editingModal);
     }
 
     /**
@@ -203,7 +195,7 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
      */
     closeOrganizationManagerForm()
     {
-        this.formVisible = false;
         this.editingOrganizationManager = null;
+        this.modalService.open(this.editingModal);
     }
 }

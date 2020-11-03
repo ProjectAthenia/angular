@@ -1,3 +1,12 @@
 app-logged-in-header {
     z-index: 1;
 }
+@import "colors";
+
+ion-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    visibility: visible;
+    color: $primary;
+}

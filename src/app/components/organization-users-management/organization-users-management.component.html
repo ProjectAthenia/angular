@@ -1,0 +1,51 @@
+<div (click)="showManagerDialogue()" id="add-btn">
+    Add Member <i class="icon ion-md-add-outline" ></i>
+</div>
+
+<div *ngIf="organization" class="list">
+    <div *ngFor="let organizationManager of organizationManagers">
+        {{organizationManager.name()}} - {{organizationManager.roleName()}}
+        <span *ngIf="notMe(organizationManager)">
+            <i class="icon ion-md-create-outline" (click)="showManagerDialogue(organizationManager)"></i>
+            <i class="icon ion-md-close-circle-outline" (click)="promptDeletion(organizationManager)"></i>
+        </span>
+    </div>
+</div>
+
+<div id="manager-form-wrapper" *ngIf="formVisible" (click)="closeOrganizationManagerForm()">
+    <div id="manager-form" (click)="preventPropagation($event)">
+        <h3>Add Member</h3>
+        <p>Enter the email address of the user that you want to add to your organization, and what sort of role this user will have in your organization.</p>
+        <div>
+            <label for="email">Email Address</label>
+            <input id="email" type="email" class="form-control" #emailInput
+                   [disabled]="editingOrganizationManager != null"
+                   [value]="editingOrganizationManager ? editingOrganizationManager.user.email : null"/>
+        </div>
+
+        <h4>Role</h4>
+        <label *ngFor="let role of organizationRoles">
+            <input type="radio" name="role" #roleRadio slot="start" [value]="role.value" [checked]="editingOrganizationManager ? editingOrganizationManager.role_id : null"/>
+            {{role.label}}
+        </label>
+
+        <button class="btn btn-primary" (click)="saveOrganizationManager(emailInput.value)">Submit</button>
+    </div>
+</div>
+
+<ng-template #existingUserModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Are you sure?</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>This user will no longer be able to access any parts of your organization.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">No</button>
+        <button type="button" class="btn btn-outline-dark" (click)="confirmDeletion()">Yes</button>
+    </div>
+</ng-template>
+

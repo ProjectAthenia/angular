@@ -51,7 +51,8 @@ export class OrganizationCreationPage extends BasePage implements OnInit
     /**
      * setups the initial location
      */
-    ngOnInit(): void {
+    ngOnInit(): void
+    {
 
         this.form = this.formBuilder.group({
 
@@ -68,7 +69,8 @@ export class OrganizationCreationPage extends BasePage implements OnInit
     /**
      * Runs the submission to the server
      */
-    submit () {
+    submit ()
+    {
         this.submitted = true;
 
         if (this.form.valid) {

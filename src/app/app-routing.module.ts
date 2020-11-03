@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: './pages/organization-creation/organization-creation.module#OrganizationCreationPageModule'
     },
     {
+        path: 'organization-users-management/:organization_id',
+        loadChildren: './pages/organization-users-management/organization-users-management.module#OrganizationUsersManagementPageModule'
+    },
+    {
         path: 'profile-editor',
         loadChildren: './pages/profile-editor/profile-editor.module#ProfileEditorPageModule'
     },

@@ -11,6 +11,7 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import {LoggedInTemplateComponent} from './logged-in-template/logged-in-template.component';
 import {SideBarComponent} from './side-bar/side-bar.component';
 import {MenuComponent} from './menu/menu.component';
+import {OrganizationUsersManagementComponent} from './organization-users-management/organization-users-management.component';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import {MenuComponent} from './menu/menu.component';
         LoggedInHeaderComponent,
         LoggedInTemplateComponent,
         MenuComponent,
+        OrganizationUsersManagementComponent,
         RatingBarComponent,
         SideBarComponent,
     ],
@@ -36,6 +38,7 @@ import {MenuComponent} from './menu/menu.component';
         LoggedInHeaderComponent,
         LoggedInTemplateComponent,
         MenuComponent,
+        OrganizationUsersManagementComponent,
         RatingBarComponent,
         SideBarComponent,
     ],

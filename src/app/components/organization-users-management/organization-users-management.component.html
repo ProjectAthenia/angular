@@ -29,8 +29,8 @@
         </div>
 
         <p>Role</p>
-        <label *ngFor="let role of organizationRoles">
-            <input type="radio" name="role" #roleRadio slot="start" [value]="role.value" [checked]="editingOrganizationManager ? editingOrganizationManager.role_id : null"/>
+        <label *ngFor="let role of organizationRoles" class="role-label">
+            <input type="radio" name="role" slot="start" [value]="role.value" [checked]="editingOrganizationManager ? editingOrganizationManager.role_id == role.value : null"/>
             {{role.label}}
         </label>
     </div>

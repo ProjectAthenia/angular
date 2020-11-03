@@ -2,6 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RatingBarComponent} from './rating-bar.component';
 import {CommonModule} from '@angular/common';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 
 describe('RatingBarComponent', () => {
@@ -14,6 +15,7 @@ describe('RatingBarComponent', () => {
                 CommonModule,
             ],
             providers: [],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
             declarations: [
                 RatingBarComponent,
             ]

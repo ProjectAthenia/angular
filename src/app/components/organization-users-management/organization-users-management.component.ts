@@ -1,4 +1,14 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewChildren} from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    QueryList,
+    SimpleChanges,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import {Organization} from '../../models/organization/organization';
 import {OrganizationManager} from '../../models/organization/organization-manager';
 import Role from '../../models/user/role';
@@ -59,12 +69,6 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
      * the organization manager that we are currently deleting if we are deleting one
      */
     deletingOrganizationManager: OrganizationManager = null;
-
-    /**
-     * all role radio buttons
-     */
-    @ViewChildren('roleRadio')
-    roleRadio: ElementRef;
 
     /**
      * The existing user modal for when the information entered already exists
@@ -133,7 +137,7 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
      */
     notMe(organizationManager: OrganizationManager): boolean
     {
-        return organizationManager.user_id !== this.me.id;
+        return this.me && organizationManager.user_id !== this.me.id;
     }
 
     /**
@@ -171,22 +175,23 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
      */
     saveOrganizationManager(email: string)
     {
-        console.log('role id ', this.roleRadio.nativeElement.value);
-        return;
-        const roleId = this.roleRadio.nativeElement.value;
-        if (this.editingOrganizationManager) {
-            this.requests.organization.updateOrganizationManager(this.editingOrganizationManager, roleId).then(updated => {
-                updated.user = this.editingOrganizationManager.user;
-                this.organizationManagers = this.organizationManagers.map(i => {
-                    return i.id == updated.id ? updated : i;
+        const roleRadio: HTMLInputElement[] = Array.from(document.querySelectorAll('input[name="role"]'));
+        const roleId = roleRadio.find(i => i.checked).value;
+        if (roleId) {
+            if (this.editingOrganizationManager) {
+                this.requests.organization.updateOrganizationManager(this.editingOrganizationManager, Number(roleId)).then(updated => {
+                    updated.user = this.editingOrganizationManager.user;
+                    this.organizationManagers = this.organizationManagers.map(i => {
+                        return i.id == updated.id ? updated : i;
+                    });
+                    this.closeOrganizationManagerForm();
+                });
+            } else {
+                this.requests.organization.createOrganizationManager(this.organization.id, email, Number(roleId)).then((organizationManager) => {
+                    this.organizationManagers.push(organizationManager);
                 });
                 this.closeOrganizationManagerForm();
-            });
-        } else {
-            this.requests.organization.createOrganizationManager(this.organization.id, email, roleId).then((organizationManager) => {
-                this.organizationManagers.push(organizationManager);
-            });
-            this.closeOrganizationManagerForm();
+            }
         }
     }
 
@@ -196,6 +201,6 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
     closeOrganizationManagerForm()
     {
         this.editingOrganizationManager = null;
-        this.modalService.open(this.editingModal);
+        this.modalService.dismissAll();
     }
 }

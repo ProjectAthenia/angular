@@ -24,7 +24,7 @@ export default class Subscriptions
         return this.requestHandler
             .get('membership-plans', true, true, [])
             .then(response => {
-                    const data = response.data;
+                    const data = response ? response.data : [];
                     const membershipPlans = [];
                     data.forEach(entry => {
                         membershipPlans.push(new MembershipPlan(entry));

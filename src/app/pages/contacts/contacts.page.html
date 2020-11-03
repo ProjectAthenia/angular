@@ -7,8 +7,8 @@
         <div *ngIf="pendingRequests.length > 0">
             <div *ngFor="let pendingRequest of pendingRequests">
                 <label (click)="goToUser(pendingRequest)">{{getContactUserName(pendingRequest)}}</label>
-                <i class="icon ion-md-checkmark-circle" (click)="confirm(pendingRequest)"></i>
-                <i class="icon ion-md-remove-circle" (click)="deny(pendingRequest)"></i>
+                <ion-icon name="checkmark-circle" (click)="confirm(pendingRequest)"></ion-icon>
+                <ion-icon name="remove-circle" (click)="deny(pendingRequest)"></ion-icon>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
             <div *ngIf="getOtherContactUser(contact)?.id" class="contact">
                 <div class="profile-image" [ngStyle]="profileImageStyle(getOtherContactUser(contact))"></div>
                 <label (click)="goToUser(contact)">{{getContactUserName(contact)}}</label>
-                <i class="icon ion-md-text" (click)="messageUser(contact)"></i>
+                <ion-icon name="text" (click)="messageUser(contact)"></ion-icon>
             </div>
         </ng-container>
     </div>

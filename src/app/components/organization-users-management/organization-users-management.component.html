@@ -1,13 +1,13 @@
-<div (click)="showManagerDialogue()" id="add-btn">
-    Add Member <i class="icon ion-md-add-outline" ></i>
-</div>
+<button class="btn btn-info" (click)="showManagerDialogue()" id="add-btn">
+    Add Member <ion-icon name="add-outline" ></ion-icon>
+</button>
 
 <div *ngIf="organization" class="list">
     <div *ngFor="let organizationManager of organizationManagers">
         {{organizationManager.name()}} - {{organizationManager.roleName()}}
         <span *ngIf="notMe(organizationManager)">
-            <i class="icon ion-md-create-outline" (click)="showManagerDialogue(organizationManager)"></i>
-            <i class="icon ion-md-close-circle-outline" (click)="promptDeletion(organizationManager)"></i>
+            <ion-icon name="create-outline" (click)="showManagerDialogue(organizationManager)"></ion-icon>
+            <ion-icon name="close-circle-outline" (click)="promptDeletion(organizationManager)"></ion-icon>
         </span>
     </div>
 </div>

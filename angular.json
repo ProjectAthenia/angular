@@ -24,6 +24,11 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/ionicons",
+                "output": "./assets/ionicons"
+              },
               "src/favicon.ico",
               "src/assets"
             ],
@@ -91,6 +96,11 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/ionicons",
+                "output": "./assets/ionicons"
+              },
               "src/favicon.ico",
               "src/assets"
             ],

@@ -6,61 +6,61 @@ To upgrade from previous version of Athenia please check each version number lis
 
 Massive update! Not only does this add a ton of new features, but it also fixes a number of issues with ionicon and misceallanous pieces. To finish this update, make the following changes.
 
-* angular.json
-* package.json
-* src/app/app-routing.module.ts
-* src/app/app.component.ts
-* src/app/app.module.ts
-* src/app/components/components.module.ts
-* src/app/components/logged-in-header/logged-in-header.component.html
-* src/app/components/logged-in-header/logged-in-header.component.spec.ts
-* src/app/components/logged-in-template/logged-in-template.component.spec.ts
-* src/app/components/menu/
-* src/app/components/organization-users-management/
-* src/app/components/rating-bar/rating-bar.component.html
-* src/app/components/rating-bar/rating-bar.component.spec.ts
-* src/app/components/side-bar/side-bar.component.html
-* src/app/components/side-bar/side-bar.component.scss
-* src/app/components/side-bar/side-bar.component.spec.ts
-* src/app/models/asset.spec.ts
-* src/app/models/asset.ts
-* src/app/models/base-model.ts
-* src/app/models/entity.ts
-* src/app/models/organization/organization-manager.spec.ts
-* src/app/models/organization/organization-manager.ts
-* src/app/models/organization/organization.spec.ts
-* src/app/models/organization/organization.ts
-* src/app/models/user/message.ts
-* src/app/models/user/role.spec.ts
-* src/app/models/user/role.ts
-* src/app/models/user/thread.spec.ts
-* src/app/models/user/thread.ts
-* src/app/models/user/user.ts
-* src/app/pages/contacts/contacts.module.ts
-* src/app/pages/contacts/contacts.page.html
-* src/app/pages/organization-creation/
-* src/app/pages/organization-users-management/
-* src/app/pages/sign-in/sign-in.page.html
-* src/app/pages/sign-in/sign-in.page.scss
-* src/app/pages/sign-in/sign-in.page.ts
-* src/app/pages/sign-up/
-* src/app/pages/subscription/
-* src/app/pages/user/user.module.ts
-* src/app/pages/user/user.page.html
-* src/app/services/data-services/organization.service.spec.ts
-* src/app/services/data-services/organization.service.ts
-* src/app/services/requests/auth/auth.spec.ts
-* src/app/services/requests/auth/auth.ts
-* src/app/services/requests/entity/
-* src/app/services/requests/organization/
-* src/app/services/requests/requests.service.ts
-* src/app/services/requests/subscriptions/subscriptions.ts
-* src/assets/styles/classes.scss
-* src/assets/styles/elements.scss
-* src/environments/environment.prod.ts
-* src/environments/environment.ts
-* src/index.html
-* src/styles.scss
+* angular.json - Added settings needed for new ionicons
+* package.json - Updated ionicons, and added stripe-angular
+* src/app/app-routing.module.ts - Added a bunch of new routes, best to simply copy over the Athenia definitions
+* src/app/app.component.ts - Removed Default redirect
+* src/app/app.module.ts - Registered stripe module
+* src/app/components/menu/ - New Component
+* src/app/components/organization-users-management/ - New Component
+* src/app/components/components.module.ts - Registered a couple new components, and added custom elements schema.
+* src/app/components/logged-in-header/logged-in-header.component.html - Replaced button links with new menu component.
+* src/app/components/logged-in-header/logged-in-header.component.spec.ts - Added menu component to declarations
+* src/app/components/logged-in-template/logged-in-template.component.spec.ts - Added menu component to declarations
+* src/app/components/rating-bar/rating-bar.component.html - Updated ion icon usage to use tag
+* src/app/components/rating-bar/rating-bar.component.spec.ts - Added custom schema module
+* src/app/components/side-bar/side-bar.component.html - Replaced links with new menu component
+* src/app/components/side-bar/side-bar.component.scss - Added a border!
+* src/app/components/side-bar/side-bar.component.spec.ts - Imported menu component
+* src/app/models/asset.spec.ts - New Test
+* src/app/models/asset.ts - New Model
+* src/app/models/base-model.ts - This class is now abstract
+* src/app/models/entity.ts - New parent class for various models
+* src/app/models/organization/organization-manager.spec.ts - New test
+* src/app/models/organization/organization-manager.ts - New Model
+* src/app/models/organization/organization.spec.ts - New test
+* src/app/models/organization/organization.ts - New Model
+* src/app/models/user/message.ts - Minor code cleanup
+* src/app/models/user/role.spec.ts - New Test
+* src/app/models/user/role.ts - New Model
+* src/app/models/user/thread.spec.ts - New tests for thread hasUserSeenThread functions
+* src/app/models/user/thread.ts - Code cleanup and added hasUserSeenThread function
+* src/app/models/user/user.ts - Updated to extend entity, removed any bits related to subscriptions, and added base route function
+* src/app/pages/contacts/contacts.module.ts - Imported custom elements schema
+* src/app/pages/contacts/contacts.page.html - Updated ionicon to use real element
+* src/app/pages/organization-creation/ - New page
+* src/app/pages/organization-users-management/ - New Page
+* src/app/pages/sign-in/sign-in.page.html - Updated for sign up link if enabled, and changed id
+* src/app/pages/sign-in/sign-in.page.scss - Updated for different id, and reworked a lot of style structure
+* src/app/pages/sign-in/sign-in.page.ts - Added sign up page integration
+* src/app/pages/sign-up/ - New Page
+* src/app/pages/subscription/ - New Page
+* src/app/pages/user/user.module.ts - Added custom schema
+* src/app/pages/user/user.page.html - Updated ionicon references
+* src/app/services/data-services/organization.service.spec.ts - New test
+* src/app/services/data-services/organization.service.ts - New service
+* src/app/services/requests/auth/auth.spec.ts - Removed createPaymentMethod test
+* src/app/services/requests/auth/auth.ts - Removed createPaymentMethod function
+* src/app/services/requests/entity/ - New Request group
+* src/app/services/requests/organization/ - New Request group
+* src/app/services/requests/requests.service.ts - Registered new groups
+* src/app/services/requests/subscriptions/subscriptions.ts - Updated for entities
+* src/assets/styles/classes.scss - Add classes for links, and horizontal pages
+* src/assets/styles/elements.scss - Added some customizations for buttons
+* src/environments/environment.prod.ts - Added new settings for social media and organizations
+* src/environments/environment.ts - Added new settings for social media and organizations
+* src/index.html - Added ionicons script
+* src/styles.scss - Removed iconicons imports
 
 ## 0.6.0
 

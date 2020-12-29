@@ -4,7 +4,8 @@ import {User} from '../user/user';
 /**
  * Used as a data wrapper for our ballot item option model
  */
-export class BallotItemOption extends BaseModel {
+export class BallotItemOption extends BaseModel
+{
 
     /**
      * THe subject type this is for
@@ -24,7 +25,8 @@ export class BallotItemOption extends BaseModel {
     /**
      * Gets the subject data properly
      */
-    get subject() {
+    get subject()
+    {
         switch (this.subject_type) {
             case 'user':
                 return new User(this._subject);
@@ -38,7 +40,24 @@ export class BallotItemOption extends BaseModel {
      * Sets the subject data for us
      * @param data
      */
-    set subject(data) {
+    set subject(data)
+    {
         this._subject = data;
+    }
+
+    /**
+     * Gets the description we want to display
+     */
+    getDescription(): string
+    {
+        switch (this.subject_type) {
+            case 'user':
+                return (this.subject as User).name;
+
+            // Add more types here
+
+            default:
+                return 'An Option';
+        }
     }
 }

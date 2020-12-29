@@ -3,15 +3,18 @@ import {BallotItem} from './ballot-item';
 import {Relation} from '../relation';
 
 export type BallotType =
-    'single_option';
+    'single_option' |
+    'multiple_options' |
+    'ranked_choice';
 
 /**
  * Used as a data wrapper for our ballot model
  */
-export class Ballot extends BaseModel {
+export class Ballot extends BaseModel
+{
 
     /**
-     * THe name of the ballot
+     * The name of the ballot
      */
     name: string;
 
@@ -29,7 +32,8 @@ export class Ballot extends BaseModel {
      * Default Constructor
      * @param data
      */
-    constructor(data) {
+    constructor(data)
+    {
         super(data, {
             ballot_items: new Relation('array', BallotItem),
         });

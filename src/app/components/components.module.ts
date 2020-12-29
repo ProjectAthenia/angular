@@ -12,6 +12,8 @@ import {LoggedInTemplateComponent} from './logged-in-template/logged-in-template
 import {SideBarComponent} from './side-bar/side-bar.component';
 import {MenuComponent} from './menu/menu.component';
 import {OrganizationUsersManagementComponent} from './organization-users-management/organization-users-management.component';
+import {BallotComponent} from './ballot/ballot.component';
+import {BallotItemComponent} from './ballot-item/ballot-item.component';
 
 @NgModule({
     imports: [
@@ -23,6 +25,8 @@ import {OrganizationUsersManagementComponent} from './organization-users-managem
     declarations: [
         ArticleEditorComponent,
         ArticleViewerComponent,
+        BallotComponent,
+        BallotItemComponent,
         LoadingComponentComponent,
         LoggedInHeaderComponent,
         LoggedInTemplateComponent,
@@ -34,6 +38,8 @@ import {OrganizationUsersManagementComponent} from './organization-users-managem
     exports: [
         ArticleEditorComponent,
         ArticleViewerComponent,
+        BallotComponent,
+        BallotItemComponent,
         LoadingComponentComponent,
         LoggedInHeaderComponent,
         LoggedInTemplateComponent,

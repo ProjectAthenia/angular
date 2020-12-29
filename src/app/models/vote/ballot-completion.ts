@@ -5,7 +5,8 @@ import {Relation} from '../relation';
 /**
  * Used as a data wrapper for our ballot model
  */
-export class BallotCompletion extends BaseModel {
+export class BallotCompletion extends BaseModel
+{
 
     /**
      * The id of the ballot that was completed
@@ -21,7 +22,8 @@ export class BallotCompletion extends BaseModel {
      * Default Constructors
      * @param data
      */
-    constructor(data) {
+    constructor(data)
+    {
         super(data, {
             votes: new Relation('array', Vote),
         });

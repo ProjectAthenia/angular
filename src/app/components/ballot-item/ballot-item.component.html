@@ -1,0 +1,16 @@
+<div class="ballot-item" [ngSwitch]="ballotType">
+    <p class="error" *ngIf="error">{{error}}</p>
+    <div *ngSwitchCase="'single_option'">
+        <!-- TODO fill in-->
+
+    </div>
+    <div *ngSwitchCase="'multiple_options'">
+        <label *ngFor="let ballotItemOption  of ballotItem.ballot_item_options">
+            <input type="radio" #ballotItemOptionInputs value="{{ballotItemOption.id}}" name="ballotItemOption[{{ballotItemOption.id}}]"/>
+            {{ballotItemOption.getDescription()}}
+        </label>
+    </div>
+    <div *ngSwitchCase="'ranked_choice'">
+        <!-- TODO fill in-->
+    </div>
+</div>

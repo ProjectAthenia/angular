@@ -37,6 +37,7 @@ export class BallotItemComponent
      */
     getVoteData(): any[]|null
     {
+        this.error = null;
         switch (this.ballotType) {
             case 'multiple_options':
                 const selectedInput = this.ballotItemOptionInputs.find(input => input.checked);
@@ -46,6 +47,8 @@ export class BallotItemComponent
                         result: 1,
                         ballot_item_option_id: selectedInput.value,
                     }];
+                } else {
+                    this.error = 'Please place a vote for this option.';
                 }
         }
 

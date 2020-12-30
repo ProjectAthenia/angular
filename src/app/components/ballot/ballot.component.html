@@ -1,3 +1,17 @@
-<div class="ballot">
-
+<div class="ballot" *ngIf="me">
+    <h1>{{ballot.name}}</h1>
+    <div class="ballot-form" *ngIf="!completedBallot; else completed">
+        <app-ballot-item
+            *ngFor="let ballotItem of ballot.ballot_items"
+            #ballotItemComponents
+            [ballotItem]="ballotItem"
+            [ballotType]="ballot.type"
+        ></app-ballot-item>
+        <div class="submit-wrapper">
+            <button class="btn btn-primary" (click)="submit()">Submit</button>
+        </div>
+    </div>
+    <ng-template #completed>
+        <p>Your vote has been counted! Thank you for participating.</p>
+    </ng-template>
 </div>

@@ -9,6 +9,10 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'ballot/:ballot_id',
+        loadChildren: './pages/ballot/ballot.module#BallotPageModule',
+    },
+    {
         path: 'contacts',
         loadChildren: './pages/contacts/contacts.module#ContactsPageModule',
     },

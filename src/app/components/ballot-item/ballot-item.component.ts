@@ -3,7 +3,7 @@ import {BallotType} from '../../models/vote/ballot';
 import {BallotItem} from '../../models/vote/ballot-item';
 
 @Component({
-    selector: 'app-ballot-item',
+    selector: 'app-ballot-item-component',
     templateUrl: './ballot-item.component.html',
     styleUrls: ['./ballot-item.component.scss']
 })

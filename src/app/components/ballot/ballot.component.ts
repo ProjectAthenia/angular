@@ -7,7 +7,7 @@ import {BallotItemComponent} from '../ballot-item/ballot-item.component';
 import {BallotCompletion} from '../../models/vote/ballot-completion';
 
 @Component({
-    selector: 'app-ballot',
+    selector: 'app-ballot-component',
     templateUrl: './ballot.component.html',
     styleUrls: ['./ballot.component.scss']
 })

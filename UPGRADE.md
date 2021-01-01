@@ -2,6 +2,18 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.8.0
+
+Voting stuff! This update adds the ability for someone to vote on a ballot through this app.
+
+* src/app/app-routing.module.ts - Registered new ballot page
+* src/app/components/ballot-item/ - New Component
+* src/app/components/ballot/ - New Component
+* src/app/components/components.module.ts - Registered new components
+* src/app/models/vote/ - New Models section
+* src/app/pages/ballot/ - New Page
+* src/app/services/requests/voting/ - New Requests group
+
 ## 0.7.0 
 
 Massive update! Not only does this add a ton of new features, but it also fixes a number of issues with ionicon and misceallanous pieces. To finish this update, make the following changes.

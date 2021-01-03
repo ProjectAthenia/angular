@@ -2,6 +2,15 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.9.0
+
+This updates makes some minor changes to the asset class to make it easier to use, and it also fixes some bigs with the last update.
+
+* src/app/models/asset.ts - Added some helper functions, and changed the url get and setting to be intelligent
+* src/app/pages/ballot/ballot.module.ts - Fixed naming bug
+* src/app/pages/ballot/ballot.page.ts - Fixed naming bug
+* src/app/services/requests/subscriptions/subscriptions.ts - Fixed entity reference
+
 ## 0.8.0
 
 Voting stuff! This update adds the ability for someone to vote on a ballot through this app.

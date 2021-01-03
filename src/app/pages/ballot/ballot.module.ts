@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: [BallotPage]
 })
-export class OrganizationUsersManagementPageModule {}
+export class BallotPageModule {}

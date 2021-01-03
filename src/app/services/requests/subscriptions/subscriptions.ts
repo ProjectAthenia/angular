@@ -2,7 +2,7 @@ import {RequestHandlerService} from '../../request-handler/request-handler.servi
 import {MembershipPlan} from '../../../models/subscription/membership-plan';
 import {PaymentMethod} from '../../../models/payment/payment-method';
 import {Subscription} from '../../../models/subscription/subscription';
-import IsEntity from '../../../../../../mobile/src/app/models/contracts/is-entity';
+import Entity from '../../../models/entity';
 
 /**
  * All requests needed for handling subscriptions within the app
@@ -40,7 +40,7 @@ export default class Subscriptions
      * @param paymentMethod
      * @param membershipPlan
      */
-    async createSubscription(entity: IsEntity, paymentMethod: PaymentMethod, membershipPlan: MembershipPlan): Promise<Subscription>
+    async createSubscription(entity: Entity, paymentMethod: PaymentMethod, membershipPlan: MembershipPlan): Promise<Subscription>
     {
         const data = {
             recurring: true,
@@ -61,7 +61,7 @@ export default class Subscriptions
      * @param subscription
      * @param data
      */
-    async updateSubscription(entity: IsEntity, subscription: Subscription, data: any): Promise<Subscription>
+    async updateSubscription(entity: Entity, subscription: Subscription, data: any): Promise<Subscription>
     {
         return this.requestHandler
             .put(entity.baseRoute() + '/' + entity.id + '/subscriptions/' + subscription.id, true, true, data)

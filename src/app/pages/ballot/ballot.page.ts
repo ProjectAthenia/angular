@@ -32,8 +32,8 @@ export class BallotPage extends BasePage implements OnInit
      */
     ngOnInit(): void
     {
-        const voteId = parseInt(this.route.snapshot.paramMap.get('vote_id'), 0);
-        this.votingRequests.getBallot(voteId).then(ballot => {
+        const ballotId = parseInt(this.route.snapshot.paramMap.get('ballot_id'), 0);
+        this.votingRequests.getBallot(ballotId).then(ballot => {
             this.ballot = ballot;
         });
     }

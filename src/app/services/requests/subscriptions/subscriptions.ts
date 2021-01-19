@@ -1,7 +1,7 @@
-import {RequestHandlerService} from '../../request-handler/request-handler.service';
 import {MembershipPlan} from '../../../models/subscription/membership-plan';
 import {PaymentMethod} from '../../../models/payment/payment-method';
 import {Subscription} from '../../../models/subscription/subscription';
+import {RequestHandlerService} from '../../request-handler/request-handler.service';
 import Entity from '../../../models/entity';
 
 /**
@@ -9,6 +9,11 @@ import Entity from '../../../models/entity';
  */
 export default class Subscriptions
 {
+    /**
+     * The membership plans that have been loaded
+     */
+    private membershipPlans: MembershipPlan[];
+
     /**
      * Default constructor
      * @param requestHandler
@@ -21,17 +26,24 @@ export default class Subscriptions
      */
     async fetchMembershipPlans(): Promise<MembershipPlan[]>
     {
+        if (this.membershipPlans) {
+            return Promise.resolve(this.membershipPlans);
+        }
+
         return this.requestHandler
-            .get('membership-plans', true, true, [])
+            .get('membership-plans', true, true, [
+                'features',
+            ])
             .then(response => {
-                    const data = response ? response.data : [];
-                    const membershipPlans = [];
-                    data.forEach(entry => {
-                        membershipPlans.push(new MembershipPlan(entry));
-                    });
-                    return Promise.resolve(membershipPlans);
-                }
-            );
+                const data = response && response.data ? response.data : [];
+                const membershipPlans = [];
+                data.forEach(entry => {
+                    membershipPlans.push(new MembershipPlan(entry));
+                });
+                this.membershipPlans = membershipPlans;
+                return Promise.resolve(membershipPlans);
+            }
+        );
     }
 
     /**
@@ -50,9 +62,9 @@ export default class Subscriptions
         return this.requestHandler
             .post(entity.baseRoute() + '/' + entity.id + '/subscriptions', true, true, data)
             .then(response => {
-                    return Promise.resolve(new Subscription(response));
-                }
-            );
+                return Promise.resolve(new Subscription(response));
+            }
+        );
     }
 
     /**

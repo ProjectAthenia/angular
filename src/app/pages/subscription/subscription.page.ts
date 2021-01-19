@@ -11,14 +11,16 @@ import {StripeCard} from 'stripe-angular';
 import DateHelpersService from '../../services/date-helpers/date-helpers.service';
 import Entity from '../../models/entity';
 import {User} from '../../models/user/user';
+import {Feature} from '../../models/feature';
+import {SubscriptionService} from '../../services/data-services/subscription.service';
 
 @Component({
     selector: 'app-subscription',
     templateUrl: './subscription.page.html',
     styleUrls: ['./subscription.page.scss'],
 })
-export class SubscriptionPage extends BasePage implements OnInit {
-
+export class SubscriptionPage extends BasePage implements OnInit
+{
     /**
      * The available membership plans
      */
@@ -55,18 +57,25 @@ export class SubscriptionPage extends BasePage implements OnInit {
     selectedMembershipPlan: MembershipPlan = null;
 
     /**
+     * The feature id the user is trying to get access to
+     */
+    feature: Feature = null;
+
+    /**
      * Default Constructor
      * @param requests
      * @param userService
      * @param router
      * @param route
      * @param toastrService
+     * @param subscriptionService
      */
     constructor(private requests: RequestsService,
                 private userService: UserService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private toastrService: ToastrService)
+                private toastrService: ToastrService,
+                private subscriptionService: SubscriptionService)
     {
         super();
     }
@@ -76,38 +85,49 @@ export class SubscriptionPage extends BasePage implements OnInit {
      */
     ngOnInit()
     {
-        this.requests.subscriptions.fetchMembershipPlans().then(membershipPlans => {
-            this.membershipPlans = membershipPlans;
-            if (this.membershipPlans.length == 1) {
-                this.setSelectedMembershipPlan(this.membershipPlans[0]);
-            }
-            this.requests.auth.loadInitialInformation().then(user => {
-                this.userService.storeMe(user);
+        this.loadEntityData();
+    }
 
-                const maybeOrganizationId = this.route.snapshot.paramMap.get('organization_id');
-                if (maybeOrganizationId) {
-                    const organizationId = Number.parseInt(maybeOrganizationId);
-                    if (!user.organization_managers.find(i => i.organization_id == organizationId)) {
-                        this.handleUnauthorizedAccess();
-                        return;
-                    }
+    /**
+     * Loads our user fresh from the server, and then figures out their current subscription status
+     */
+    private loadEntityData()
+    {
+        this.requests.auth.loadInitialInformation().then(user => {
+            this.userService.storeMe(user);
 
-                    this.requests.organization.loadOrganization(organizationId).then(organization => {
-                        this.readyEntity(organization);
-                    })
-
-                } else {
-                    this.readyEntity(user);
+            const maybeOrganizationId = this.route.snapshot.paramMap.get('organization_id');
+            if (maybeOrganizationId) {
+                const organizationId = Number.parseInt(maybeOrganizationId);
+                if (!user.organization_managers.find(i => i.organization_id == organizationId)) {
+                    this.handleUnauthorizedAccess();
+                    return;
                 }
-            }).catch(console.error);
+
+                this.requests.organization.loadOrganization(organizationId).then(organization => {
+                    this.readyEntity(organization);
+                })
+
+            } else {
+                this.readyEntity(user);
+            }
         }).catch(console.error);
+    }
+
+    /**
+     * Takes us to the home page at the moment, and shows an error message
+     */
+    private handleUnauthorizedAccess()
+    {
+        this.toastrService.error('You do not have permission to access this organization.');
+        this.router.navigateByUrl('/home').catch(console.error);
     }
 
     /**
      * Gets everything ready for the entity passed in
      * @param entity
      */
-    readyEntity(entity: Entity)
+    private readyEntity(entity: Entity)
     {
         this.entity = entity;
         this.currentSubscription = this.entity.getCurrentSubscription();
@@ -119,28 +139,68 @@ export class SubscriptionPage extends BasePage implements OnInit {
         if (this.entity.payment_methods.length == 0) {
             this.selectedPaymentMethod = null;
         }
+        this.getSubscriptionDataReady();
     }
 
     /**
-     * Takes us to the home page at the moment, and shows an error message
+     * Gets everything ready after we have the user loaded
      */
-    handleUnauthorizedAccess()
+    private getSubscriptionDataReady()
     {
-        this.toastrService.error('You do not have permission to access this organization.');
-        this.router.navigateByUrl('/home').catch(console.error);
+        this.requests.subscriptions.fetchMembershipPlans().then(membershipPlans => {
+
+            const maybeFeatureId = this.route.snapshot.paramMap.get('feature_id');
+
+            if (maybeFeatureId) {
+                this.findFeature(parseInt(maybeFeatureId), membershipPlans);
+            } else {
+                this.setAvailableMembershipMembershipPlans(membershipPlans);
+            }
+        }).catch(console.error);
+    }
+
+    /**
+     * gets everything ready for when the user wants to access a feature
+     */
+    findFeature(featureId: number, membershipPlans: MembershipPlan[])
+    {
+        this.subscriptionService.getFeature(featureId).then(feature => {
+            this.feature = feature;
+            this.setAvailableMembershipMembershipPlans(
+                membershipPlans.filter(membershipPlan => membershipPlan.containsFeatureId(featureId))
+            );
+        }).catch(() => {
+            // TODO handle feature not available error
+        });
+    }
+
+    /**
+     * Sets all membership plans that are currently available based on the current page state
+     * @param membershipPlans
+     */
+    setAvailableMembershipMembershipPlans(membershipPlans: MembershipPlan[])
+    {
+        this.membershipPlans = this.currentSubscription ? membershipPlans.filter(membershipPlan => {
+            return membershipPlan.current_cost > this.currentSubscription.membership_plan_rate.cost;
+        }) : membershipPlans;
+        if (this.membershipPlans.length == 1) {
+            this.setSelectedMembershipPlan(this.membershipPlans[0]);
+        }
     }
 
     /**
      * All active membership plans
      */
-    activeMembershipPlans(): MembershipPlan[] {
+    activeMembershipPlans(): MembershipPlan[]
+    {
         return this.membershipPlans;
     }
 
     /**
      * Gets the display style for the card selector
      */
-    getCardSelectorDisplay() {
+    getCardSelectorDisplay()
+    {
         return {
             display: !this.currentSubscription ||
             (this.currentSubscription.expires_at && this.currentSubscription.recurring) ? 'block' : 'none',
@@ -150,7 +210,8 @@ export class SubscriptionPage extends BasePage implements OnInit {
     /**
      * Gets the new card input display
      */
-    getCardDisplay() {
+    getCardDisplay()
+    {
         return {
             display: this.selectedPaymentMethod === null ? 'flex' : 'none',
         };
@@ -159,7 +220,8 @@ export class SubscriptionPage extends BasePage implements OnInit {
     /**
      * Gets the user's current subscription status
      */
-    getCurrentSubscriptionStatus(): string {
+    getCurrentSubscriptionStatus(): string
+    {
         if (!this.currentSubscription.expires_at) {
             return 'good for a lifetime!';
         } else {

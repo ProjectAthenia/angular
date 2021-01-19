@@ -1,0 +1,10 @@
+<app-overlay-window (close)="cancel.emit()">
+  <h2>You need to upgrade your {{subscriptionBrandName}}!</h2>
+  <ng-content></ng-content>
+  <div class="side-by-side">
+    <button class="btn btn-primary" (click)="cancel.emit()">
+      Cancel
+    </button>
+    <button class="btn btn-primary" (click)="upgradePlan()"></button>
+  </div>
+</app-overlay-window>

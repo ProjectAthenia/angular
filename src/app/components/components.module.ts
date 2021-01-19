@@ -14,6 +14,8 @@ import {MenuComponent} from './menu/menu.component';
 import {OrganizationUsersManagementComponent} from './organization-users-management/organization-users-management.component';
 import {BallotComponent} from './ballot/ballot.component';
 import {BallotItemComponent} from './ballot-item/ballot-item.component';
+import {SubscriptionUpgradeRequiredWindowComponent} from './subscription-upgrade-required-window/subscription-upgrade-required-window.component';
+import {OverlayWindowComponent} from './overlay-window/overlay-window.component';
 
 @NgModule({
     imports: [
@@ -32,8 +34,10 @@ import {BallotItemComponent} from './ballot-item/ballot-item.component';
         LoggedInTemplateComponent,
         MenuComponent,
         OrganizationUsersManagementComponent,
+        OverlayWindowComponent,
         RatingBarComponent,
         SideBarComponent,
+        SubscriptionUpgradeRequiredWindowComponent,
     ],
     exports: [
         ArticleEditorComponent,
@@ -45,8 +49,10 @@ import {BallotItemComponent} from './ballot-item/ballot-item.component';
         LoggedInTemplateComponent,
         MenuComponent,
         OrganizationUsersManagementComponent,
+        OverlayWindowComponent,
         RatingBarComponent,
         SideBarComponent,
+        SubscriptionUpgradeRequiredWindowComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

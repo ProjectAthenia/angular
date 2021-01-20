@@ -84,7 +84,7 @@ export class OrganizationCreationPage extends BasePage implements OnInit
                 this.organizationService.cacheOrganization(organization);
                 this.me.organization_managers.push(organizationManager);
                 this.userService.storeMe(this.me);
-                this.router.navigateByUrl('/subscription/' + organization.id).catch(console.error);
+                this.router.navigateByUrl('/organization-subscription/' + organization.id).catch(console.error);
             });
         }
     }

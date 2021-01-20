@@ -2,6 +2,30 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.10.0
+
+Big update! This update completely reworks
+
+* src/app/app-routing.module.ts - A new route was added pointing to the subscription page with a feature passed in, and the existing organization subscription route was renamed
+* src/app/components/overlay-window/
+* src/app/components/subscription-upgrade-required-window/
+* src/app/components/components.module.ts
+* src/app/models/feature.spec.ts
+* src/app/models/feature.ts
+* src/app/models/subscription/membership-plan.spec.ts
+* src/app/models/subscription/membership-plan.ts
+* src/app/pages/organization-creation/organization-creation.page.ts
+* src/app/pages/subscription/subscription.page.html
+* src/app/pages/subscription/subscription.page.ts
+* src/app/services/data-services/subscription.service.spec.ts
+* src/app/services/data-services/subscription.service.ts
+* src/app/services/requests/auth/auth.ts
+* src/app/services/requests/features/
+* src/app/services/requests/requests.service.ts
+* src/app/services/requests/subscriptions/subscriptions.ts
+* src/environments/environment.prod.ts
+* src/environments/environment.ts
+
 ## 0.9.0
 
 This updates makes some minor changes to the asset class to make it easier to use, and it also fixes some bigs with the last update.

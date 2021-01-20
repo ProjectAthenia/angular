@@ -49,7 +49,7 @@ const routes: Routes = [
         loadChildren: './pages/subscription/subscription.module#SubscriptionPageModule'
     },
     {
-        path: 'subscription/:organization_id',
+        path: 'organization-subscription/:organization_id',
         loadChildren: './pages/subscription/subscription.module#SubscriptionPageModule'
     },
     {

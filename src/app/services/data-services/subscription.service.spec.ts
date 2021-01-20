@@ -1,23 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 
-import RequestsProviderMock from '../providers/requests/requests.mock';
 import {SubscriptionService} from './subscription.service';
-import {User} from '../models/user/user';
-import {MembershipPlan} from '../models/subscription/membership-plan';
+import {User} from '../../models/user/user';
+import {MembershipPlan} from '../../models/subscription/membership-plan';
+import RequestsServiceMock from '../requests/requests.service.mock';
 
 describe('SubscriptionService', () => {
     beforeEach(() => TestBed.configureTestingModule({}));
 
     it('should be created', () => {
         const service: SubscriptionService = new SubscriptionService(
-            new RequestsProviderMock(),
+            new RequestsServiceMock(),
         );
         expect(service).toBeTruthy();
     });
 
     it('hasFeatureAccess should return true when member is currently subscribed with proper subscription', async () => {
         const service: SubscriptionService = new SubscriptionService(
-            new RequestsProviderMock(),
+            new RequestsServiceMock(),
         );
 
         const user = new User({
@@ -42,7 +42,7 @@ describe('SubscriptionService', () => {
 
     it('hasFeatureAccess should return false when member is currently subscribed with improper subscription', async () => {
         const service: SubscriptionService = new SubscriptionService(
-            new RequestsProviderMock(),
+            new RequestsServiceMock(),
         );
 
         const user = new User({
@@ -66,7 +66,7 @@ describe('SubscriptionService', () => {
     });
 
     it('hasFeatureAccess should return false when default membership plan does not exist', async () => {
-        let requests = new RequestsProviderMock();
+        let requests = new RequestsServiceMock();
         const service: SubscriptionService = new SubscriptionService(
             requests,
         );
@@ -86,7 +86,7 @@ describe('SubscriptionService', () => {
     });
 
     it('hasFeatureAccess should return false when default membership plan does not contain feature', async () => {
-        let requests = new RequestsProviderMock();
+        let requests = new RequestsServiceMock();
         const service: SubscriptionService = new SubscriptionService(
             requests,
         );
@@ -110,7 +110,7 @@ describe('SubscriptionService', () => {
     });
 
     it('hasFeatureAccess should return true when default membership plan contains feature', async () => {
-        let requests = new RequestsProviderMock();
+        let requests = new RequestsServiceMock();
         const service: SubscriptionService = new SubscriptionService(
             requests,
         );

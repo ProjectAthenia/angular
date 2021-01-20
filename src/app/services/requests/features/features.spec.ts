@@ -1,14 +1,14 @@
-import {RequestHandlerProvider} from '../../request-handler/request-handler';
-import RequestHandlerProviderMock from '../../request-handler/request-handler.mock';
 import Features from './features';
 import {Feature} from '../../../models/feature';
+import {RequestHandlerService} from '../../request-handler/request-handler.service';
+import RequestHandlerServiceMock from '../../request-handler/request-handler.service.mock';
 
 describe('Test the feature requests', () => {
-    let requestHandler : RequestHandlerProvider;
+    let requestHandler : RequestHandlerService;
     let features : Features;
 
     beforeEach(() => {
-        requestHandler = new RequestHandlerProviderMock();
+        requestHandler = new RequestHandlerServiceMock();
         features = new Features(requestHandler);
     });
 

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {RequestsProvider} from '../providers/requests/requests';
-import {User} from '../models/user/user';
-import {Feature} from '../models/feature';
+import {User} from '../../models/user/user';
+import {Feature} from '../../models/feature';
+import {RequestsService} from '../requests/requests.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +12,7 @@ export class SubscriptionService
      * Default Constructor
      * @param requests
      */
-    constructor(private requests: RequestsProvider)
+    constructor(private requests: RequestsService)
     {}
 
     /**

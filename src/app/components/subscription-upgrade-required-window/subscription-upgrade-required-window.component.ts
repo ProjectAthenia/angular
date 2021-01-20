@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Router} from '@angular/router';
-import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-subscription-upgrade-required-window',
@@ -31,7 +30,7 @@ export class SubscriptionUpgradeRequiredWindowComponent {
      * Default constructor
      * @param router
      */
-    constructor(private router: NavController)
+    constructor(private router: Router)
     {}
 
     /**
@@ -40,6 +39,6 @@ export class SubscriptionUpgradeRequiredWindowComponent {
     upgradePlan()
     {
         this.cancel.emit();
-        this.router.navigateForward('/subscriptions/' + this.featureId).catch(console.error);
+        this.router.navigateByUrl('/subscriptions/' + this.featureId).catch(console.error);
     }
 }

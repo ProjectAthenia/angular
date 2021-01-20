@@ -6,6 +6,7 @@ import Social from './social/social';
 import Messaging from './messaging/messaging';
 import OrganizationRequests from './organization/organization';
 import EntityRequests from './entity/entity';
+import Features from './features/features';
 
 /**
  * Provider for interacting with all app wide requests
@@ -46,6 +47,11 @@ export class RequestsService
     messaging: Messaging;
 
     /**
+     * The feature requests available
+     */
+    features: Features;
+
+    /**
      * Default constructor
      * @param requestHandler
      */
@@ -57,5 +63,6 @@ export class RequestsService
         this.subscriptions = new Subscriptions(this.requestHandler);
         this.social = new Social(this.requestHandler);
         this.messaging = new Messaging(requestHandler);
+        this.features = new Features(requestHandler);
     }
 }

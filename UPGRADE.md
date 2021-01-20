@@ -7,11 +7,11 @@ To upgrade from previous version of Athenia please check each version number lis
 Big update! This update completely reworks
 
 * src/app/app-routing.module.ts - A new route was added pointing to the subscription page with a feature passed in, and the existing organization subscription route was renamed
-* src/app/components/overlay-window/
-* src/app/components/subscription-upgrade-required-window/
-* src/app/components/components.module.ts
-* src/app/models/feature.spec.ts
-* src/app/models/feature.ts
+* src/app/components/overlay-window/ - New Component
+* src/app/components/subscription-upgrade-required-window/ - New Component
+* src/app/components/components.module.ts - Registered new component
+* src/app/models/feature.spec.ts - New Test
+* src/app/models/feature.ts - New Model
 * src/app/models/subscription/membership-plan.spec.ts
 * src/app/models/subscription/membership-plan.ts
 * src/app/pages/organization-creation/organization-creation.page.ts

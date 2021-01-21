@@ -12,19 +12,19 @@ Big update! This update completely reworks
 * src/app/components/components.module.ts - Registered new component
 * src/app/models/feature.spec.ts - New Test
 * src/app/models/feature.ts - New Model
-* src/app/models/subscription/membership-plan.spec.ts
-* src/app/models/subscription/membership-plan.ts
-* src/app/pages/organization-creation/organization-creation.page.ts
-* src/app/pages/subscription/subscription.page.html
-* src/app/pages/subscription/subscription.page.ts
-* src/app/services/data-services/subscription.service.spec.ts
-* src/app/services/data-services/subscription.service.ts
-* src/app/services/requests/auth/auth.ts
-* src/app/services/requests/features/
-* src/app/services/requests/requests.service.ts
-* src/app/services/requests/subscriptions/subscriptions.ts
-* src/environments/environment.prod.ts
-* src/environments/environment.ts
+* src/app/models/subscription/membership-plan.spec.ts - Added new test for containsFeatureId function
+* src/app/models/subscription/membership-plan.ts - Added new fields, features relation, and function for prorating
+* src/app/pages/organization-creation/organization-creation.page.ts - Updated subscription page url
+* src/app/pages/subscription/subscription.page.html - Almost completely redone for subscription upgrades
+* src/app/pages/subscription/subscription.page.ts - Almost completely redone for subscription upgrades
+* src/app/services/data-services/subscription.service.spec.ts - New Test
+* src/app/services/data-services/subscription.service.ts - New Service
+* src/app/services/requests/auth/auth.ts - Added features expansion on get me request
+* src/app/services/requests/features/ - New Request group
+* src/app/services/requests/requests.service.ts - Registered features group
+* src/app/services/requests/subscriptions/subscriptions.ts - Cached membership plans
+* src/environments/environment.prod.ts - Added has_api_feature_flags variable
+* src/environments/environment.ts - Added has_api_feature_flags variable
 
 ## 0.9.0
 

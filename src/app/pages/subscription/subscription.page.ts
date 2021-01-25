@@ -193,7 +193,9 @@ export class SubscriptionPage extends BasePage implements OnInit
      */
     activeMembershipPlans(): MembershipPlan[]
     {
-        return this.membershipPlans;
+        return this.membershipPlans.filter(membershipPlan => {
+            return membershipPlan.visible && (this.currentSubscription ? this.currentSubscription.membership_plan_rate.cost < membershipPlan.current_cost : true);
+        });
     }
 
     /**
@@ -202,8 +204,8 @@ export class SubscriptionPage extends BasePage implements OnInit
     getCardSelectorDisplay()
     {
         return {
-            display: !this.currentSubscription ||
-            (this.currentSubscription.expires_at && this.currentSubscription.recurring) ? 'block' : 'none',
+            display: !this.currentSubscription || !this.changingPaymentMethod() || (this.currentSubscription.expires_at && this.currentSubscription.recurring) ?
+                'block' : 'none',
         };
     }
 
@@ -239,6 +241,14 @@ export class SubscriptionPage extends BasePage implements OnInit
                 return 'set to expire on the ' + formattedExpiration + '.';
             }
         }
+    }
+
+    /**
+     * This returns true if the user is an existing subscriber who is not upgrading their membership plan
+     */
+    changingPaymentMethod(): boolean
+    {
+        return this.currentSubscription && !this.selectedMembershipPlan;
     }
 
     /**
@@ -282,51 +292,48 @@ export class SubscriptionPage extends BasePage implements OnInit
         this.submitted = true;
         this.error = null;
 
-        if (this.currentSubscription) {
-            if (this.selectedPaymentMethod === null) {
-                stripeCard.createToken().then(token => {
-                    this.requests.entityRequests.createPaymentMethod(this.entity, token.id).then(paymentMethod => {
-                        this.entity.payment_methods.push(paymentMethod);
-                        this.setSelectedPaymentMethod(paymentMethod);
-                        this.changePaymentMethod(paymentMethod);
-                    });
+        if (!this.selectedMembershipPlan && !this.currentSubscription) {
+            this.error = 'Please select a membership plan.';
+        } else if (this.selectedPaymentMethod === false) {
+            this.error = 'Please select a payment method.';
+        } else if (this.selectedPaymentMethod === null) {
+            stripeCard.createToken().then(token => {
+                this.requests.entityRequests.createPaymentMethod(this.entity, token.id).then(paymentMethod => {
+                    this.entity.payment_methods.push(paymentMethod);
+                    this.setSelectedPaymentMethod(paymentMethod);
+                    this.completePaymentSubmission(paymentMethod);
                 }).catch(error => {
                     this.error = error.message;
                 });
-            } else {
-                this.changePaymentMethod(this.selectedPaymentMethod as PaymentMethod);
-            }
+            });
         } else {
-            if (!this.selectedMembershipPlan) {
-                this.error = 'Please select a membership plan.';
-            } else if (this.selectedPaymentMethod === false) {
-                this.error = 'Please select a payment method.';
-            } else if (this.selectedPaymentMethod === null) {
-                stripeCard.createToken().then(token => {
-                    this.requests.entityRequests.createPaymentMethod(this.entity, token.id).then(paymentMethod => {
-                        this.selectedPaymentMethod = paymentMethod;
-                        this.entity.payment_methods.push(paymentMethod);
-                        this.createSubscription();
-                    }).catch(error => {
-                        this.error = error.message;
-                    });
-                });
-            } else {
-                this.createSubscription();
-            }
+            this.completePaymentSubmission(this.selectedPaymentMethod as PaymentMethod);
+        }
+    }
+
+    /**
+     * Completes the payment submission process
+     * @param paymentMethod
+     */
+    completePaymentSubmission(paymentMethod: PaymentMethod)
+    {
+        if (this.selectedMembershipPlan) {
+            this.createSubscription(paymentMethod);
+        } else {
+            this.changePaymentMethod(paymentMethod);
         }
     }
 
     /**
      * creates a subscription properly
      */
-    createSubscription()
+    createSubscription(paymentMethod: PaymentMethod)
     {
-        const paymentMethod = this.selectedPaymentMethod;
         if (paymentMethod) {
 
             this.requests.subscriptions.createSubscription(
-                this.entity, paymentMethod as PaymentMethod,
+                this.entity,
+                paymentMethod as PaymentMethod,
                 this.selectedMembershipPlan
             ).then(subscription => {
                 this.currentSubscription = subscription;
@@ -335,7 +342,8 @@ export class SubscriptionPage extends BasePage implements OnInit
                     this.userService.storeMe(this.entity as User);
                 }
                 this.toastrService.show( 'Subscription successfully created!');
-            }).catch(() => {
+            }).catch(error => {
+                console.error(error);
                 this.error = 'Error processing payment. Please try another payment source.';
             });
         }

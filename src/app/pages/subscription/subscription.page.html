@@ -42,14 +42,13 @@
 
                     <label *ngFor="let membershipPlan of activeMembershipPlans()" (click)="setSelectedMembershipPlan(membershipPlan)">
                         <input type="radio" name="membership-plan" value="{{membershipPlan.id}}"/>
-                        {{membershipPlan.name}} ${{membershipPlan.calculateProratedCost(currentSubscription)}}
-                        <span *ngIf="membershipPlans[0].duration !== 'lifetime'"> , the cost will be ${{membershipPlans[0].current_cost}} per {{membershipPlans[0].duration}} after your current subscription expires.</span>
+                        {{membershipPlan.name}} ${{membershipPlan.calculateProratedCost(currentSubscription).toFixed(2)}}<span *ngIf="membershipPlan.duration !== 'lifetime'"> prorated upgrade, the cost will be ${{membershipPlan.current_cost}} per {{membershipPlan.duration}} after your current subscription expires.</span>
                     </label>
 
                 </div>
 
                 <h3 *ngIf="membershipPlans.length == 1">
-                    Upgrade to the {{membershipPlans[0].name}} for ${{membershipPlans[0].calculateProratedCost(currentSubscription)}}
+                    Upgrade to the {{membershipPlans[0].name}} for ${{membershipPlans[0].calculateProratedCost(currentSubscription).toFixed(2)}}
                     <span *ngIf="membershipPlans[0].duration !== 'lifetime'"> after your current subscription expires, the cost will be ${{membershipPlans[0].current_cost}} per {{membershipPlans[0].duration}}.</span>
                 </h3>
             </ng-template>
@@ -58,11 +57,11 @@
         <div [ngStyle]="getCardSelectorDisplay()">
 
             <div id="payment-options" *ngIf="entity && entity.payment_methods.length > 0">
-                <h3>Select Your Payment Method</h3>
+                <h3>{{changingPaymentMethod() ? 'Change' : 'Select'}} Your Payment Method</h3>
 
                 <label *ngFor="let paymentMethod of entity.payment_methods"
                        (click)="setSelectedPaymentMethod(paymentMethod)">
-                    <input type="radio" name="payment-options" value="{{paymentMethod.id}}"/>
+                    <input type="radio" name="payment-options" [checked]="selectedPaymentMethod && selectedPaymentMethod.id == paymentMethod.id" value="{{paymentMethod.id}}"/>
                     Card Ending In {{paymentMethod.identifier}}
                 </label>
 
@@ -78,7 +77,7 @@
             </div>
 
             <div class="submit-wrapper">
-                <button class="btn btn-primary" (click)="submit(stripeCard)">{{currentSubscription ? 'Change Payment Method' : 'Submit'}}</button>
+                <button class="btn btn-primary" (click)="submit(stripeCard)">{{changingPaymentMethod() ? 'Change Payment Method' : 'Submit'}}</button>
             </div>
         </div>
 

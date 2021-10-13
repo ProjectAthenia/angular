@@ -35,6 +35,11 @@ export class MembershipPlan extends BaseModel {
     default: boolean;
 
     /**
+     * Whether or not this membership plan is visible to public users
+     */
+    visible: boolean;
+
+    /**
      * All features contained in this
      */
     features: Feature[];

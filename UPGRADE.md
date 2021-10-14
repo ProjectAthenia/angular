@@ -2,6 +2,15 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.11.0
+
+Another little update. This one adds a new field to the membership plan that controls visibility, and a new service that providers common helper functions for strings.
+
+* src/app/models/subscription/membership-plan.ts - New field added to model
+* src/app/pages/subscription/subscription.page.html - Some new display functions
+* src/app/pages/subscription/subscription.page.ts - Integrated new field and view functions
+* src/app/services/string-helpers/ - New Path
+
 ## 0.10.0
 
 Big update! This update completely reworks

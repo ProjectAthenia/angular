@@ -2,6 +2,14 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.12.0
+
+More Flexibility! This one adds an environment flag that will force the user to be authenticated.
+
+* src/app/app.component.ts - Integrated the new variable into the default redirect
+* src/environments/environment.prod.ts - Added the new variable
+* src/environments/environment.ts - Added the new variable
+
 ## 0.11.0
 
 Another little update. This one adds a new field to the membership plan that controls visibility, and a new service that providers common helper functions for strings.

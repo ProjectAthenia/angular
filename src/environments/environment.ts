@@ -11,6 +11,7 @@ export const environment = {
     branding_image_url: null,
     forgot_password_url: null,
     sign_up_enabled: true,
+    auth_required: true,
     social_media_enabled: true,
     subscriptions_enabled: true,
     organizations_enabled: true,

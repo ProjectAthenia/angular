@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthManagerService} from '../../services/auth-manager/auth-manager.service';
 import {environment} from '../../../environments/environment';
+import {StorageService} from '../../services/storage/storage.service';
 
 @Component({
     selector: 'app-menu',
@@ -13,9 +14,11 @@ export class MenuComponent
     /**
      * Default Constructor
      * @param router
+     * @param storageService
      * @param authManagerService
      */
     constructor(private router: Router,
+                private storageService: StorageService,
                 private authManagerService: AuthManagerService)
     {}
 
@@ -40,7 +43,7 @@ export class MenuComponent
      */
     isSocialMediaEnabled()
     {
-        return environment.social_media_enabled;
+        return this.isLoggedIn() && environment.social_media_enabled;
     }
 
     /**
@@ -48,7 +51,7 @@ export class MenuComponent
      */
     areSubscriptionsEnabled()
     {
-        return environment.subscriptions_enabled;
+        return this.isLoggedIn() && environment.subscriptions_enabled;
     }
 
     /**
@@ -56,6 +59,14 @@ export class MenuComponent
      */
     areOrganizationsEnabled()
     {
-        return environment.organizations_enabled;
+        return this.isLoggedIn() && environment.organizations_enabled;
+    }
+
+    /**
+     * Tells us whether or not the user is currently logged in
+     */
+    isLoggedIn()
+    {
+        return !isNaN(this.storageService.loadLoggedInUserId());
     }
 }

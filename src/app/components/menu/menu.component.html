@@ -1,7 +1,7 @@
-<button ngbDropdownItem (click)="goTo('/home')">Home</button>
+<button ngbDropdownItem (click)="goTo('/')">Home</button>
 <button ngbDropdownItem *ngIf="isSocialMediaEnabled()" (click)="goTo('/contacts')">Contacts</button>
 <button ngbDropdownItem *ngIf="isSocialMediaEnabled()" (click)="goTo('/threads')">Messages</button>
 <button ngbDropdownItem *ngIf="areOrganizationsEnabled()" (click)="goTo('/organization-creation')">Create Organization</button>
-<button ngbDropdownItem (click)="goTo('/profile-editor')">My Profile</button>
+<button ngbDropdownItem *ngIf="isLoggedIn()" (click)="goTo('/profile-editor')">My Profile</button>
 <button ngbDropdownItem *ngIf="areSubscriptionsEnabled()" (click)="goTo('/subscription')">My Subscription</button>
-<button ngbDropdownItem (click)="logout()">Logout</button>
+<button ngbDropdownItem *ngIf="isLoggedIn()" (click)="logout()">Logout</button>

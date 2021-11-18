@@ -2,6 +2,13 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.13.0
+
+Additional logged out functionality.
+
+* src/app/components/menu/menu.component.html - Added some if statements to hide options when not logged in.
+* src/app/components/menu/menu.component.ts - Added some functions to determine logged in status.
+
 ## 0.12.0
 
 More Flexibility! This one adds an environment flag that will force the user to be authenticated.

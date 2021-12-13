@@ -4,7 +4,6 @@ import {RouterModule} from '@angular/router';
 import {RatingBarComponent} from './rating-bar/rating-bar.component';
 import {ArticleViewerComponent} from './article-viewer/article-viewer.component';
 import {ArticleEditorComponent} from './article-editor/article-editor.component';
-import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
 import {LoggedInHeaderComponent} from './logged-in-header/logged-in-header.component';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import {LoggedInTemplateComponent} from './logged-in-template/logged-in-template.component';
@@ -21,7 +20,6 @@ import {LoadingIndicatorComponent} from './loading-indicator/loading-indicator.c
     imports: [
         CommonModule,
         RouterModule,
-        Ng2LoadingSpinnerModule,
         NgbDropdownModule,
     ],
     declarations: [

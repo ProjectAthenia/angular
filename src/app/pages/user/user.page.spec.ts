@@ -9,7 +9,6 @@ import RequestsServicesMock from '../../services/requests/requests.service.mock'
 import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';
 import {StorageService} from '../../services/storage/storage.service';
 import {ToastrService} from 'ngx-toastr';
-import {Ng2LoadingSpinnerModule} from 'ng2-loading-spinner';
 import {Location} from '@angular/common';
 
 describe('UserPage', () => {
@@ -41,7 +40,6 @@ describe('UserPage', () => {
             ],
             imports: [
                 ReactiveFormsModule,
-                Ng2LoadingSpinnerModule,
                 ComponentsModule,
             ],
             providers: [

@@ -25,7 +25,6 @@ export class LoadingIndicatorComponent
      * Whether or not the component is currently showing
      */
     isShowing(): boolean {
-        return true;
         return this.loadingControllerService.currentlyShown || this.showLoading;
     }
 }

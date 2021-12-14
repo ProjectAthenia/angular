@@ -10,59 +10,59 @@ const routes: Routes = [
     },
     {
         path: 'ballot/:ballot_id',
-        loadChildren: './pages/ballot/ballot.module#BallotPageModule',
+        loadChildren: () => import('./pages/ballot/ballot.module').then(m => m.BallotPageModule),
     },
     {
         path: 'contacts',
-        loadChildren: './pages/contacts/contacts.module#ContactsPageModule',
+        loadChildren: () => import('./pages/contacts/contacts.module').then(m => m.ContactsPageModule),
     },
     {
         path: 'home',
-        loadChildren: './pages/home/home.module#HomePageModule'
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
     },
     {
         path: 'organization-creation',
-        loadChildren: './pages/organization-creation/organization-creation.module#OrganizationCreationPageModule'
+        loadChildren: () => import('./pages/organization-creation/organization-creation.module').then(m => m.OrganizationCreationPageModule)
     },
     {
         path: 'organization-users-management/:organization_id',
-        loadChildren: './pages/organization-users-management/organization-users-management.module#OrganizationUsersManagementPageModule'
+        loadChildren: () => import('./pages/organization-users-management/organization-users-management.module').then(m => m.OrganizationUsersManagementPageModule)
     },
     {
         path: 'profile-editor',
-        loadChildren: './pages/profile-editor/profile-editor.module#ProfileEditorPageModule'
+        loadChildren: () => import('./pages/profile-editor/profile-editor.module').then(m => m.ProfileEditorPageModule)
     },
     {
         path: 'sign-in',
-        loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'
+        loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInPageModule)
     },
     {
         path: 'sign-up',
-        loadChildren: './pages/sign-up/sign-up.module#SignUpPageModule'
+        loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpPageModule)
     },
     {
         path: 'subscription',
-        loadChildren: './pages/subscription/subscription.module#SubscriptionPageModule'
+        loadChildren: () => import('./pages/subscription/subscription.module').then(m => m.SubscriptionPageModule)
     },
     {
         path: 'subscription/:feature_id',
-        loadChildren: './pages/subscription/subscription.module#SubscriptionPageModule'
+        loadChildren: () => import('./pages/subscription/subscription.module').then(m => m.SubscriptionPageModule)
     },
     {
         path: 'organization-subscription/:organization_id',
-        loadChildren: './pages/subscription/subscription.module#SubscriptionPageModule'
+        loadChildren: () => import('./pages/subscription/subscription.module').then(m => m.SubscriptionPageModule)
     },
     {
         path: 'threads',
-        loadChildren: './pages/threads/threads.module#ThreadsPageModule',
+        loadChildren: () => import('./pages/threads/threads.module').then(m => m.ThreadsPageModule),
     },
     {
         path: 'user/:user_id',
-        loadChildren: './pages/user/user.module#UserPageModule',
+        loadChildren: () => import('./pages/user/user.module').then(m => m.UserPageModule),
     },
     {
         path: 'user/:user_id/message',
-        loadChildren: './pages/thread/thread.module#ThreadPageModule',
+        loadChildren: () => import('./pages/thread/thread.module').then(m => m.ThreadPageModule),
     },
 ];
 

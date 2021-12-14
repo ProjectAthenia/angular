@@ -12,7 +12,7 @@ export class ArticleEditorComponent implements OnChanges {
     /**
      * The editor for this page
      */
-    @ViewChild('editor', {static: false})
+    @ViewChild('editor')
     editor: any;
 
     /**

@@ -73,13 +73,13 @@ export class OrganizationUsersManagementComponent implements OnChanges, OnInit
     /**
      * The existing user modal for when the information entered already exists
      */
-    @ViewChild('deleteConfirmation', {static: false})
+    @ViewChild('deleteConfirmation')
     deleteConfirmation;
 
     /**
      * The editing form modal
      */
-    @ViewChild('editingModal', {static: false})
+    @ViewChild('editingModal')
     editingModal;
 
     /**

@@ -31,7 +31,7 @@ export class SignUpPage extends BasePage implements OnInit
     /**
      * The existing user modal for when the information entered already exists
      */
-    @ViewChild('existingUserModal', {static: false})
+    @ViewChild('existingUserModal')
     existingUserModal;
 
     /**

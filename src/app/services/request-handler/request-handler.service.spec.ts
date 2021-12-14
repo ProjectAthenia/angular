@@ -5,7 +5,6 @@ import {AuthManagerService} from '../auth-manager/auth-manager.service';
 import {RequestHandlerService} from './request-handler.service';
 import {ToastrService} from 'ngx-toastr';
 import {observable, Observable, of} from 'rxjs';
-import {error} from 'util';
 import {LoadingControllerService} from '../loading-controller/loading-controller.service';
 
 describe('Test Request Handler provider', () => {
@@ -67,7 +66,7 @@ describe('Test Request Handler provider', () => {
         spyOn(authService, 'logOut');
 
         await requestHandlerProvider.requiresAuth().then(() => {
-            throw error('Promise not rejected');
+            throw new Error('Promise not rejected');
         }).catch(() => {
 
             expect(authService.needsRefresh).toHaveBeenCalled();

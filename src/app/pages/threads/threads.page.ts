@@ -20,7 +20,7 @@ export class ThreadsPage extends BasePage implements OnInit, OnDestroy {
     /**
      * The search bar
      */
-    @ViewChild('filterBar', {static: false})
+    @ViewChild('filterBar')
     filterBar: ElementRef;
 
     /**

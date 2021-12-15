@@ -2,6 +2,19 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.14.0
+
+Reworked Loading Indicator
+
+* package.json - Removed ng-loading package
+* src/app/components/loading-component/ - Completely Removed
+* src/app/components/loading-indicator/ - New component
+* src/app/app.component.html - Updated component name
+* src/app/app.component.scss - Updated component styles
+* src/app/app.module.ts - Removed package references
+* src/app/components/components.module.ts - Changed component import
+* src/app/pages/user/user.page.spec.ts - Removed package references
+
 ## 0.13.0
 
 Additional logged out functionality.

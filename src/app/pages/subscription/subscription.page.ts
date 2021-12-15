@@ -49,7 +49,7 @@ export class SubscriptionPage extends BasePage implements OnInit
     /**
      * The payment method the user has selected. False if none, null if new.
      */
-    selectedPaymentMethod: PaymentMethod|boolean = false;
+    selectedPaymentMethod: PaymentMethod|false = false;
 
     /**
      * The selected membership plan if one has been selected

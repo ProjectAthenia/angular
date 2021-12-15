@@ -2,6 +2,10 @@
 
 To upgrade from previous version of Athenia please check each version number listed below step by step.
 
+## 0.15.0
+
+* src/app/pages/subscription/subscription.page.ts - Fixed new type bug generated
+
 ## 0.14.0
 
 Reworked Loading Indicator

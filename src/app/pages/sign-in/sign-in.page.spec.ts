@@ -9,6 +9,7 @@ import {RequestsService} from '../../services/requests/requests.service';
 import RequestsServiceMock from '../../services/requests/requests.service.mock';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 describe('SignInPage', () => {
     let component: SignInPage;
@@ -38,6 +39,7 @@ describe('SignInPage', () => {
                 {provide: RequestsService, requestsProvider},
                 {provide: Router, useValue: routerStub},
                 {provide: ToastrService, useValue: toast},
+                {provide: HttpClient, useValue: {}},
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         })

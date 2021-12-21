@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {LoggedInTemplateComponent} from './logged-in-template.component';
 import {CommonModule} from '@angular/common';
@@ -14,7 +14,7 @@ describe('LoggedInTemplateComponent', () => {
     let fixture: ComponentFixture<LoggedInTemplateComponent>;
     let navController;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         navController = jasmine.createSpyObj('NavController', ['goBack']);
         TestBed.configureTestingModule({
             imports: [

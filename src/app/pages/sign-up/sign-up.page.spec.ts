@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SignUpPage } from './sign-up.page';
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
@@ -18,7 +18,7 @@ describe('SignUpPage', () => {
         error: jasmine.createSpy('error')
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 SignUpPage,

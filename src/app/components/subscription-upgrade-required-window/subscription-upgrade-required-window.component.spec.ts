@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CommonModule } from "@angular/common";
 import {SubscriptionUpgradeRequiredWindowComponent} from './subscription-upgrade-required-window.component';
@@ -9,7 +9,7 @@ describe('SubscriptionUpgradeRequiredWindowComponent', () => {
     let component: SubscriptionUpgradeRequiredWindowComponent;
     let fixture: ComponentFixture<SubscriptionUpgradeRequiredWindowComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 CommonModule,

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CommonModule } from "@angular/common";
 import {OrganizationCreationPage} from './organization-creation.page';
@@ -15,7 +15,7 @@ describe('OrganizationCreationPage', () => {
     let navController;
     const requestsProvider: RequestsService = new RequestsServiceMock();
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         navController = jasmine.createSpyObj('NavController', ['goBack']);
         TestBed.configureTestingModule({
             imports: [

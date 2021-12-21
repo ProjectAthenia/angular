@@ -1,5 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {ThreadPage} from './thread.page';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -23,7 +23,7 @@ describe('ThreadPage', () => {
         back: jasmine.createSpy('back')
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         navController = jasmine.createSpyObj('NavController', ['back']);
         activatedRoute = {};
         activatedRoute.snapshot = {};

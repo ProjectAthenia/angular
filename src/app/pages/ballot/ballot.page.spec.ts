@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CommonModule } from "@angular/common";
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
@@ -19,7 +19,7 @@ describe('BallotPage', () => {
         error: jasmine.createSpy('error')
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         activatedRoute = {};
         activatedRoute.snapshot = {};
         activatedRoute.snapshot.paramMap = convertToParamMap({

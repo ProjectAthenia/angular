@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CommonModule } from "@angular/common";
 import {OverlayWindowComponent} from './overlay-window.component';
@@ -7,7 +7,7 @@ describe('OverlayWindowComponent', () => {
     let component: OverlayWindowComponent;
     let fixture: ComponentFixture<OverlayWindowComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 CommonModule,

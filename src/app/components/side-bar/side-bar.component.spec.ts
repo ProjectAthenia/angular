@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SideBarComponent} from './side-bar.component';
 import {CommonModule} from '@angular/common';
@@ -12,7 +12,7 @@ describe('SideBarComponent', () => {
     let fixture: ComponentFixture<SideBarComponent>;
     let navController;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         navController = jasmine.createSpyObj('NavController', ['goBack']);
         TestBed.configureTestingModule({
             imports: [

@@ -1,5 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {HomePage} from './home.page';
 import {ToastrService} from 'ngx-toastr';
@@ -13,7 +13,7 @@ describe('HomePage', () => {
         error: jasmine.createSpy('error')
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [HomePage],
             providers: [

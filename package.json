@@ -27,6 +27,7 @@
     "@angular/platform-browser": "~12.2.15",
     "@angular/platform-browser-dynamic": "~12.2.15",
     "@angular/router": "~12.2.15",
+    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@types/stripe-v3": "^3.1.26",
     "bootstrap": "^4.4.1",
     "ionicons": "^5.2.3",
